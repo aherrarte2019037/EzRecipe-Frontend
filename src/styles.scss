@@ -1,9 +1,0 @@
-@import 'themes';
-@import '~@nebular/theme/styles/globals';
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-@include nb-install() {
-  @include nb-theme-global();
-};

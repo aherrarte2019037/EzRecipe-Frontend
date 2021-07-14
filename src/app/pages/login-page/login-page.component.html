@@ -1,0 +1,88 @@
+<section class="flex overflow-y-hidden flex-col items-center h-screen md:flex-row ">
+    <div class="bg-gradient-to-t lg:flex flex-col items-center justify-center  from-pink-300 via-purple-300 to-indigo-400 hidden w-full h-screen md:w-1/3 lg:w-[55%]">
+        <div class="text-skew mt-12">
+            <span class="rounded-l-md">E</span>
+            <span>Z</span>
+            <span>R</span>
+            <span>E</span>
+            <span>C</span>
+            <span>I</span>
+            <span>P</span>
+            <span class="rounded-r-md">E</span>
+        </div>
+        <img class="mx-10 max-w-xl" src="../../../assets/loginImage.svg">
+    </div>
+
+    <div class="flex items-center justify-center w-full h-screen px-6 bg-white md:max-w-md xl:max-w-[700px] lg:max-w-full md:mx-auto md:w-1/2 lg:px-16 xl:px-28">
+        <div class="w-full h-100">
+
+            <a class="flex justify-center w-full items-center mb-4 font-medium text-blueGray-900 title-font md:mb-0">
+                <img class="w-28 mr-0.5" src="../../../assets/food2.gif">
+            </a>
+
+            <h1 class="mt-4 text-2xl font-semibold text-gray-900 tracking-ring tighter sm:text-3xl title-font">Iniciar Sesión</h1>
+            
+            <form class="mt-5">
+                <div class="relative">
+                    <img class="absolute w-5 h-5 left-4 top-[13px] z-50" src="../../../assets/emailIcon.svg">
+                    <input formControlName="identifier" type="email" placeholder="Correo Electrónico" class="w-full pr-4 pl-[42px] pt-2 pb-3 mt-0.5 text-base bg-gray-100 text-gray-500 transition duration-300 ease-in-out transform border-transparent rounded-lg focus:shadow-outline focus:ring-2 ring-gray-300">
+                </div>
+
+                <div class="mt-6 relative">
+                    <img class="absolute w-5 h-5 left-4 top-[13px] z-50" src="../../../assets/passwordIcon.svg">
+                    <input formControlName="password" type="password" placeholder="Contraseña" class="w-full pr-4 pl-[42px] pt-2 pb-3 mt-0.5 text-base bg-gray-100 text-gray-500 transition duration-300 ease-in-out transform border-transparent rounded-lg focus:shadow-outline focus:ring-2 ring-gray-300">
+                </div>
+
+                <div class="mt-1 relative text-right flex justify-between items-center">
+                    <div class="round mt-0.5">
+                        <input formControlName="remember" type="checkbox" id="checkbox" />
+                        <label for="checkbox"></label>
+                        <span class="text-sm font-semibold text-gray-700 absolute left-[23px]">Recordarme</span>
+                    </div>
+                    <a class="text-sm font-semibold transition duration-150 leading-relaxed cursor-pointer text-gray-700 hover:text-blue-500">Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="mx-auto block w-full px-4 pt-[8px] pb-[12px] mt-6 tracking-wide font-semibold text-gray-50 transition duration-500 ease-in-out transform bg-gray-800 rounded-full hover:bg-gray-800">Iniciar Sesión</button>
+            </form>
+
+            <div class="w-[99%] mx-auto space-x-4 flex items-center my-5">
+                <hr class="w-full border-gray-300">
+                <span class="text-center whitespace-nowrap text-gray-500 text-[15px]">Ingresa con</span>
+                <hr class="w-full border-gray-300">
+            </div>
+
+            <div class="flex justify-enter h-12 space-x-4">
+                <button type="button" class="inline-flex relative w-full px-1 pb-1 font-semibold transition duration-500 ease-in-out transform bg-white border rounded-full border-blueGray-300 hover:bg-gray-200">
+                    <div class="flex relative items-center justify-between">
+                        <span class="ml-5 text-gray-800 font-semibold">Google</span>
+                    </div>
+                    <svg class="w-6 h-6 absolute right-5 top-[11px]" viewBox="0 0 48 48">
+                        <defs>
+                            <path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z">
+                            </path>
+                        </defs>
+                        <clipPath id="b">
+                            <use xlink:href="#a" overflow="visible"></use>
+                        </clipPath>
+                        <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z"></path>
+                        <path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"></path>
+                        <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z"></path>
+                        <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"></path>
+                    </svg>
+                </button>
+            
+                <button type="button" class="inline-flex relative w-full px-1 pb-1 font-semibold transition duration-500 ease-in-out transform bg-white border rounded-full border-blueGray-300 hover:bg-gray-200">
+                    <div class="flex relative items-center justify-between">
+                        <span class="ml-5 text-gray-800 font-semibold">Facebook</span>
+                    </div>
+                    <img class="w-[26px] h-[26px] absolute right-5 top-[10px]" src="../../../assets/facebookIcon.svg">
+                </button>
+            </div>
+
+            <div class="w-full flex space-x-1.5 justify-center items-center mt-5 text-gray-700">
+                <span>¿No tienes cuenta?</span> <button class="font-semibold text-gray-800 cursor-pointer hover:underline">Registrarse</button>
+            </div>
+
+        </div>
+    </div>
+</section>
