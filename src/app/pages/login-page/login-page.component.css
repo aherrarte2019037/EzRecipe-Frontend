@@ -1,68 +1,10 @@
-.text-skew {
-    display: flex;
-    justify-content: center;
-    transform: translateY(-50%);
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    transform: rotateX(35deg), translateY(-50%);
-}
-
-.text-skew {
-}
-
-.text-skew span {
-    color: #b4b4b4;
-}
-
-.text-skew span:nth-child(odd) {
-    transform: skewY(15deg);
-}
-
-.text-skew span:nth-child(even) {
-    transform: skewY(-15deg);
-    background-color: #f1f1f1;
-    color: #a6a6a6;
-}
-
-.text-skew > span {
-    display: block;
-    background-color: #fff;
-    @apply w-12 h-12 xl:w-14 xl:h-14;
-    line-height: 42px;
-    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
-    box-shadow: 0 40px 50px rgba(0, 0, 0, 0.1);
-}
-
-.button-blur {
-    @apply w-full lg:w-64 xl:w-72;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    margin: 20px;
-    @apply pt-2.5 pb-3;
-    text-align:center;
-    border: none;
-    background-size: 300% 100%;
-    border-radius: 50px;
-    transition: all .4s ease-in-out;
-}
-  
-.button-blur:hover {
-    background-position: 100% 0;
-    transition: all .4s ease-in-out;
-    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
-}
-  
-.button-blur:focus {
+input:focus-visible {
     outline: none;
-}
-  
-.button-blur {
-    background-image: linear-gradient( to right,#426cf3, #426cf3, #4e59f1, #594ef1 );
-    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+    font-weight: 500;
 }
 
-.button-blur:hover {
-    box-shadow: 0 4px 15px 0 rgba(65, 68, 234, 0.75);
+input::placeholder, input {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 27px!important;
 }

@@ -2,15 +2,52 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-input:focus-visible {
-    outline: none;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,400&display=swap');
+
+body {
+  font-family: 'Nunito', sans-serif!important;
 }
 
-.round {
+.text-skew {
+  display: flex;
+  justify-content: center;
+  transform: translateY(-50%);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  transform: rotateX(35deg), translateY(-50%);
+}
+
+.text-skew {
+}
+
+.text-skew span {
+  color: #b4b4b4;
+}
+
+.text-skew span:nth-child(odd) {
+  transform: skewY(15deg);
+}
+
+.text-skew span:nth-child(even) {
+  transform: skewY(-15deg);
+  background-color: #f1f1f1;
+  color: #a6a6a6;
+}
+
+.text-skew > span {
+  display: block;
+  background-color: #fff;
+  @apply w-12 h-12 xl:w-14 xl:h-14;
+  line-height: 48px;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  box-shadow: 0 40px 50px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-container {
     position: relative;
 }
 
-.round label {
+.checkbox-container label {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
@@ -22,7 +59,7 @@ input:focus-visible {
   width: 18px;
 }
 
-.round label:after {
+.checkbox-container label:after {
   border: 1px solid #fff;
   border-top: none;
   border-right: none;
@@ -37,24 +74,24 @@ input:focus-visible {
   transition: all 0.18s ease-in-out;
 }
 
-.round input[type="checkbox"] {
+.checkbox-container input[type="checkbox"] {
   opacity: 0;
 }
 
-.round input[type="checkbox"]:checked + label {
+.checkbox-container input[type="checkbox"]:checked + label {
   background-color: #4b85f0;
   border-color: #4b85f0;
   transition: all 0.15s ease-in-out;
 }
 
-.round input[type="checkbox"]:checked + label:after {
+.checkbox-container input[type="checkbox"]:checked + label:after {
   opacity: 1;
 }
 
-.round input[type="checkbox"] ~ span {
+.checkbox-container input[type="checkbox"] ~ span {
   transition: color 0.18s ease-in;
 }
 
-.round input[type="checkbox"]:checked ~ span {
+.checkbox-container input[type="checkbox"]:checked ~ span {
   color: #4b85f0;
 }
