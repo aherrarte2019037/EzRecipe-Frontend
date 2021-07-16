@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
@@ -8,10 +9,14 @@ import { Title } from '@angular/platform-browser';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor( private title: Title ) { }
+  constructor( private title: Title, private http: HttpClient ) { }
 
   ngOnInit(): void {
     this.title.setTitle( 'Iniciar Sesión' );
+  }
+
+  login() {
+    
   }
 
 }
