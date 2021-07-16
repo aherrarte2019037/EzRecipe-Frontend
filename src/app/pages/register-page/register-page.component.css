@@ -1,0 +1,10 @@
+input:focus-visible {
+    outline: none;
+    font-weight: 500;
+}
+
+input::placeholder, input {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 27px!important;
+}
