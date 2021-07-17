@@ -12,6 +12,8 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SocialLoginModule } from 'angularx-social-login';
+import { GlobalService } from './services/global.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     ReactiveFormsModule,
+    SocialLoginModule,
     NebularModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } }    
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
