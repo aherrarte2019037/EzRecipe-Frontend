@@ -22,10 +22,10 @@
 
             <h1 class="mt-4 text-2xl font-semibold text-gray-900 tracking-ring tighter sm:text-3xl title-font">Iniciar Sesión</h1>
             
-            <form class="mt-5">
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="mt-5">
                 <div class="relative">
                     <img class="absolute w-5 h-5 left-4 top-[13px] z-50" src="../../../assets/emailIcon.svg">
-                    <input formControlName="identifier" type="email" placeholder="Correo Electrónico" class="w-full pr-4 pl-[42px] pt-2 pb-3 mt-0.5 text-base bg-gray-100 text-gray-500 transition duration-300 ease-in-out transform border-transparent rounded-lg focus:shadow-outline focus:ring-2 ring-gray-300">
+                    <input formControlName="email" type="email" placeholder="Correo Electrónico" class="w-full pr-4 pl-[42px] pt-2 pb-3 mt-0.5 text-base bg-gray-100 text-gray-500 transition duration-300 ease-in-out transform border-transparent rounded-lg focus:shadow-outline focus:ring-2 ring-gray-300">
                 </div>
 
                 <div class="mt-6 relative">
