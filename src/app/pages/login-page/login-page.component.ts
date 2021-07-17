@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login-page',
@@ -32,9 +32,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginWithFacebook() {
-    /* this.socialService.signIn( SocialAuthService.FACEBOOK_PROVIDER_ID )
+    this.socialService.signIn( FacebookLoginProvider.PROVIDER_ID )
       .then( data => console.log(data) )
-      .catch( err => err ); */
+      .catch( err => console.log(err) );
   }
 
   login() {
