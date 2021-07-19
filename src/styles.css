@@ -4,8 +4,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,400&display=swap');
 
-body {
+* {
   font-family: 'Nunito', sans-serif!important;
+}
+
+button {
+  text-transform: none!important;
 }
 
 .text-skew {
@@ -15,9 +19,6 @@ body {
   text-align: center;
   transition: transform 0.3s ease-in-out;
   transform: rotateX(35deg), translateY(-50%);
-}
-
-.text-skew {
 }
 
 .text-skew span {
@@ -37,8 +38,7 @@ body {
 .text-skew > span {
   display: block;
   background-color: #fff;
-  @apply w-12 h-12 xl:w-14 xl:h-14;
-  line-height: 48px;
+  @apply w-12 h-12 xl:w-14 xl:h-14 leading-[47px] xl:leading-[55px];
   transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   box-shadow: 0 40px 50px rgba(0, 0, 0, 0.1);
 }

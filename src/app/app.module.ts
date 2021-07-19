@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/main/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule } from '@nebular/theme';
+import { NbDialogModule, NbThemeModule } from '@nebular/theme';
 import { NebularModule } from './nebular.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -27,10 +27,11 @@ import { GlobalService } from './services/global.service';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
     ReactiveFormsModule,
     SocialLoginModule,
-    NebularModule
+    NebularModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbDialogModule.forRoot({ autoFocus: false }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },

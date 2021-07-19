@@ -6,5 +6,6 @@ input:focus-visible {
 input::placeholder, input {
   font-size: 15px;
   font-weight: 500;
-  line-height: 27px!important;
+  line-height: 25px!important;
+  padding-top: 11px;
 }
