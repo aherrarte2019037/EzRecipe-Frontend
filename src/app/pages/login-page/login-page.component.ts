@@ -55,16 +55,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   getFormError( input: string ) {
-    const error = this.loginForm.get(input)?.errors;
-    const invalid = this.loginForm.get(input)?.invalid;
-    const dirty = this.loginForm.get(input)?.dirty;
-    const touched = this.loginForm.get(input)?.touched;
+    const { errors, invalid, dirty, touched } = this.loginForm.get(input)!;
    
     if( invalid && dirty || invalid && touched ) {
-      if( 'required' in error! ) return 'Campo Requerido';
-      if( 'minlength' in error! ) return `Mínimo ${error.minlength.requiredLength} caracteres`;
-      if( 'maxlength' in error! ) return `Máximo ${error.maxlength.requiredLength} caracteres`;
-      if( 'email' in error! ) return 'Correo Electrónico Inválido';
+      if( 'required' in errors! ) return 'Campo Requerido';
+      if( 'minlength' in errors! ) return `Mínimo ${errors.minlength.requiredLength} caracteres`;
+      if( 'maxlength' in errors! ) return `Máximo ${errors.maxlength.requiredLength} caracteres`;
+      if( 'email' in errors! ) return 'Correo Electrónico Inválido';
     }
 
     return null;

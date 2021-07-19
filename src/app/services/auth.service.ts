@@ -34,4 +34,8 @@ export class AuthService {
     sessionStorage.removeItem( 'token' )
   }
 
+  isAuthenticated() {
+    return localStorage.getItem( 'token' ) || sessionStorage.getItem( 'token' )
+  }
+
 }

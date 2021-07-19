@@ -14,13 +14,15 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule } from 'angularx-social-login';
 import { GlobalService } from './services/global.service';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
