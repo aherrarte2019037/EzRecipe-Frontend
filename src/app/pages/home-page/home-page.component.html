@@ -1,5 +1,7 @@
 <ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
 
+<div *ngIf="showOverlay" class="w-full h-full bg-white absolute"></div>
+
 <app-navbar></app-navbar>
 
 <p>home-page works!</p>
