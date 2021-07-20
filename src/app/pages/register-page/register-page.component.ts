@@ -58,7 +58,7 @@ export class RegisterPageComponent implements OnInit {
 
     this.authService.register( this.registerForm.value ).subscribe(
       data => this.dialogService.open( this.dialog, { context: { title: 'Registro Exitoso', message: `Bienvenido ${data.name}`, success: true } } ),
-      error => this.dialogService.open( this.dialog, { context: { title: 'Error Al Registrarse', message: error.error.message, success: false } } )
+      error => this.dialogService.open( this.dialog, { context: { title: 'Error Al Registrarse', message: error?.error?.message || 'Error inesperado', success: false } } )
     );
   }
 

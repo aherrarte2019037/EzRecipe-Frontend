@@ -42,7 +42,7 @@ export class LoginPageComponent implements OnInit {
       concatMap( data => this.authService.socialLogin( data ) )
     ).subscribe(
       data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
-      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error.error.message, success: false } })
+      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error?.error?.message || 'Error inesperado', success: false } })
     );
   }
 
@@ -51,7 +51,7 @@ export class LoginPageComponent implements OnInit {
       concatMap( data => this.authService.socialLogin( data ) )
     ).subscribe(
       data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
-      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error.error.message, success: false } })
+      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error?.error?.message || 'Error inesperado', success: false } })
     );
   }
 
@@ -62,7 +62,7 @@ export class LoginPageComponent implements OnInit {
 
     this.authService.login( email, password, remember ).subscribe(
       data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
-      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error.error.message, success: false } } )
+      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error?.error?.message || 'Error inesperado', success: false } } )
     );
   }
 
