@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { NbDialogService } from '@nebular/theme';
 import { fadeInDownOnEnterAnimation, fadeInUpOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { from } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,7 +24,8 @@ export class LoginPageComponent implements OnInit {
     private fmBuilder: FormBuilder,
     private socialService: SocialAuthService,
     private authService: AuthService,
-    private dialogService: NbDialogService ) {}
+    private dialogService: NbDialogService,
+    public spinnerService: NgxSpinnerService ) {}
 
   ngOnInit(): void {
     this.title.setTitle( 'Iniciar Sesión' );
@@ -61,7 +63,11 @@ export class LoginPageComponent implements OnInit {
     const { email, password, remember } = this.loginForm.value;
 
     this.authService.login( email, password, remember ).subscribe(
-      data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
+      data => {
+        this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } );
+        this.spinnerService.show( 'main' );
+        this.loginForm.reset();
+      },
       error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error?.error?.message || 'Error inesperado', success: false } } )
     );
   }

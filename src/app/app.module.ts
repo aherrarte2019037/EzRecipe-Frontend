@@ -16,6 +16,8 @@ import { SocialLoginModule } from 'angularx-social-login';
 import { GlobalService } from './services/global.service';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ComponentsModule } from './components/components.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    ComponentsModule,
+    NgxSpinnerModule,
     NebularModule,
     NbEvaIconsModule,
     NbThemeModule.forRoot({ name: 'default' }),

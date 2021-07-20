@@ -108,7 +108,7 @@
 
         <nb-card-footer class="w-full space-x-2.5 !pt-0 flex !border-none items-center justify-end">
             <button *ngIf="!data.success" class="!rounded-xl" nbButton (click)="ref.close()">Cerrar</button>
-            <button *ngIf="data.success" routerLink="/home" class="!rounded-xl !tracking-wide" hero status="success" nbButton>Ingresar</button>
+            <button *ngIf="data.success" (click)="spinnerService.show('main')" routerLink="/home" class="!rounded-xl !tracking-wide" hero status="success" nbButton>Ingresar</button>
             <button *ngIf="!data.success" routerLink="/register" class="!rounded-xl !tracking-wide" hero status="info" nbButton>Registrarse</button>
         </nb-card-footer>
     </nb-card>
