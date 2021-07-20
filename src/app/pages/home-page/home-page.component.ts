@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+  showOverlay: boolean = true;
 
   constructor( private spinnerService: NgxSpinnerService ) { }
 
@@ -16,7 +17,7 @@ export class HomePageComponent implements OnInit {
 
   spinnerBehavior () {
     this.spinnerService.show( 'main' );
-    setTimeout( () => this.spinnerService.hide( 'main' ), 4500 );
+    setTimeout( () => {this.spinnerService.hide( 'main' ); this.showOverlay = false}, 2000 );
   }
 
 }
