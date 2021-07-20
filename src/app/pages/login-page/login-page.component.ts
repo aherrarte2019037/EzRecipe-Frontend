@@ -1,8 +1,8 @@
-import { Component, OnInit, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NbDialogService } from '@nebular/theme';
-import { fadeInDownOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
+import { fadeInDownOnEnterAnimation, fadeInUpOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { from } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
-  animations: [ fadeInDownOnEnterAnimation({ duration: 500 }), fadeOutOnLeaveAnimation({ duration: 500 }) ]
+  animations: [ fadeInDownOnEnterAnimation({ duration: 500 }), fadeOutOnLeaveAnimation({ duration: 500 }), fadeInUpOnEnterAnimation({ translate: '40px', duration: 300 }) ]
 })
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup = this.buildForm();
@@ -40,18 +40,30 @@ export class LoginPageComponent implements OnInit {
   loginWithGoogle() {
     from( this.socialService.signIn( GoogleLoginProvider.PROVIDER_ID ) ).pipe(
       concatMap( data => this.authService.socialLogin( data ) )
+    ).subscribe(
+      data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
+      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error.error.message, success: false } })
     );
   }
 
   loginWithFacebook() {
     from( this.socialService.signIn( FacebookLoginProvider.PROVIDER_ID ) ). pipe(
       concatMap( data => this.authService.socialLogin( data ) )
+    ).subscribe(
+      data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
+      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error.error.message, success: false } })
     );
   }
 
   login() {
     if( this.loginForm.invalid ) return this.loginForm.markAllAsTouched();
-    this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: 'Datos incorrectos' } } );
+
+    const { email, password, remember } = this.loginForm.value;
+
+    this.authService.login( email, password, remember ).subscribe(
+      data => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Exitoso', message: `Bienvenido ${data.user.name}`, success: true } } ),
+      error => this.dialogService.open( this.dialog, { context: { title: 'Ingreso Fallido', message: error.error.message, success: false } } )
+    );
   }
 
   getFormError( input: string ) {

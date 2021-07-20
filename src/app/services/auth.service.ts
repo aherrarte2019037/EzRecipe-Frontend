@@ -11,15 +11,19 @@ export class AuthService {
 
   constructor( private globalService: GlobalService, private http: HttpClient ) { }
 
-  login( email: string, password: string, remember: boolean ) {
-    return this.http.post<any>( `${this.apiUrl}/auth/login`, { email, password } ).pipe(
+  login( email: string, password: string, remember: boolean, token: boolean = true ) {
+    return this.http.post<any>( `${this.apiUrl}/login`, { email, password, getToken: token } ).pipe(
       tap( data => this.setToken( data?.token, remember ) )
     )
   }
 
+  register( user: {} ) {
+    return this.http.post<any>( `${this.apiUrl}/register`, user );
+  }
+
   socialLogin( data: any ) {
     const user = { name: data.firstName, lastname: data.lastName, email: data.email, rol: 'Client', username: data.name.replace(/ /g, "") };
-    return this.http.post<any>( `${this.apiUrl}/auth/social`, user ).pipe(
+    return this.http.post<any>( `${this.apiUrl}/login/social`, user ).pipe(
       tap( data => this.setToken( data?.token, false ) )
     )
   }

@@ -20,7 +20,7 @@
                 <div class="w-full h-100">
 
                     <a class="flex justify-center w-full items-center mb-4 font-medium text-blueGray-900 title-font md:mb-0">
-                        <img class="w-28 mr-0.5" src="../../../assets/food2.gif">
+                        <img class="w-28 mr-0.5" src="../../../assets/food.gif">
                     </a>
 
                     <h1 class="mt-4 text-2xl !font-semibold text-gray-900 tracking-ring tighter sm:text-3xl title-font">Iniciar Sesión</h1>
@@ -28,14 +28,14 @@
                     <form [formGroup]="loginForm" (ngSubmit)="login()" class="mt-5">
                         <div class="relative">
                             <span *ngIf="getFormError('email')" [@fadeInDownOnEnter] [@fadeOutOnLeave] class="absolute top-[52px] text-right font-medium text-xs text-red-400">{{ getFormError('email') }}</span>
-                            <img class="absolute w-5 h-5 left-4 top-[16px] z-50" src="../../../assets/emailIcon.svg">
                             <input formControlName="email" type="email" placeholder="Correo Electrónico" class="w-full pr-4 pl-[42px] pt-2 pb-3 mt-0.5 text-base bg-gray-100 text-gray-500 transition duration-300 ease-in-out transform border-transparent rounded-lg focus:shadow-outline focus:ring-2 ring-gray-300">
+                            <nb-icon class="absolute text-gray-400 left-4 top-[16px] z-50" icon="email"></nb-icon>
                         </div>
 
                         <div class="mt-6 relative">
-                            <img class="absolute w-5 h-5 left-4 top-[15px] z-50" src="../../../assets/passwordIcon.svg">
                             <input formControlName="password" type="password" placeholder="Contraseña" class="w-full pr-4 pl-[42px] pt-2 pb-3 mt-0.5 text-base bg-gray-100 text-gray-500 transition duration-300 ease-in-out transform border-transparent rounded-lg focus:shadow-outline focus:ring-2 ring-gray-300">
                             <span *ngIf="getFormError('password')" [@fadeInDownOnEnter] [@fadeOutOnLeave] class="font-medium text-xs text-red-400">{{ getFormError('password') }}</span>
+                            <nb-icon class="absolute text-gray-400 left-4 top-[16px] z-50" icon="lock"></nb-icon>
                         </div>
 
                         <div class="mt-1.5 relative text-right flex justify-between items-center">
@@ -96,18 +96,20 @@
 </nb-layout>
 
 <ng-template #dialog let-data let-ref="dialogRef">
-    <nb-card class="!rounded-2xl !pb-2 !w-[480px]">
-        <nb-card-body class="flex !pb-1 w-full space-x-2 items-center justify-center">
-            <img width="170px" src="../../../assets/failedModal.svg">
-            <div>
-                <h5 class="!text-gray-700">{{ data.title }}</h5>
-                <p class="!text-gray-700">{{ data.message }}</p>
+    <nb-card [@fadeInUpOnEnter] class="!rounded-2xl !pb-2 !w-[480px]">
+        <nb-card-body class="flex !pb-0 w-full space-x-3 items-center justify-center">
+            <img *ngIf="data.success" class="-ml-2" width="190px" src="../../../assets/succesModal.jpg">
+            <img *ngIf="!data.success" class="-ml-2 mt-2" width="180px" src="../../../assets/failModal.jpg">
+            <div class="flex flex-col">
+                <span class="text-indigo-500 text-[22px] font-semibold my-[4px]">{{ data.title }}</span>
+                <span class="!text-gray-600">{{ data.message }}</span>
             </div>
         </nb-card-body>
 
         <nb-card-footer class="w-full space-x-2.5 !pt-0 flex !border-none items-center justify-end">
-            <button class="!rounded-xl" nbButton (click)="ref.close()">Cerrar</button>
-            <button routerLink="/register" class="!rounded-xl" hero status="success" nbButton>Crear Cuenta</button>
+            <button *ngIf="!data.success" class="!rounded-xl" nbButton (click)="ref.close()">Cerrar</button>
+            <button *ngIf="data.success" routerLink="/home" class="!rounded-xl !tracking-wide" hero status="success" nbButton>Ingresar</button>
+            <button *ngIf="!data.success" routerLink="/register" class="!rounded-xl !tracking-wide" hero status="info" nbButton>Registrarse</button>
         </nb-card-footer>
     </nb-card>
 </ng-template>

@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule } from 'angularx-social-login';
 import { GlobalService } from './services/global.service';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     ReactiveFormsModule,
     SocialLoginModule,
     NebularModule,
+    NbEvaIconsModule,
     NbThemeModule.forRoot({ name: 'default' }),
-    NbDialogModule.forRoot({ autoFocus: false }),
+    NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
