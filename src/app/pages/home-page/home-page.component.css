@@ -1,0 +1,3 @@
+nb-layout-column {
+    @apply flex flex-col justify-start items-center
+}
