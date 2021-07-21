@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  animations: [ zoomInOnEnterAnimation({ delay: 1900, duration: 600 }), slideInRightOnEnterAnimation({ delay: 2000, duration: 500 }), slideInLeftOnEnterAnimation({ delay: 2000, duration: 500 }) ]
+  animations: [ slideInRightOnEnterAnimation({ delay: 2000, duration: 500 }), slideInLeftOnEnterAnimation({ delay: 2000, duration: 500 }) ]
 })
 export class NavbarComponent implements OnInit {
   profileMenuClick$ = this.ctxMenuService.onItemClick().pipe(

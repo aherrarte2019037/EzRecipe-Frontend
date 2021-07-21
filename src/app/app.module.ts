@@ -18,6 +18,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ComponentsModule } from './components/components.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     LoginPageComponent,
     RegisterPageComponent,
     NotFoundPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    RecipesPageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
