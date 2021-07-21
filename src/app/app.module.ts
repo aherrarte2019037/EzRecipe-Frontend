@@ -40,11 +40,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SocialLoginModule,
     ComponentsModule,
     NgxSpinnerModule,
-    NebularModule,
     NbEvaIconsModule,
-    NbThemeModule.forRoot({ name: 'default' }),
     NbMenuModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
+    NebularModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },

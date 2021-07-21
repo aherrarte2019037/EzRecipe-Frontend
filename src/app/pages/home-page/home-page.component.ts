@@ -1,36 +1,42 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NbMenuItem } from '@nebular/theme';
 
 @Component({
   selector: 'app-home-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  showOverlay: boolean = true;
-
+  showContent: boolean = false;
   items: NbMenuItem[] = [
     {
-      title: 'Inicio',
-      icon: 'home-outline',
-      link: '/home'
-    },
-    {
-      title: 'Mis Recetas',
-      icon: 'archive-outline',
-    },
-    {
       title: 'Recetas',
-      icon: 'book-outline',
+      icon: 'book-open-outline',
       link: '/home/recipes'
     },
     {
       title: 'Perfil',
       icon: 'person-outline',
-      link: '/home/profile'
+      link: '/home/profile',
+      selected: true
     },
+    {
+      title: 'Compras',
+      icon: 'credit-card-outline'
+    },
+    {
+      title: 'Guardado',
+      icon: 'archive-outline',
+    },
+    {
+      title: 'Mensajes',
+      icon: 'message-circle-outline'
+    },
+    {
+      title: 'Ajustes',
+      icon: 'settings-2-outline'
+    }
   ];
 
   constructor( private spinnerService: NgxSpinnerService ) { }
@@ -41,7 +47,7 @@ export class HomePageComponent implements OnInit {
 
   spinnerBehavior () {
     this.spinnerService.show( 'main' );
-    setTimeout( () => {this.spinnerService.hide( 'main' ); this.showOverlay = false}, 2000 );
+    setTimeout( () => { this.showContent = true; this.spinnerService.hide( 'main' ) }, 2000 );
   }
 
 }
