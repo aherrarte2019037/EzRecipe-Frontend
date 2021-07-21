@@ -1,0 +1,37 @@
+<ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
+<div *ngIf="showOverlay" class="w-full h-full z-50 bg-white absolute"></div>
+
+<app-navbar></app-navbar>
+
+<nb-layout class="home-layout">
+    <nb-layout-column>
+        
+        <div class="flex space-x-9 justify-center w-full h-full mb-8">
+            <div class="w-[25%] xl:w-[15%]">
+                
+                <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
+                    <nb-user class="nb-user"
+                        picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                        badgeText="Activo"
+                        badgeStatus="primary"
+                        badgePosition="bottom right"
+                        size="giant"
+                        name="Marta G"
+                        title="@Engineer">
+                    </nb-user>
+                </div>
+
+            </div>
+
+            <div class="w-[50%] xl:w-[70%]  bg-red-200">
+                <app-latest-recipes></app-latest-recipes>
+                <router-outlet></router-outlet>
+            </div>
+
+            <div class="w-[25%] xl:w-[15%] bg-green-200">
+                <p>right</p>
+            </div>
+        </div>
+
+    </nb-layout-column>
+</nb-layout>

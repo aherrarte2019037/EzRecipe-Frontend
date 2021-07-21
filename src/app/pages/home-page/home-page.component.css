@@ -1,0 +1,7 @@
+nb-layout-column {
+    @apply flex flex-col justify-start items-center
+}
+
+.user-card {
+    box-shadow: rgba(160, 160, 160, 0.1) 0px 4px 12px;
+}
