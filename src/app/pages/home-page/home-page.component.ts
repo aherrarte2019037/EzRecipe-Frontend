@@ -31,7 +31,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Mensajes',
-      icon: 'message-circle-outline'
+      icon: 'message-circle-outline',
+      badge: { text: '2', status: 'warning' }
     },
     {
       title: 'Ajustes',
