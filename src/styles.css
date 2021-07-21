@@ -18,6 +18,7 @@
 
 .nb-user .user-title {
   font-size: 13px!important;
+  @apply !text-gray-600 !-mt-0.5;
 }
 
 .nb-user .status-primary {
