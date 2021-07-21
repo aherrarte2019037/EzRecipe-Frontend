@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/main/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbDialogModule, NbThemeModule } from '@nebular/theme';
+import { NbDialogModule, NbMenuModule, NbThemeModule } from '@nebular/theme';
 import { NebularModule } from './nebular.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -39,6 +39,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NebularModule,
     NbEvaIconsModule,
     NbThemeModule.forRoot({ name: 'default' }),
+    NbMenuModule.forRoot(),
     NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
   ],
   providers: [

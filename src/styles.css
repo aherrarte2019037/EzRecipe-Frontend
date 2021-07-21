@@ -2,10 +2,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap');
 
 * {
   font-family: 'Nunito', sans-serif!important;
+}
+
+.home-layout .layout {
+  min-height: calc( 100vh - 70px )!important;
 }
 
 body {
