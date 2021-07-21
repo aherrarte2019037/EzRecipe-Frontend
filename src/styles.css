@@ -12,6 +12,18 @@
   min-height: calc( 100vh - 78px )!important;
 }
 
+.nb-user .user-name {
+  font-weight: 600!important;
+}
+
+.nb-user .user-title {
+  font-size: 13px!important;
+}
+
+.nb-user .status-primary {
+  @apply !bg-indigo-500;
+}
+
 body {
   overflow-x: hidden;
 }
