@@ -1,11 +1,13 @@
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NbMenuItem,NbDialogService } from '@nebular/theme';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  providers: [UserService]
 })
 export class HomePageComponent implements OnInit {
   showContent: boolean = false;
@@ -40,14 +42,39 @@ export class HomePageComponent implements OnInit {
     }
   ];
 
-  constructor( private spinnerService: NgxSpinnerService,private dialogService: NbDialogService ) { }
+  videoindex =0;
+  videos = [{link:"https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration:31000},
+  {link:"https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration:37000},
+  {link:"https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration:21000},
+  ]
+  disableModal = true;
+
+  constructor( private spinnerService: NgxSpinnerService,private dialogService: NbDialogService, private _userService: UserService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
   }
 
   open(dialog: TemplateRef<any>) {
+    this.disableModal = true;
     this.dialogService.open(dialog);
+    setTimeout(() =>{this.disableModal= false},this.videos[this.videoindex].duration)
+  }
+
+  addThreeCoins(){
+
+    this._userService.addThreeCoins().subscribe(
+      data=>{
+        console.log(data);
+        this.videoindex=this.videoindex+1;
+
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+    )
+
   }
 
   spinnerBehavior () {
