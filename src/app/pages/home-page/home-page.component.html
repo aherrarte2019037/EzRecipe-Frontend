@@ -16,8 +16,31 @@
 
                     <nb-card class="w-full !rounded-xl menu-card mt-5 px-5 py-3">
                         <nb-menu class="navigation-menu" [items]="items"></nb-menu>
-                        
+
                     </nb-card>
+
+                    <nb-card class="w-full !rounded-xl menu-card mt-5 text-center">
+                      <nb-card-body>
+                        <img src="../../../assets/adds.svg" class="!rounded-lg">
+                        <button (click)="open(dialog)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full mt-2">
+                          Gana EzCoins
+                        </button>
+                      </nb-card-body>
+                    </nb-card>
+
+                    <ng-template #dialog let-data let-ref="dialogRef">
+                      <nb-card>
+                        <nb-card-header>Mira este video para ganar EzCoins</nb-card-header>
+                        <nb-card-body>
+
+                          <iframe width="560" height="315" src="https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                        </nb-card-body>
+                        <nb-card-footer>
+                          <button nbButton (click)="ref.close()">Cerrar video</button>
+                        </nb-card-footer>
+                      </nb-card>
+                    </ng-template>
 
                 </div>
 
@@ -32,7 +55,7 @@
                                 Publish
                             </button>
                         </div>
-                    </div>               
+                    </div>
 
 
                     <router-outlet></router-outlet>
