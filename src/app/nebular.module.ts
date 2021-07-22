@@ -7,8 +7,7 @@ import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbDatepickerModule, Nb
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    NbMenuModule.forRoot()
+    CommonModule
   ],
   exports: [
     NbLayoutModule,

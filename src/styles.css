@@ -25,6 +25,26 @@
   @apply !bg-indigo-500;
 }
 
+.navigation-menu .menu-items .menu-item a:not(.active, :hover) {
+  color: #8f9bb3;
+}
+
+.navigation-menu .menu-items .menu-item a:hover:not(.active), .navigation-menu .menu-items .menu-item a:hover:not(.active) nb-icon {
+  @apply !text-gray-500;
+}
+
+.navigation-menu .menu-items .menu-item a.active, .navigation-menu .menu-items .menu-item a.active nb-icon{
+  color: #598bff!important;
+}
+
+.navigation-menu .menu-items .menu-item a {
+  @apply transition duration-200 ease-out;
+}
+
+.navigation-menu .menu-items .menu-item a.active {
+  @apply border-l-2 border-blue-500;
+}
+
 body {
   overflow-x: hidden;
 }
