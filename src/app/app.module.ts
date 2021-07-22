@@ -21,6 +21,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     NotFoundPageComponent,
     HomePageComponent,
     RecipesPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
