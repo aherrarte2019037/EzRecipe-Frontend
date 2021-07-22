@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePageComponent implements OnInit {
   showContent: boolean = false;
+  videoindex =0;
+  disableModal = true;
   items: NbMenuItem[] = [
     {
       title: 'Recetas',
@@ -41,13 +43,11 @@ export class HomePageComponent implements OnInit {
       icon: 'settings-2-outline'
     }
   ];
-
-  videoindex =0;
-  videos = [{link:"https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration:31000},
-  {link:"https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration:37000},
-  {link:"https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration:21000},
+  videos = [
+    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 31000 },
+    { link: "https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration: 37000 },
+    { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
-  disableModal = true;
 
   constructor( private spinnerService: NgxSpinnerService,private dialogService: NbDialogService, private _userService: UserService ) { }
 
@@ -62,19 +62,10 @@ export class HomePageComponent implements OnInit {
   }
 
   addThreeCoins(){
-
     this._userService.addThreeCoins().subscribe(
-      data=>{
-        console.log(data);
-        this.videoindex=this.videoindex+1;
-
-      },
-      error=>{
-        console.log(<any>error);
-
-      }
+      data=> this.videoindex=this.videoindex + 1,
+      error=> error
     )
-
   }
 
   spinnerBehavior () {
