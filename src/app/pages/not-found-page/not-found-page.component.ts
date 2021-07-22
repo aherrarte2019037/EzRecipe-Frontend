@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'app-not-found-page',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundPageComponent implements OnInit {
 
-  constructor() { }
+  constructor( private dialogService: NbDialogService ) { }
 
   ngOnInit(): void {
+  }
+
+  open( dialog: any ) {
+    this.dialogService.open( dialog, { context: { title: 'Titulo', message: 'Mensaje' } })
   }
 
 }
