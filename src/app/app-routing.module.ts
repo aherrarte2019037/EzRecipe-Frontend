@@ -5,7 +5,7 @@ import { NoAuthGuard } from './guards/no-auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent, canActivate: [NoAuthGuard] },
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard], children: [
     { path: 'recipes', component: RecipesPageComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfilePageComponent },
     { path: '', pathMatch: 'full', redirectTo: 'recipes' }
   ]},
   { path: '', pathMatch: 'full', redirectTo: 'home' },
