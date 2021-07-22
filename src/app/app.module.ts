@@ -19,7 +19,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ComponentsModule } from './components/components.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     NotFoundPageComponent,
     HomePageComponent,
     RecipesPageComponent,
-    ProfileComponent
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +42,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ComponentsModule,
     NgxSpinnerModule,
     NbEvaIconsModule,
+    FileUploadModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
