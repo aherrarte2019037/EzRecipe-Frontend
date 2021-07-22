@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem,NbDialogService } from '@nebular/theme';
 
 @Component({
   selector: 'app-home-page',
@@ -40,10 +40,14 @@ export class HomePageComponent implements OnInit {
     }
   ];
 
-  constructor( private spinnerService: NgxSpinnerService ) { }
+  constructor( private spinnerService: NgxSpinnerService,private dialogService: NbDialogService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
+  }
+
+  open(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog);
   }
 
   spinnerBehavior () {
