@@ -6,7 +6,7 @@
   <nb-layout class="home-layout">
     <nb-layout-column>
 
-      <div class="flex space-x-9 justify-center w-full h-full lg:pb-7 md:pb-4">
+      <div class="flex space-x-9 justify-between w-full h-full lg:pb-7 md:pb-4">
         <div class="w-[25%] max-w-[222px] xl:max-w-[224px] flex flex-col justify-between xl:w-[15%]">
 
           <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
@@ -46,13 +46,17 @@
 
         </div>
 
-        <div class="w-[50%] xl:w-[70%]">
+        <div class="w-[50%] xl:w-[50%]">
           <app-latest-recipes></app-latest-recipes>
 
-          <div class="w-full flex justify-center">
-            <div class="bg-white xl:w-1/2 w-full rounded-lg py-4 flex items-center justify-around">
-              <span class="text-gray-400 text-[14px] xl:text-[15px] add-recipe-span">Quieres publicar una receta?</span>
-              <button class="bg-blue-500 relative tracking-wide font-normal text-sm hover:bg-blue-600 text-white py-2 pl-8 pr-3.5 rounded-[10px]">
+          <div class="w-full card-shadow flex justify-center">
+            <div class="bg-white w-full rounded-xl py-4 flex items-center justify-around">
+              <div class="flex items-center space-x-2.5">
+                <img class="w-9 h-9 rounded-full" src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+                <span class="text-gray-400 -mt-0.5 font-medium text-[15px] add-recipe-span">Quieres publicar una receta?</span>
+              </div>
+
+              <button (click)="openAddModal()" class="bg-blue-500 relative tracking-wide font-normal text-sm hover:bg-blue-600 text-white py-2 pl-8 pr-3.5 rounded-[10px]">
                 <nb-icon class="absolute left-3 top-[9px] !w-[18px] !h-[18px]" icon="attach"></nb-icon>
                 Crear
               </button>

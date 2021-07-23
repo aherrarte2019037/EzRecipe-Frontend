@@ -9,3 +9,7 @@ nb-layout-column {
 .add-recipe-span {
     font-family: 'Open Sans', sans-serif!important;
 }
+
+.card-shadow {
+    box-shadow: rgba(160, 160, 160, 0.1) 0px 4px 12px!important;
+}

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/main/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbDialogModule, NbMenuModule, NbThemeModule } from '@nebular/theme';
+import { NbDialogModule, NbMenuModule, NbThemeModule, NbWindowModule } from '@nebular/theme';
 import { NebularModule } from './nebular.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -46,13 +46,14 @@ import { SafePipe } from './pipes/safe.pipe';
     NbEvaIconsModule,
     FileUploadModule,
     NbMenuModule.forRoot(),
+    NbWindowModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
     NebularModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } }    
+    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

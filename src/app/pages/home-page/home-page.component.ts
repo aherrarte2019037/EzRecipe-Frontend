@@ -1,7 +1,8 @@
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NbMenuItem,NbDialogService } from '@nebular/theme';
+import { NbMenuItem,NbDialogService, NbWindowService } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
+import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
 
 @Component({
   selector: 'app-home-page',
@@ -49,7 +50,11 @@ export class HomePageComponent implements OnInit {
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
 
-  constructor( private spinnerService: NgxSpinnerService,private dialogService: NbDialogService, private _userService: UserService ) { }
+  constructor(
+    private spinnerService: NgxSpinnerService,
+    private dialogService: NbDialogService,
+    private _userService: UserService,
+    private windowService: NbWindowService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
@@ -71,6 +76,10 @@ export class HomePageComponent implements OnInit {
   spinnerBehavior () {
     this.spinnerService.show( 'main' );
     setTimeout( () => { this.showContent = true; this.spinnerService.hide( 'main' ) }, 2000 );
+  }
+
+  openAddModal() {
+    this.windowService.open( AddRecipeComponent, { closeOnBackdropClick: false, windowClass: 'add-recipe-window' } )
   }
 
 }
