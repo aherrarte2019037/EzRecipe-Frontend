@@ -1,0 +1,75 @@
+<nb-card [@fadeInUpOnEnter] class="!border-none mx-auto w-[600px] h-[300px] !mb-0">
+
+    <nb-card-body class="!py-0">
+        <nb-stepper orientation="horizontal">
+            <nb-step [label]="step1" [stepControl]="firstForm">
+                <ng-template #step1>Paso 1</ng-template>
+                <h6 class="!text-gray-700">Datos Generales</h6>
+
+                <form class="mt-3.5" [formGroup]="firstForm">
+                    <div class="flex space-x-4 mt-2">
+                        <div class="flex flex-col space-y-4">
+                            <nb-form-field>
+                                <nb-icon nbPrefix icon="book-outline"></nb-icon>
+                                <input [status]="getFormStatus('name', firstForm)" formControlName="name" type="text" nbInput placeholder="Nombre">
+                            </nb-form-field>
+
+                            <nb-form-field>
+                                <nb-icon nbPrefix icon="grid-outline"></nb-icon>
+                                <input [status]="getFormStatus('category', firstForm)" formControlName="category" type="text" nbInput placeholder="Categoría">
+                            </nb-form-field>
+                        </div>
+
+                        <div class="relative text-area">
+                            <nb-icon [status]="getFormStatus('description', firstForm)" class="absolute top-3 left-3" icon="file-text-outline"></nb-icon>
+                            <textarea id="textarea" [status]="getFormStatus('description', firstForm)" formControlName="description" placeholder="Descripción" class="h-24 !pt-2 !pl-[38px]" nbInput></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="w-full flex space-x-3 mt-6 justify-end">
+                        <button (click)="firstForm.invalid? firstForm.markAllAsTouched(): ''" type="submit" hero class="!rounded-lg !text-right !font-medium" status="primary" nbButton nbStepperNext>Siguiente</button>
+                    </div>
+                </form>
+
+            </nb-step>
+
+            <nb-step [@fadeInOnEnter] [label]="step2" [stepControl]="secondForm">
+                <ng-template #step2>Paso 2</ng-template>
+                <div class="flex space-x-2.5 items-center w-full">                    
+                    <h6 class="!text-gray-700">Ingredientes</h6>
+                    <button size="small" status="success" shape="round" outline (click)="addIngredient()" class="!text-right !py-[5px] !font-medium" nbButton>Añadir</button>
+                </div>
+
+                <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }">
+                    <form class="mt-3.5 relative h-[100px]" [formGroup]="secondForm">
+                        <span class="text-gray-600 w-full flex justify-center pt-10" *ngIf="!getIngredients().controls.length">Agrega ingredientes a tu receta...</span>
+                        <div formArrayName="ingredients" *ngFor="let item of getIngredients()?.controls; let i = index">
+                            <div class="w-full flex space-x-2 items-center mb-2" [formGroupName]="i">
+                                <nb-form-field>
+                                    <nb-icon nbPrefix icon="pie-chart-outline"></nb-icon>
+                                    <input [status]="getIngredientFormStatus( 'name', i )" class="w-full" size="tiny" nbInput formControlName="name" placeholder="Ingrediente">
+                                </nb-form-field>
+    
+                                <nb-form-field>
+                                    <nb-icon nbPrefix icon="hash-outline"></nb-icon>
+                                    <input [status]="getIngredientFormStatus( 'quantity', i )" class="w--full" size="tiny" nbInput formControlName="quantity" placeholder="Cantidad">
+                                </nb-form-field>
+
+                                <button (click)="deleteIngredient(i)" nbButton ghost status="danger"><nb-icon class="!w-4" icon="trash-2"></nb-icon></button>
+                            </div>
+    
+                        </div>
+    
+                    </form>
+                </perfect-scrollbar>
+                <div class="w-full absolute bottom-[29px] right-11 flex space-x-3 justify-end">
+                    <button (click)="firstForm.markAsPristine();" hero class="!rounded-lg !text-right !font-medium" status="info" nbButton nbStepperPrevious>Anterior</button>
+                    <button (click)="firstForm.invalid? firstForm.markAllAsTouched(): ''" type="submit" hero class="!rounded-lg !text-right !font-medium" status="primary" nbButton nbStepperNext>Siguiente</button>
+                </div>
+
+            </nb-step>
+
+        </nb-stepper>
+    </nb-card-body>
+</nb-card>
