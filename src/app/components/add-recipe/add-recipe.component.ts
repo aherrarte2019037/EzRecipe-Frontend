@@ -38,6 +38,7 @@ export class AddRecipeComponent implements OnInit {
   });
   loadingUpload: boolean = false;
   filesName: string[] = [];
+  userLogged: any = null;
 
   constructor (
     public windowRef: NbWindowRef, private formBuilder: FormBuilder) { }
@@ -48,14 +49,16 @@ export class AddRecipeComponent implements OnInit {
       console.log(this.filesName)
     }
     this.uploader.onBuildItemForm = ( fileItem: any, form: FormData ) => {
+      form.append('context', `photo=112321`);
       form.append( 'file', fileItem );
-      form.append( 'upload_preset', 'recipeImagesss' );
+      form.append( 'upload_preset', 'recipeImage' );
       fileItem.withCredentials = false;
       return { fileItem, form };
     }
   }
 
   upload() {
+    this.uploader.uploadAll();
   }
 
   formCompleted() {
