@@ -49,15 +49,18 @@ export class HomePageComponent implements OnInit {
     { link: "https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration: 37000 },
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
+  userLogged: any = null;
 
   constructor(
     private spinnerService: NgxSpinnerService,
     private dialogService: NbDialogService,
     private _userService: UserService,
-    private windowService: NbWindowService ) { }
+    private windowService: NbWindowService,
+    private userService: UserService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
+    this.userService.userLogged.subscribe( data => this.userLogged = data )
   }
 
   open(dialog: TemplateRef<any>) {
@@ -79,7 +82,7 @@ export class HomePageComponent implements OnInit {
   }
 
   openAddModal() {
-    this.windowService.open( AddRecipeComponent, { closeOnBackdropClick: false, windowClass: 'add-recipe-window' } )
+    this.windowService.open( AddRecipeComponent, { context: { userLogged: this.userLogged }, closeOnBackdropClick: false, windowClass: 'add-recipe-window' } )
   }
 
 }

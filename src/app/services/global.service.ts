@@ -22,4 +22,8 @@ export class GlobalService {
     } as SocialAuthServiceConfig
   }
 
+  static getCloudinaryUrl(): string {
+    return 'https://api.cloudinary.com/v1_1/dykas17bj/upload';
+  }
+
 }
