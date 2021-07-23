@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef, NbWindowRef } from '@nebular/theme';
-import { fadeInOnEnterAnimation, fadeInUpOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
   styleUrls: ['./add-recipe.component.css'],
-  animations: [ fadeInUpOnEnterAnimation({ duration: 500 }), fadeInOnEnterAnimation() ]
+  animations: [ fadeInUpOnEnterAnimation({ duration: 500 }) ]
 })
 export class AddRecipeComponent implements OnInit {
   firstForm: FormGroup = this.formBuilder.group({
