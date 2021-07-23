@@ -1,7 +1,8 @@
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NbMenuItem,NbDialogService } from '@nebular/theme';
+import { NbMenuItem,NbDialogService, NbWindowService } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
+import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
 
 @Component({
   selector: 'app-home-page',
@@ -11,6 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePageComponent implements OnInit {
   showContent: boolean = false;
+  videoindex =0;
+  disableModal = true;
   items: NbMenuItem[] = [
     {
       title: 'Recetas',
@@ -41,18 +44,23 @@ export class HomePageComponent implements OnInit {
       icon: 'settings-2-outline'
     }
   ];
-
-  videoindex =0;
-  videos = [{link:"https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration:31000},
-  {link:"https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration:37000},
-  {link:"https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration:21000},
+  videos = [
+    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 31000 },
+    { link: "https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration: 37000 },
+    { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
-  disableModal = true;
+  userLogged: any = null;
 
-  constructor( private spinnerService: NgxSpinnerService,private dialogService: NbDialogService, private _userService: UserService ) { }
+  constructor(
+    private spinnerService: NgxSpinnerService,
+    private dialogService: NbDialogService,
+    private _userService: UserService,
+    private windowService: NbWindowService,
+    private userService: UserService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
+    this.userService.userLogged.subscribe( data => this.userLogged = data )
   }
 
   open(dialog: TemplateRef<any>) {
@@ -62,24 +70,19 @@ export class HomePageComponent implements OnInit {
   }
 
   addThreeCoins(){
-
     this._userService.addThreeCoins().subscribe(
-      data=>{
-        console.log(data);
-        this.videoindex=this.videoindex+1;
-
-      },
-      error=>{
-        console.log(<any>error);
-
-      }
+      data=> this.videoindex=this.videoindex + 1,
+      error=> error
     )
-
   }
 
   spinnerBehavior () {
     this.spinnerService.show( 'main' );
     setTimeout( () => { this.showContent = true; this.spinnerService.hide( 'main' ) }, 2000 );
+  }
+
+  openAddModal() {
+    this.windowService.open( AddRecipeComponent, { context: { userLogged: this.userLogged }, closeOnBackdropClick: false, windowClass: 'add-recipe-window' } )
   }
 
 }

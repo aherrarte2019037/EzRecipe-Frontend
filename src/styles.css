@@ -45,6 +45,22 @@
   @apply border-l-2 border-blue-500;
 }
 
+.add-recipe-window nb-card-body {
+  overflow: hidden!important;
+}
+
+.add-recipe-window nb-card {
+  border-radius: 16px!important;
+}
+
+.add-recipe-window .step-content {
+  padding-top: 5px!important;
+}
+
+.add-recipe-window .nb-form-field-addon-basic-highlight {
+  color: #8f9bb3!important;
+}
+
 body {
   overflow-x: hidden;
 }

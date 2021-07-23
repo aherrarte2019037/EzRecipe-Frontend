@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/main/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbDialogModule, NbMenuModule, NbThemeModule } from '@nebular/theme';
+import { NbDialogModule, NbMenuModule, NbThemeModule, NbWindowModule } from '@nebular/theme';
 import { NebularModule } from './nebular.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -20,8 +20,9 @@ import { ComponentsModule } from './components/components.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { FileUploadModule } from 'ng2-file-upload';
 import { SafePipe } from './pipes/safe.pipe';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -44,15 +45,16 @@ import { SafePipe } from './pipes/safe.pipe';
     ComponentsModule,
     NgxSpinnerModule,
     NbEvaIconsModule,
-    FileUploadModule,
     NbMenuModule.forRoot(),
+    NbWindowModule.forRoot(),
+    CloudinaryModule.forRoot( { Cloudinary: CloudinaryCore }, { cloud_name: 'dykas17bj' } ),
     NbThemeModule.forRoot({ name: 'default' }),
     NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
     NebularModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } }    
+    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
