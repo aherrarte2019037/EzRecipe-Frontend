@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbDatepickerModule, NbCardModule, NbInputModule } from '@nebular/theme';
+import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbDatepickerModule, NbCardModule, NbInputModule, NbIconModule, NbActionsModule, NbUserModule, NbBadgeModule, NbContextMenuModule, NbMenuModule, NbStepperModule, NbFormFieldModule } from '@nebular/theme';
 
 
 
@@ -15,7 +15,15 @@ import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbDatepickerModule, Nb
     NbButtonModule,
     NbDatepickerModule,
     NbCardModule,
-    NbInputModule
+    NbInputModule,
+    NbIconModule,
+    NbActionsModule,
+    NbUserModule,
+    NbBadgeModule,
+    NbContextMenuModule,
+    NbMenuModule,
+    NbStepperModule,
+    NbFormFieldModule
   ]
 })
 export class NebularModule { }

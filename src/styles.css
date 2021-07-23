@@ -2,10 +2,71 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap');
+
+* {
+  font-family: 'Nunito', sans-serif!important;
+}
+
+.home-layout .layout {
+  min-height: calc( 100vh - 78px )!important;
+}
+
+.nb-user .user-name {
+  font-weight: 600!important;
+}
+
+.nb-user .user-title {
+  font-size: 13px!important;
+  @apply !text-gray-600 !-mt-0.5;
+}
+
+.nb-user .status-primary {
+  @apply !bg-indigo-500;
+}
+
+.navigation-menu .menu-items .menu-item a:not(.active, :hover) {
+  color: #8f9bb3;
+}
+
+.navigation-menu .menu-items .menu-item a:hover:not(.active), .navigation-menu .menu-items .menu-item a:hover:not(.active) nb-icon {
+  @apply !text-gray-500;
+}
+
+.navigation-menu .menu-items .menu-item a.active, .navigation-menu .menu-items .menu-item a.active nb-icon{
+  color: #598bff!important;
+}
+
+.navigation-menu .menu-items .menu-item a {
+  @apply transition duration-200 ease-out;
+}
+
+.navigation-menu .menu-items .menu-item a.active {
+  @apply border-l-2 border-blue-500;
+}
+
+.add-recipe-window nb-card-body {
+  overflow: hidden!important;
+}
+
+.add-recipe-window nb-card {
+  border-radius: 16px!important;
+}
+
+.add-recipe-window .step-content {
+  padding-top: 5px!important;
+}
+
+.add-recipe-window .nb-form-field-addon-basic-highlight {
+  color: #8f9bb3!important;
+}
 
 body {
-  font-family: 'Nunito', sans-serif!important;
+  overflow-x: hidden;
+}
+
+button {
+  text-transform: none!important;
 }
 
 .text-skew {
@@ -15,9 +76,6 @@ body {
   text-align: center;
   transition: transform 0.3s ease-in-out;
   transform: rotateX(35deg), translateY(-50%);
-}
-
-.text-skew {
 }
 
 .text-skew span {
@@ -37,8 +95,7 @@ body {
 .text-skew > span {
   display: block;
   background-color: #fff;
-  @apply w-12 h-12 xl:w-14 xl:h-14;
-  line-height: 48px;
+  @apply w-12 h-12 xl:w-14 xl:h-14 leading-[47px] xl:leading-[55px];
   transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   box-shadow: 0 40px 50px rgba(0, 0, 0, 0.1);
 }
@@ -94,4 +151,34 @@ body {
 
 .checkbox-container input[type="checkbox"]:checked ~ span {
   color: #4b85f0;
+}
+
+.fade-in-left {
+  animation:fade-in-left .5s cubic-bezier(.39,.575,.565,1.000) both
+}
+
+@keyframes fade-in-left {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fade-in-right {
+  animation:fade-in-left .5s cubic-bezier(.39,.575,.565,1.000) both
+}
+
+@keyframes fade-in-right {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
