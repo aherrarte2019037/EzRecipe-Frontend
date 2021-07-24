@@ -9,7 +9,7 @@
 
           <nb-layout-column>
             <div class="flex space-x-9 justify-between w-full h-full lg:pb-7 md:pb-4">
-              <div class="w-[25%] max-w-[222px] xl:max-w-[224px] flex flex-col justify-between xl:w-[15%]">
+              <div class="w-[25%] max-w-[222px] xl:max-w-[224px] flex flex-col justify-between xl:w-[25%]">
 
                 <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
                   <nb-user class="nb-user" picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
@@ -56,11 +56,12 @@
               </div>
 
               <div class="w-[50%] xl:w-[50%]">
-                <app-latest-recipes></app-latest-recipes>
+                <app-latest-recipes [recipes]="['asd','asdas','asdasd']"></app-latest-recipes>
+                <hr class="border border-gray-300 mb-2">
                 <router-outlet></router-outlet>
               </div>
 
-              <div class="w-[25%] max-w-[222px] xl:max-w-[224px] xl:w-[15%] h-auto bg-gray-300">
+              <div class="w-[25%] max-w-[222px] xl:max-w-[224px] xl:w-[25%] h-auto bg-gray-300">
                 <nb-card *ngIf="userLogged.rol == 'Client'" class="w-full !rounded-xl menu-card mt-2 !mb-0">
                   <nb-card-body class="">
                       <div class="flex items-center">
