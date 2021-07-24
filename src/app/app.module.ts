@@ -23,6 +23,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { SafePipe } from './pipes/safe.pipe';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
+import { SubscriptionComponent } from './pages/subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
     HomePageComponent,
     RecipesPageComponent,
     ProfilePageComponent,
-    SafePipe
+    SafePipe,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,
