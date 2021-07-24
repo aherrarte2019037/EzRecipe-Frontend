@@ -6,11 +6,11 @@
   <div class="scroll-container">
     <ng-container *ngIf="showContent">
       <nb-layout class="home-layout !overflow-y-hidden">
-          
+
           <nb-layout-column>
             <div class="flex space-x-9 justify-between w-full h-full lg:pb-7 md:pb-4">
               <div class="w-[25%] max-w-[222px] xl:max-w-[224px] flex flex-col justify-between xl:w-[15%]">
-      
+
                 <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
                   <nb-user class="nb-user" picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                    badgeText="Activo"
@@ -20,18 +20,18 @@
                    [name]="userLogged?.name +' '+ (userLogged.lastname | slice:0:1)" [title]="'@' + userLogged.rol">
                   </nb-user>
                 </div>
-      
+
                 <nb-card class="w-full !rounded-xl menu-card mt-5 px-5 py-3">
                   <nb-menu class="navigation-menu" [items]="items"></nb-menu>
                 </nb-card>
-      
+
                 <div class="flex w-full px-0.5 items-center justify-between">
                   <span class="font-bold text-gray-500 text-[12px]">ANUNCIOS</span>
                   <div class="relative mt-[-22px]">
                     <nb-badge text="5" position="top right" status="danger"></nb-badge>
                   </div>
                 </div>
-      
+
                 <nb-card class="w-full !rounded-xl menu-card mt-2 !mb-0">
                   <nb-card-body class="!p-3.5">
                     <img src="../../../assets/adds.svg" class="!rounded-lg">
@@ -49,40 +49,25 @@
                     </div>
                   </nb-card-body>
                 </nb-card>
-      
+
               </div>
-      
+
               <div class="w-[50%] xl:w-[50%]">
                 <app-latest-recipes></app-latest-recipes>
-      
-                <div class="w-full card-shadow flex justify-center">
-                  <div class="bg-white w-full rounded-xl py-4 flex items-center justify-around">
-                    <div class="flex items-center space-x-2.5">
-                      <img class="w-9 h-9 rounded-full" src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
-                      <span class="text-gray-400 -mt-0.5 font-medium text-[15px] add-recipe-span">Quieres publicar una receta?</span>
-                    </div>
-      
-                    <button (click)="openAddModal()" class="bg-blue-500 relative tracking-wide font-normal text-sm hover:bg-blue-600 text-white py-2 pl-10 pr-[24px] rounded-[12px]">
-                      <nb-icon class="absolute left-4 top-[9px] !w-[18px] !h-[18px]" icon="attach"></nb-icon>
-                      Crear
-                    </button>
-                  </div>
-                </div>
-      
                 <router-outlet></router-outlet>
               </div>
-      
+
               <div class="w-[25%] max-w-[222px] xl:max-w-[224px] xl:w-[15%] bg-green-200">
                 <p>right</p>
               </div>
             </div>
-      
+
           </nb-layout-column>
         </nb-layout>
     </ng-container>
   </div>
   </perfect-scrollbar>
-    
+
 <ng-template #dialog let-data let-ref="dialogRef">
   <nb-card class="!p-2 !pt-4 !rounded-2xl">
     <nb-card-body>
