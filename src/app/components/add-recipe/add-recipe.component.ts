@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NbWindowRef } from '@nebular/theme';
-import { fadeInDownOnEnterAnimation, fadeInUpOnEnterAnimation } from 'angular-animations';
+import { fadeInDownOnEnterAnimation, fadeInOnEnterAnimation, fadeInUpOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 import { FileItem, FileUploader } from 'ng2-file-upload';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { GlobalService } from 'src/app/services/global.service';
+import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
-  styleUrls: ['./add-recipe.component.css'],
-  animations: [fadeInUpOnEnterAnimation({ duration: 500 }), fadeInDownOnEnterAnimation({ duration: 300 })]
+  styleUrls  : ['./add-recipe.component.css'],
+  animations : [
+    fadeInUpOnEnterAnimation({ duration: 500 }),
+    fadeInOnEnterAnimation({ delay: 200 }),
+    fadeInDownOnEnterAnimation({ duration: 400 }),
+    fadeOutOnLeaveAnimation() 
+  ]
 })
 export class AddRecipeComponent implements OnInit {
   firstForm: FormGroup = this.formBuilder.group({
@@ -36,20 +43,55 @@ export class AddRecipeComponent implements OnInit {
       }
     ]
   });
-  loadingUpload: boolean = false;
   filesName: string[] = [];
   userLogged: any = null;
+  previewImages: any = [];
 
-  constructor (
-    public windowRef: NbWindowRef, private formBuilder: FormBuilder) { }
+  constructor(
+    public windowRef: NbWindowRef,
+    private formBuilder: FormBuilder,
+    private spinnerService: NgxSpinnerService,
+    private recipeService: RecipeService ) { }
 
   ngOnInit(): void {
+    this.onAfterAddingFile();
+    this.onBuildItemForm();
+  }
+
+  addRecipe() {
+    this.spinnerService.show( 'addRecipe' );
+    this.uploader.uploadAll();
+    const recipe = { ...this.firstForm.value, ...this.secondForm.value, ...this.thirdForm.value, image: this.filesName };
+    this.recipeService.addRecipe( recipe ).subscribe();
+    setTimeout(() => {
+      this.spinnerService.hide( 'addRecipe' );
+      this.windowRef.close();
+    }, 2000);
+  }
+
+  //Subir Imágenes
+  onAfterAddingFile() {
     this.uploader.onAfterAddingFile = ( item: FileItem ) => {
-      this.filesName.push( item.file.name );
-      console.log(this.filesName)
+      const filename = `${this.userLogged._id}${Date.now()}`;
+      this.filesName.push( filename );
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.previewImages.push({
+          path: reader.result as string,
+          id: filename,
+          name: item.file.name,
+          size: (item.file.size/1024)/1024
+        });
+      };
+      reader.readAsDataURL( item._file );
     }
+  }
+
+  onBuildItemForm() {
     this.uploader.onBuildItemForm = ( fileItem: any, form: FormData ) => {
-      form.append('context', `photo=112321`);
+      const fileName = `${this.userLogged._id}${Date.now().toString()}`
+      form.append('public_id', fileName);
       form.append( 'file', fileItem );
       form.append( 'upload_preset', 'recipeImage' );
       fileItem.withCredentials = false;
@@ -57,12 +99,9 @@ export class AddRecipeComponent implements OnInit {
     }
   }
 
-  upload() {
-    this.uploader.uploadAll();
-  }
-
-  formCompleted() {
-    if (this.firstForm.invalid && this.secondForm.invalid) return;
+  deleteFile( index: number ) {
+    this.previewImages.splice( index, 1 );
+    this.uploader.queue[index].remove();
   }
 
   getFormStatus(input: string, form: FormGroup) {
@@ -72,7 +111,6 @@ export class AddRecipeComponent implements OnInit {
   }
 
   //Ingredientes
-
   getIngredientFormStatus(input: string, index: number) {
     const formArray = this.secondForm.get('ingredients') as FormArray;
     const formGroup = formArray.controls[index] as FormGroup;
@@ -107,7 +145,6 @@ export class AddRecipeComponent implements OnInit {
   }
 
   //Pasos
-
   getStepFormStatus(index: number) {
     const formArray = this.thirdForm.get('steps') as FormArray;
     const formControl = formArray.controls[index] as FormControl;

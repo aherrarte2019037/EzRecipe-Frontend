@@ -35,9 +35,9 @@ export class HomePageComponent implements OnInit {
       icon: 'archive-outline',
     },
     {
-      title: 'Mensajes',
-      icon: 'message-circle-outline',
-      badge: { text: '2', status: 'warning' }
+      title: 'Suscripciones',
+      icon: 'star-outline',
+      link: '/home/subscription'
     },
     {
       title: 'Ajustes',
