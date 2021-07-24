@@ -22,7 +22,7 @@ export class UserService {
   }
 
   setUserLlogged() {
-    this.http.get<any>( `${this.apiUrl}/userLogged`).pipe(
+    this.http.get<any>( `${this.apiUrl}/getUserLogged`).pipe(
       tap( data => this.userLogged.next( data?.userFound ) )
     ).subscribe();
   }
