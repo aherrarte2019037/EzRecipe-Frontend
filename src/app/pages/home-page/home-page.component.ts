@@ -67,6 +67,7 @@ export class HomePageComponent implements OnInit {
     this.disableModal = true;
     this.dialogService.open(dialog);
     setTimeout(() =>{this.disableModal= false},this.videos[this.videoindex].duration)
+
   }
 
   addThreeCoins(){
@@ -74,6 +75,7 @@ export class HomePageComponent implements OnInit {
       data=> this.videoindex=this.videoindex + 1,
       error=> error
     )
+    this.userService.userLogged.subscribe( data => this.userLogged = data )
   }
 
   spinnerBehavior () {

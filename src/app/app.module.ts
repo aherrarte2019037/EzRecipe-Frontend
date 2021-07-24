@@ -24,6 +24,7 @@ import { SafePipe } from './pipes/safe.pipe';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { SubscriptionComponent } from './pages/subscription/subscription.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SubscriptionComponent } from './pages/subscription/subscription.compone
     BrowserAnimationsModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    PerfectScrollbarModule,
     ComponentsModule,
     NgxSpinnerModule,
     NbEvaIconsModule,
