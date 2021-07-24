@@ -1,0 +1,180 @@
+
+    <div class="pt-10 flex justify-center items-center">
+        <div class="">
+            <div class="text-center font-semibold">
+                <h1 class="text-5xl">
+                    <span class="text-blue-700 tracking-wide">Ez</span>
+                    <span>Plans</span>
+                </h1>
+                <p class=" text-2xl text-gray-400 font-normal w-full px-8 md:w-full">
+                    Escoge el plan que mejor se adapte<br/> a ti.
+                </p>
+            </div>
+            <div class="pt-24 flex flex-row">
+                <!-- Basic Card -->
+                <div class="w-96 p-8 bg-white text-center rounded-3xl pr-16 shadow-xl">
+                    <h1 class="text-black font-semibold text-2xl">EzApprenti</h1>
+                    <p class="pt-2 tracking-wide">
+                        <span class="text-gray-400 align-top">$ </span>
+                        <span class="text-3xl font-semibold">5</span>
+                        <span class="text-gray-400 font-medium">/ mes</span>
+                    </p>
+                    <hr class="mt-4 border-1">
+                    <div class="pt-8">
+                        <p class="font-semibold text-gray-400 text-left">
+                            <span class="material-icons align-middle">
+                                1
+                            </span>
+                            <span class="pl-2">
+                                Tres meses de suscripción
+                            </span>
+                        </p>
+                        <p class="font-semibold text-gray-400 text-left pt-5">
+                            <span class="material-icons align-middle">
+                                2
+                            </span>
+                            <span class="pl-2">
+                                Recetas de chefs profesionales
+                            </span>
+                        </p>
+                        <p class="font-semibold text-gray-400 text-left pt-5">
+                        </p>
+
+                            <p class="w-full py-4 bg-gray-500 mt-8 rounded-xl text-white">
+                                <span class="text-gray-200 font-medium">
+                                    No disponible
+                                </span>
+                            </p>
+                    </div>
+                </div>
+                <!-- StartUp Card -->
+                <div class="w-80 p-8 bg-white text-center rounded-3xl text-white border-2 shadow-xl border-gray-100 transform scale-125">
+                    <h1 class="text-white font-semibold text-2xl pt-2">EzChef</h1>
+                    <p class="pt-2 tracking-wide">
+                        <span class="text-gray-400 align-top">$ </span>
+                        <span class="text-3xl font-semibold">10</span>
+                        <span class="text-gray-400 font-medium">/ mes</span>
+                    </p>
+                    <hr class="mt-4 border-1 border-gray-600">
+                    <div class="pt-8">
+                        <p class="font-semibold text-gray-400 text-left">
+                            <span class="material-icons align-middle">
+                                1
+                            </span>
+                            <span class="pl-2">
+                                Seis Meses de Suscripción
+                            </span>
+                        </p>
+                        <p class="font-semibold text-gray-400 text-left pt-5">
+                            <span class="material-icons align-middle">
+                                2
+                            </span>
+                            <span class="pl-2">
+                                Recetas de chefs Profesionales
+                            </span>
+                        </p>
+                        <p class="font-semibold text-gray-400 text-left pt-5">
+                            <span class="material-icons align-middle">
+                                3
+                            </span>
+                            <span class="pl-2">
+                                Contacto con chefs profesionales
+                            </span>
+                        </p>
+
+                        <button (click)="open(dialog)" class="w-full">
+                            <p class="w-full py-4 bg-blue-600 mt-8 rounded-xl text-white">
+                                <span class="text-gray-200 font-medium">
+                                    Escoger Plan
+                                </span>
+                            </p>
+                          </button>
+                    </div>
+                    <div class="absolute top-4 right-4">
+                        <p class="bg-blue-700 font-semibold px-4 py-1 rounded-full uppercase text-xs">POPULAR</p>
+                    </div>
+                </div>
+                <!-- Enterprise Card -->
+                <div class="w-96 p-8 bg-white text-center rounded-3xl pl-16 shadow-xl">
+                    <h1 class="text-black font-semibold text-2xl">EzMaster</h1>
+                    <p class="pt-2 tracking-wide">
+                        <span class="text-gray-400 align-top">$ </span>
+                        <span class="text-3xl font-semibold">15</span>
+                        <span class="text-gray-400 font-medium">/ mes</span>
+                    </p>
+                    <hr class="mt-4 border-1">
+                    <div class="pt-8">
+                        <p class="font-semibold text-gray-400 text-left">
+                            <span class="material-icons align-middle">
+                                1
+                            </span>
+                            <span class="pl-2">
+                                Un año de suscripción
+                            </span>
+                        </p>
+                        <p class="font-semibold text-gray-400 text-left pt-5">
+                            <span class="material-icons align-middle">
+                                2
+                            </span>
+                            <span class="pl-2">
+                                Recetas de Chefs Profesionales
+                            </span>
+                        </p>
+                        <p class="font-semibold text-gray-400 text-left pt-5">
+                            <span class="material-icons align-middle">
+                                3
+                            </span>
+                            <span class="pl-2">
+                                <span class="text-black">Contacto con Chefs Profesionales</span>
+                            </span>
+                        </p>
+
+                            <p class="w-full py-4 bg-gray-500 mt-8 rounded-xl text-white">
+                                <span class=" text-white font-medium">
+                                    No disponible
+                                </span>
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #dialog let-data let-ref="dialogRef">
+      <nb-card class="!p-2 !pt-4 !rounded-2xl">
+        <nb-card-body>
+          <!-- component -->
+<div class="leading-loose">
+  <form class="max-w-xl m-4 p-10 bg-white rounded">
+    <p class="text-gray-800 font-medium">Información de la tarjeta</p>
+    <div class="">
+      <label class="block text-sm text-gray-00" for="cus_name">Nombre</label>
+      <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="cus_name" name="cus_name" type="text" required="" placeholder="Tu nombre" aria-label="Name">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="cus_email">Datos de la Tarjeta y dirección</label>
+      <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="cus_email" name="cus_email" type="text" required="" placeholder="Numero de la tarjeta" aria-label="Email">
+    </div>
+    <div class="mt-2">
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" type="text" required="" placeholder="CVC" aria-label="Email">
+    </div>
+    <div class="mt-2">
+      <label class="hidden text-sm block text-gray-600" for="cus_email">Calle</label>
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" type="text" required="" placeholder="Calle" aria-label="Email">
+    </div>
+    <div class="inline-block mt-2 w-1/2 pr-1">
+      <label class="hidden block text-sm text-gray-600" for="cus_email">País</label>
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" type="text" required="" placeholder="País" aria-label="Email">
+    </div>
+    <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+      <label class="hidden block text-sm text-gray-600" for="cus_email">Postal</label>
+      <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" type="text" required="" placeholder="Postal" aria-label="Email">
+    </div>
+  </form>
+</div>
+        </nb-card-body>
+        <nb-card-footer class="flex justify-end items-center !border-none">
+          <button class="ml-2 !rounded-xl" nbButton (click)="ref.close()">Adquirir suscripción</button>
+        </nb-card-footer>
+      </nb-card>
+    </ng-template>
