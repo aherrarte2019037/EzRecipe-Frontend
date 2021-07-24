@@ -8,6 +8,14 @@
   font-family: 'Nunito', sans-serif!important;
 }
 
+body {
+  overflow-y: hidden!important;
+}
+
+.scroll-container {
+  height: 89vh;
+}
+
 .home-layout .layout {
   min-height: calc( 100vh - 78px )!important;
 }
@@ -23,6 +31,12 @@
 
 .nb-user .status-primary {
   @apply !bg-indigo-500;
+}
+
+.nb-theme-default nb-context-menu, .nb-theme-default nb-context-menu a:not(:hover) {
+  border-radius: 1rem!important;
+  font-weight: 500!important;
+  @appy !text-gray-700;
 }
 
 .navigation-menu .menu-items .menu-item a:not(.active, :hover) {
