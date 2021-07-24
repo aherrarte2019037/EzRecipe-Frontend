@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuService } from '@nebular/theme';
 import { fadeInDownOnEnterAnimation, fadeInExpandOnEnterAnimation, slideInLeftOnEnterAnimation, slideInRightOnEnterAnimation, zoomInOnEnterAnimation } from 'angular-animations';
+import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +18,9 @@ export class NavbarComponent implements OnInit {
     filter( ({ tag }) => tag === 'profile-menu'),
     map( ({ item: { title } }) => title ),
   );
+  userLogged: BehaviorSubject<any> = this.userService.userLogged;
 
-  constructor( private ctxMenuService: NbMenuService, private authService: AuthService, private router: Router ) { }
+  constructor( private ctxMenuService: NbMenuService, private authService: AuthService, private router: Router, private userService: UserService ) { }
 
   ngOnInit(): void {
     this.profileMenuBehavior();
