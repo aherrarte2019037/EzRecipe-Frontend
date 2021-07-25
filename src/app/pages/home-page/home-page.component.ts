@@ -60,7 +60,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinnerBehavior();
-    this.userService.userLogged.subscribe( data => this.userLogged = data.userFound )
+    this.userService.userLogged.subscribe( data => this.userLogged = data )
   }
 
   open(dialog: TemplateRef<any>) {
