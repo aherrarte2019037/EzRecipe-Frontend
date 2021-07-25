@@ -8,7 +8,7 @@
     </div>
     <div class="text-sm font-bold text-white mb-2">Añadir Receta</div>
   </div>
-  <div *ngFor="let reci of recipes" class="bg-blue-200 w-36 rounded-lg content-end flex flex-wrap items-center justify-center rounded-lg ml-8">
+  <div *ngFor="let reci of recipes" [ngStyle]="{'background-image': 'url('+ urlImg +''+ reci.image[0] +')','background-size': 'cover','background-position': 'center'}" class="bg-blue-200 w-36 rounded-lg content-end flex flex-wrap items-center justify-center rounded-lg ml-8">
     <div class="text-sm font-bold text-white mb-2">{{reci.idPublisher.name}} {{reci.idPublisher.lastname | slice:0:1}}</div>
   </div>
 </div>
