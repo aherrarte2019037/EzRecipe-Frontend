@@ -13,10 +13,10 @@ import { SubscriptionComponent } from './pages/subscription/subscription.compone
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent, canActivate: [NoAuthGuard] },
   { path: 'register', component: RegisterPageComponent, canActivate: [NoAuthGuard] },
+  { path: 'subscription', component: SubscriptionComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard], children: [
     { path: 'recipes', component: RecipesPageComponent },
     { path: 'profile', component: ProfilePageComponent },
-    {path: 'subscription', component: SubscriptionComponent},
     { path: '', pathMatch: 'full', redirectTo: 'recipes' }
   ]},
   { path: '', pathMatch: 'full', redirectTo: 'home' },
