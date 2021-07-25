@@ -50,10 +50,9 @@
 
             </div>
 
-            <div class="w-[50%] xl:w-[50%]">
-              <app-latest-recipes [recipes]="['asd','asdas','asdasd']"></app-latest-recipes>
-
-              <div class="h-[500px]">
+              <div class="w-[50%] xl:w-[50%]">
+                <app-latest-recipes [recipes]="recipes | slice:0:3"></app-latest-recipes>
+                <hr class="border border-gray-300 mb-2">
                 <router-outlet></router-outlet>
               </div>
             </div>
