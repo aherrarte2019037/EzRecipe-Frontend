@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit {
     {
       title: 'Suscripciones',
       icon: 'star-outline',
-      link: '/home/subscription'
+      link: '/subscription'
     },
     {
       title: 'Ajustes',
