@@ -73,6 +73,7 @@ export class AddRecipeComponent implements OnInit {
   onAfterAddingFile() {
     this.uploader.onAfterAddingFile = ( item: FileItem ) => {
       const filename = `${this.userLogged._id}${Date.now()}`;
+      console.log(filename)
       this.filesName.push( filename );
       const reader = new FileReader();
 
@@ -90,8 +91,9 @@ export class AddRecipeComponent implements OnInit {
 
   onBuildItemForm() {
     this.uploader.onBuildItemForm = ( fileItem: any, form: FormData ) => {
-      const fileName = `${this.userLogged._id}${Date.now().toString()}`
-      form.append('public_id', fileName);
+      const filename = `${this.userLogged._id}${Date.now().toString()}`
+      console.log(filename)
+      form.append('public_id', filename);
       form.append( 'file', fileItem );
       form.append( 'upload_preset', 'recipeImage' );
       fileItem.withCredentials = false;

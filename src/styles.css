@@ -12,8 +12,12 @@ body {
   overflow-y: hidden!important;
 }
 
+.cdk-global-scrollblock {
+  overflow-y: hidden!important;
+}
+
 .scroll-container {
-  height: 89vh;
+  height: calc( 100vh - 78px );
 }
 
 .home-layout .layout {

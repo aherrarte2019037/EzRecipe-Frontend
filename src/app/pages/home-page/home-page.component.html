@@ -1,10 +1,10 @@
-<ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
-
+<!-- <ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
+ -->
 <app-navbar></app-navbar>
 
 <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }">
   <div class="scroll-container">
-    <ng-container *ngIf="showContent">
+    <ng-container *ngIf="true">
       <nb-layout class="home-layout !overflow-y-hidden">
           
           <nb-layout-column>
@@ -52,7 +52,7 @@
       
               </div>
       
-              <div class="w-[50%] xl:w-[50%]">
+              <div class="w-[50%] flex flex-col h-full">
                 <app-latest-recipes></app-latest-recipes>
       
                 <div class="w-full card-shadow flex justify-center">
@@ -69,7 +69,9 @@
                   </div>
                 </div>
       
-                <router-outlet></router-outlet>
+                <div class="w-full card-shadow mt-5 h-full">
+                  <router-outlet></router-outlet>
+                </div>
               </div>
       
               <div class="w-[25%] max-w-[222px] xl:max-w-[224px] xl:w-[15%] bg-green-200">
