@@ -1,4 +1,5 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit,TemplateRef,ViewChild } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { NbDialogService } from '@nebular/theme';
 import { SubscriptionService } from 'src/app/services/subscription.service';
 
@@ -9,17 +10,28 @@ import { SubscriptionService } from 'src/app/services/subscription.service';
   providers: [SubscriptionService]
 })
 export class SubscriptionComponent implements OnInit {
-
+  showContent: boolean = false;
   disableModal = true;
+  @ViewChild('dialog1') dialog!: TemplateRef<any>;
 
-  constructor( private dialogService: NbDialogService, private _subService: SubscriptionService) { }
-
-  ngOnInit(): void {
+  constructor( 
+    private dialogService: NbDialogService, 
+    private _subService: SubscriptionService,
+    private spinnerService: NgxSpinnerService,) { 
+    
   }
 
-  open(dialog: TemplateRef<any>){
-    this.disableModal = true;
-    this.dialogService.open(dialog);
+  ngOnInit(): void {
+    this.spinnerBehavior();
+  }
+
+  spinnerBehavior () {
+    this.spinnerService.show( 'main' );
+    setTimeout( () => { this.showContent = true; this.spinnerService.hide( 'main' ) }, 2000 );
+  }
+
+  openCard(){
+    this.dialogService.open(this.dialog);
   }
 
   addSubChef(){

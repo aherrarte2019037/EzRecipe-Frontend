@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
@@ -11,6 +11,9 @@ import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.com
 export class LatestRecipesComponent implements OnInit {
   showContent: boolean = false;
   userLogged: any = null;
+  urlImg = 'https://res.cloudinary.com/dykas17bj/image/upload/'
+
+  @Input() recipes: any
 
   constructor(
     private windowService: NbWindowService,

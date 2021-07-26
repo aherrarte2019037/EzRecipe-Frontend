@@ -1,88 +1,82 @@
-<ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
-
+<!-- <ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
+ -->
 <app-navbar></app-navbar>
 
 <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }">
   <div class="scroll-container">
-    <ng-container *ngIf="showContent">
+    <ng-container *ngIf="true">
       <nb-layout class="home-layout !overflow-y-hidden">
 
-          <nb-layout-column>
-            <div class="flex space-x-9 justify-between w-full h-full lg:pb-7 md:pb-4">
-              <div class="w-[25%] max-w-[222px] xl:max-w-[224px] flex flex-col justify-between xl:w-[15%]">
+        <nb-layout-column>
+          <div class="flex space-x-9 justify-between w-full h-full lg:pb-7 md:pb-4">
+            <div class="w-[25%] max-w-[222px] xl:max-w-[224px] flex flex-col justify-between xl:w-[25%]">
 
-                <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
-                  <nb-user class="nb-user" picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                   badgeText="Activo"
-                   badgeStatus="primary"
-                   badgePosition="bottom right"
-                   size="giant"
-                   [name]="userLogged?.name +' '+ (userLogged.lastname | slice:0:1)" [title]="'@' + userLogged.rol">
-                  </nb-user>
-                </div>
-
-                <nb-card class="w-full !rounded-xl menu-card mt-5 px-5 py-3">
-                  <nb-menu class="navigation-menu" [items]="items"></nb-menu>
-                </nb-card>
-
-                <div class="flex w-full px-0.5 items-center justify-between">
-                  <span class="font-bold text-gray-500 text-[12px]">ANUNCIOS</span>
-                  <div class="relative mt-[-22px]">
-                    <nb-badge text="5" position="top right" status="danger"></nb-badge>
-                  </div>
-                </div>
-
-                <nb-card class="w-full !rounded-xl menu-card mt-2 !mb-0">
-                  <nb-card-body class="!p-3.5">
-                    <img src="../../../assets/adds.svg" class="!rounded-lg">
-                    <img class="absolute w-9 h-9 top-6 right-6" src="../../../assets/promotion.svg">
-                    <div class="flex justify-start items-center space-x-2">
-                      <button *ngIf="videoindex<3" (click)="open(dialog)" class="bg-pink-500 text-sm hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-3">
-                        Ver vídeo
-                      </button>
-                      <button *ngIf="videoindex>2" (click)="open(dialog)" class="bg-gradient-to-r from-gray-400 to-gray-400 text-sm text-white py-2 px-4 rounded-lg mt-3" disabled>
-                        Ver video
-                      </button>
-                      <button *ngIf="videoindex>2" (click)="open(dialog)" class="bg-gradient-to-r from-gray-400 to-gray-400 text-sm text-white py-2 px-4 rounded-lg mt-3" disabled>
-                        Ver video
-                      </button>
-                      <button class="h-[38px] rounded-lg relative w-[38px] mt-3 bg-gray-200">
-                        <nb-icon class="!absolute !w-5 !h-5 !top-[9px] !left-[9px]" icon="close-outline"></nb-icon>
-                      </button>
-                    </div>
-                  </nb-card-body>
-                </nb-card>
-
+              <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
+                <nb-user *ngIf="userLogged" class="nb-user" picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" badgeText="Activo" badgeStatus="primary" badgePosition="bottom right" size="giant" [name]="userLogged?.name +' '+ (userLogged?.lastname | slice:0:1)" [title]="'@' + userLogged.rol">
+                </nb-user>
               </div>
 
+              <nb-card class="w-full !rounded-xl menu-card mt-5 px-5 py-3">
+                <nb-menu class="navigation-menu" [items]="items"></nb-menu>
+              </nb-card>
+
+              <div class="flex w-full px-0.5 items-center justify-between">
+                <span class="font-bold text-gray-500 text-[12px]">ANUNCIOS</span>
+                <div class="relative mt-[-22px]">
+                  <nb-badge text="5" position="top right" status="danger"></nb-badge>
+                </div>
+              </div>
+
+              <nb-card class="w-full !rounded-xl menu-card mt-2 !mb-0">
+                <nb-card-body class="!p-3.5">
+                  <img src="../../../assets/adds.svg" class="!rounded-lg">
+                  <img class="absolute w-9 h-9 top-6 right-6" src="../../../assets/promotion.svg">
+                  <div class="flex justify-start items-center space-x-2">
+                    <button *ngIf="videoindex<3" (click)="open(dialog)" class="bg-pink-500 text-sm hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-3">
+                      Ver vídeo
+                    </button>
+                    <button *ngIf="videoindex>2" (click)="open(dialog)" class="bg-gradient-to-r from-gray-400 to-gray-400 text-sm text-white py-2 px-4 rounded-lg mt-3" disabled>
+                      Ver video
+                    </button>
+                    <button *ngIf="videoindex>2" (click)="open(dialog)" class="bg-gradient-to-r from-gray-400 to-gray-400 text-sm text-white py-2 px-4 rounded-lg mt-3" disabled>
+                      Ver video
+                    </button>
+                    <button class="h-[38px] rounded-lg relative w-[38px] mt-3 bg-gray-200">
+                      <nb-icon class="!absolute !w-5 !h-5 !top-[9px] !left-[9px]" icon="close-outline"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+
+            </div>
+
               <div class="w-[50%] xl:w-[50%]">
-                <app-latest-recipes></app-latest-recipes>
+                <app-latest-recipes [recipes]="recipes | slice:0:3"></app-latest-recipes>
+                <hr class="border border-gray-300 mb-2">
                 <router-outlet></router-outlet>
               </div>
 
-              <div class="w-[25%] max-w-[222px] xl:max-w-[224px] xl:w-[15%] h-auto bg-gray-300">
-                <nb-card *ngIf="userLogged.rol == 'Client'" class="w-full !rounded-xl menu-card mt-2 !mb-0">
-                  <nb-card-body class="">
-                      <div class="flex items-center">
-                        <img class="w-12 h-12 object-cover rounded-full" src="../../../assets/ezCoins.png">
-                        <div class="mx-3">
-                          <p class="text-gray-600 !text-lg !font-semibold pb-1">{{userLogged.ezCoins}} EzCoins.</p>
-                          <div class="flex flex-wrap">
-                            <div><button routerLink="subscription" class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white">Suscripciones</button></div>
-                          </div>
-                          <!--<button class="!text-white text-justify rounded-lg bg-blue-500" (click)="open(dialog)">Consigue más...</button>-->
-                        </div>
+            <div class="w-[25%] max-w-[222px] xl:max-w-[224px] xl:w-[25%] h-auto bg-gray-300">
+              <nb-card *ngIf="userLogged?.rol == 'Client'" class="w-full !rounded-xl menu-card !mb-0">
+                <nb-card-body class="">
+                  <div class="flex items-center">
+                    <img class="w-12 h-12 object-cover rounded-full" src="../../../assets/ezCoins.png">
+                    <div class="mx-3">
+                      <p class="text-gray-600 !text-lg !font-semibold pb-1">{{userLogged.ezCoins}} EzCoins.</p>
+                      <div class="flex flex-wrap">
+                        <div><button routerLink="/subscription" class="rounded-lg bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white">Suscripciones</button></div>
+                      </div>
                     </div>
-                  </nb-card-body>
-                </nb-card>
-              </div>
+                  </div>
+                </nb-card-body>
+              </nb-card>
             </div>
-
-          </nb-layout-column>
-        </nb-layout>
+          </div>
+        </nb-layout-column>
+      </nb-layout>
     </ng-container>
   </div>
-  </perfect-scrollbar>
+</perfect-scrollbar>
 
 <ng-template #dialog let-data let-ref="dialogRef">
   <nb-card class="!p-2 !pt-4 !rounded-2xl">
