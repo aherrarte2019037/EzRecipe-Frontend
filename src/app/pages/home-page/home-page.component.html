@@ -6,7 +6,7 @@
   <nb-layout>
 
     <nb-layout-column>
-      
+
       <div class="flex main-container space-x-9 justify-between w-full">
 
         <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[245px]">
@@ -91,6 +91,33 @@
             </div>
           </div>
         </perfect-scrollbar>
+
+        <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[245px]">
+          <div *ngIf="userLogged?.rol == 'AdminApp'" class="w-full mt-0.5 layout-container card-shadow flex flex-col justify-between">
+            <div class="flex flex-col space-y-2">
+              <div class="flex mb-0.1 w-full px-0.5 items-center justify-between">
+                <span class="font-bold text-gray-500 text-[12px]">PETICIONES</span>
+              </div>
+
+              <nb-card class="w-full !rounded-xl menu-card">
+                <nb-card-body class="!px-4" *ngFor="let req of chefRequests">
+                  <div class="flex items-center">
+                    <!--<img *ngIf="req.image" class="w-11 h-10 object-cover rounded-full" [src]="req.image">
+                    <img *ngIf="!req.image" class="w-11 h-10 object-cover rounded-full" src="http://simpleicon.com/wp-content/uploads/user-4.png">-->
+                    <div class="ml-3">
+                      <p class="!text-gray-600 !text-sm pb-1"><span class="!text-sm text-gray-700 ezcoin-span !font-semibold">{{req.name}} {{req.lastname}} @{{req.username}}</span> Quiere ser Chef</p>
+                    </div>
+                  </div>
+                  <div class="flex mt-3 justify-between space-x-2 mb-1">
+                    <button (click)="confirmChefRquest(req._id)" class="rounded-xl bg-[#1878f3] hover:bg-blue-600 w-full text-sm tracking-wide py-2 text-white">Confirmar</button>
+                    <button (click)="cancelChefRquest(req._id)" class="rounded-xl hover:bg-gray-300 bg-gray-200 text-sm tracking-wide text-gray-700 font-semibold px-6 py-2">Cancelar</button>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+          </div>
+        </perfect-scrollbar>
+
 
       </div>
 

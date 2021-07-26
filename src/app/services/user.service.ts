@@ -27,4 +27,22 @@ export class UserService {
     ).subscribe();
   }
 
+  getChefRequests(): Observable<any>{
+
+    return this.http.get(`${this.apiUrl}/getChefRequests`);
+
+  }
+
+  confirmChefRquest(id: String):Observable<any>{
+
+    return this.http.get(`${this.apiUrl}/confirmChefRequest/${id}`);
+
+  }
+
+  cancelChefRequest(id: String):Observable<any>{
+
+    return this.http.get(`${this.apiUrl}/cancelChefRequest/${id}`);
+
+  }
+
 }
