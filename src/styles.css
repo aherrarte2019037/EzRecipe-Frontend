@@ -16,10 +16,6 @@ body {
   overflow-y: hidden!important;
 }
 
-.scroll-container {
-  height: calc( 100vh - 78px );
-}
-
 .home-layout .layout {
   min-height: calc( 100vh - 78px )!important;
 }
