@@ -52,6 +52,7 @@ export class HomePageComponent implements OnInit {
   ]
   userLogged: any = null;
   recipes: any;
+  chefRequests: any;
 
   constructor(
     private spinnerService: NgxSpinnerService,
@@ -65,6 +66,7 @@ export class HomePageComponent implements OnInit {
     this.spinnerBehavior();
     this.userService.userLogged.subscribe( data => this.userLogged = data )
     this.recipeService.getRecipes().subscribe( data => this.recipes = data )
+    this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
   }
 
   open(dialog: TemplateRef<any>) {
@@ -80,6 +82,38 @@ export class HomePageComponent implements OnInit {
       error=> error
     )
     this.userService.userLogged.subscribe( data => this.userLogged = data )
+  }
+
+  confirmChefRquest(id: String){
+
+    this._userService.confirmChefRquest(id).subscribe(
+
+      data=>{
+        console.log(data);
+        this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+
+    )
+  }
+
+  cancelChefRquest(id: String){
+
+    this._userService.cancelChefRequest(id).subscribe(
+
+      data=>{
+        console.log(data);
+        this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+
+    )
   }
 
   spinnerBehavior () {
