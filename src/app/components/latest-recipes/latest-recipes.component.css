@@ -7,3 +7,12 @@
 .recipe-card {
   background-position: center;
 }
+
+.overlay-container:hover > .overlay {
+  opacity: 0.7;
+  background-color: black;
+}
+
+.overlay-container:hover > .overlay-text {
+  opacity: 1;
+}
