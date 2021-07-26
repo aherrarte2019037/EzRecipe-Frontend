@@ -1,9 +1,18 @@
 #divAddRecipe{
-  background-image: url('https://images.unsplash.com/photo-1608949621301-dc970e104c90?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');
+  background-image: url('https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGZvb2R8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .recipe-card {
   background-position: center;
+}
+
+.overlay-container:hover > .overlay {
+  opacity: 0.7;
+  background-color: black;
+}
+
+.overlay-container:hover > .overlay-text {
+  opacity: 1;
 }
