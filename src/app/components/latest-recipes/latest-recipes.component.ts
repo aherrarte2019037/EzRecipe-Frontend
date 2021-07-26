@@ -11,6 +11,8 @@ import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.com
 export class LatestRecipesComponent implements OnInit {
   showContent: boolean = false;
   userLogged: any = null;
+  urlImg = 'https://res.cloudinary.com/dykas17bj/image/upload/'
+
   @Input() recipes: any
 
   constructor(
@@ -19,7 +21,6 @@ export class LatestRecipesComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe( data => this.userLogged = data )
-    console.log(this.recipes)
   }
 
   openAddModal() {
