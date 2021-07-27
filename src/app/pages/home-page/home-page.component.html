@@ -25,7 +25,7 @@
               <div class="flex w-full px-0.5 items-center justify-between">
                 <span class="font-bold text-gray-500 text-[12px]">ANUNCIOS</span>
                 <div class="relative mt-[-22px]">
-                  <nb-badge text="5" position="top right" status="danger"></nb-badge>
+                  <nb-badge [text]="countVideoIndex.toString()" position="top right" status="danger"></nb-badge>
                 </div>
               </div>
 
@@ -64,7 +64,7 @@
         </perfect-scrollbar>
 
         <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[245px]">
-          <div *ngIf="userLogged?.rol == 'Client'" class="w-full mt-0.5 layout-container card-shadow flex flex-col justify-between">
+          <div *ngIf="userLogged?.rol != 'AdminApp'" class="w-full mt-0.5 layout-container card-shadow flex flex-col justify-between">
             <div class="flex flex-col space-y-2">
               <div class="flex mb-0.1 w-full px-0.5 items-center justify-between">
                 <span class="font-bold text-gray-500 text-[12px]">MONEDAS</span>
@@ -94,8 +94,13 @@
             <div class="flex flex-col space-y-2">
               <div class="flex mb-0.1 w-full px-0.5 items-center justify-between">
                 <span class="font-bold text-gray-500 text-[12px]">PETICIONES</span>
+                <div class="relative mt-[-22px]">
+                  <nb-badge *ngIf="chefRequests.length>0" [text]="chefRequests.length" position="top right" status="danger"></nb-badge>
+                  <nb-badge *ngIf="chefRequests.length<1" text="0" position="top right" status="danger"></nb-badge>
+                </div>
               </div>
 
+              <p *ngIf="chefRequests<=1" class="!font-semibold m-2">¡No tienes peticiones por hoy!<nb-icon icon="checkmark-square-outline" class="ml-1 absolute"></nb-icon></p>
               <nb-card class="w-full !rounded-xl menu-card">
                 <nb-card-body class="!px-4" *ngFor="let req of chefRequests">
                   <div class="flex items-center">
