@@ -25,7 +25,7 @@ import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbDatepickerModule, Nb
     NbStepperModule,
     NbFormFieldModule,
     NbListModule,
-    NbTooltipModule
+    NbTooltipModule,
   ]
 })
 export class NebularModule { }

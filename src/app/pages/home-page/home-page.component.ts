@@ -14,6 +14,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 export class HomePageComponent implements OnInit {
   showContent: boolean = false;
   videoindex =0;
+  countVideoIndex = 3-this.videoindex;
   disableModal = true;
   items: NbMenuItem[] = [
     {

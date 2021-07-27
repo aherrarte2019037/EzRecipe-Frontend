@@ -77,6 +77,23 @@ export class ProfilePageComponent implements OnInit {
 
   }*/
 
+  petitionChefRequest(){
+
+    this.userService.petitionChefRequest().subscribe(
+      data=>{
+        console.log(data);
+        this.userService.userLogged.subscribe( data =>{ this.userLogged = data })
+
+
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+    )
+
+  }
+
   desactiveForm(){
     this.formActivated = false;
   }

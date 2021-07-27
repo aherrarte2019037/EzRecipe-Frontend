@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,10 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { SubscriptionComponent } from './pages/subscription/subscription.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { TimeagoModule } from 'ngx-timeago';
+import { TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
+
+export class MyIntl extends TimeagoIntl { }
 
 @NgModule({
   declarations: [
@@ -49,6 +53,10 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     ComponentsModule,
     NgxSpinnerModule,
     NbEvaIconsModule,
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
     NbMenuModule.forRoot(),
     NbWindowModule.forRoot(),
     CloudinaryModule.forRoot( { Cloudinary: CloudinaryCore }, { cloud_name: 'dykas17bj' } ),
@@ -58,7 +66,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } },
+    { provide: 'SocialAuthServiceConfig', useValue: { autoLogin: false, providers: GlobalService.getSocialAuthConfig().providers } }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

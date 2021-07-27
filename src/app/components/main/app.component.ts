@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TimeagoIntl } from 'ngx-timeago';
+import { strings as spanish } from 'ngx-timeago/language-strings/es';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'EzRecipe';
+
+  constructor( intl: TimeagoIntl ) {
+    intl.strings = spanish;
+    intl.changes.next();
+  }
+  
 }
