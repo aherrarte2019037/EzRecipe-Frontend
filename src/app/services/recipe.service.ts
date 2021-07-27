@@ -16,7 +16,11 @@ export class RecipeService {
   }
 
   getRecipes(): Observable<any>{
-    return this.http.get( `${this.apiUrl}/getRecipe`)
+    return this.http.get( `${this.apiUrl}/getRecipe` )
+  }
+
+  getLatest() {
+    return this.http.get( `${this.apiUrl}/latestRecipes` )
   }
 
 }
