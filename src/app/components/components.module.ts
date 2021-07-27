@@ -12,6 +12,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TimeagoModule } from 'ngx-timeago';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -31,7 +33,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     FileUploadModule,
     CloudinaryModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TimeagoModule
   ],
   exports: [
     NavbarComponent,

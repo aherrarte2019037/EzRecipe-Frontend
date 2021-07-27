@@ -52,38 +52,37 @@
     </div>
 </div> -->
 
-<div class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
+<div *ngIf="recipe" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
     <div class="flex justify-between items-center">
         <div class="flex items-center space-x-2">
             <img class="rounded-xl w-11 h-11" src="https://daisyui.com/tailwind-css-component-profile-1@56w.png">
             <div class="flex flex-col justify-between">
-                <span class="font-semibold mb-[-1px] text-[14px] text-gray-800">Laura Fisher</span>
+                <span class="font-semibold mb-[-1px] text-[14px] text-gray-800">{{ recipe?.idPublisher?.name }} {{ recipe?.idPublisher?.lastname }}</span>
                 <span class="text-[12px] pl-4 relative mt-[-1px] font-semibold text-gray-400">
                     <nb-icon class="absolute -ml-4 mt-[2px] !text-[15px]" icon="done-all-outline"></nb-icon>
-                    12 hours ago
+                    {{ recipe.dateTime | timeago }}
                 </span>
             </div>
         </div>
         <div class="flex space-x-2">
-            <span nbTooltip="Premium" nbTooltipStatus="warning" class="pr-3 px-5 py-1 relative font-semibold bg-yellow-400 rounded-full text-white text-[13px]">
+            <span [hidden]="recipe?.type === 'common'" nbTooltip="Premium" nbTooltipStatus="warning" class="pr-3 px-5 py-1 relative font-semibold bg-yellow-400 rounded-full text-white text-[13px]">
                 <nb-icon class="!text-[15px] mt-[-1px] left-[8px] absolute" icon="star"></nb-icon>
             </span>
-            <button class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+            <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }, { title: 'Guardar' }]" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
                 <nb-icon icon="more-horizontal-outline"></nb-icon>
             </button>
         </div>
     </div>
 
-    <span class="text-gray-700 text-[15px] description-span">El pastel de queso es uno de los más apreciados en la mayoría de regiones del mundo.</span>
+    <span class="text-gray-700 text-[15px] description-span">{{ recipe.description | titlecase}}.</span>
     <div class="flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 space-x-0 justify-between space-y-4 w-full h-full">
-        <div [ngStyle]="{'background-image': 'url(' + 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=653&q=80' + ')'}" class="image-recipe"></div>
-        <div [ngStyle]="{'background-image': 'url(' + 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60' + ')'}" class="image-recipe"></div>
+        <div *ngFor="let image of recipe.image" [ngStyle]="{'background-image': 'url(' + imageUrl + image + ')'}" class="image-recipe"></div>
     </div>
 
     <div class="flex space-x-3 !mt-4 bg-gray-200 px-4 rounded-xl h-[60px] justify-between w-full">
         <button class="text-gray-500 text-[13px] font-semibold hover:text-red-500 space-x-1 flex items-center">
             <nb-icon icon="heart"></nb-icon>
-            <span class="mt-0.5">98</span>
+            <span class="mt-0.5">{{ recipe?.likes?.length }}</span>
         </button>
 
         <button class="text-gray-500 text-[13px] hover:text-blue-500 space-x-1 flex items-center">
