@@ -1,6 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,21 +15,10 @@ export class ProfilePageComponent implements OnInit {
   userProfile: any;
   username: any
 
-  constructor(private renderer: Renderer2, public userService: UserService, private formBuilder: FormBuilder, private _route: ActivatedRoute) {
-    this._route.queryParams.subscribe(params=>{ this.username = params['username'] || null })
-   }
+  constructor(private renderer: Renderer2, public userService: UserService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.username = this._route.snapshot.paramMap.get('username')
-    this.userService.userLogged.subscribe( data =>{ this.userLogged = data
-      if(this.username === 'user'){
-        this.userService.getUserUsername(data.username).subscribe( data => this.userProfile = data )
-      }else {
-        this.userService.getUserUsername(this.username).subscribe( data => this.userProfile = data )
-      }
-
-    })
-
+    this.userService.userLogged.subscribe( data =>{ this.userLogged = data })
   }
 
   setFormValue(){
@@ -75,7 +63,7 @@ export class ProfilePageComponent implements OnInit {
 
   }
 
-  editProfile(){
+  /*editProfile(){
     this.userService.editUser(this.formChanges, this.userLogged._id).subscribe(
       () => {
 
@@ -87,7 +75,7 @@ export class ProfilePageComponent implements OnInit {
     )
     this.desactiveForm();
 
-  }
+  }*/
 
   desactiveForm(){
     this.formActivated = false;
