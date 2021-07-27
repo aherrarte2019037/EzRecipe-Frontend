@@ -54,14 +54,14 @@
           </div>
         </perfect-scrollbar>
 
-        <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[50%] xl:w-[50%]">
+        <div class="w-[50%] xl:w-[50%]">
           <div class="w-full layout-container flex flex-col justify-between">
 
-            <div class="h-[85vh]">
+            <div class="h-[84vh]">
               <router-outlet></router-outlet>
             </div>
           </div>
-        </perfect-scrollbar>
+        </div>
 
         <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[245px]">
           <div *ngIf="userLogged?.rol == 'Client'" class="w-full mt-0.5 layout-container card-shadow flex flex-col justify-between">
