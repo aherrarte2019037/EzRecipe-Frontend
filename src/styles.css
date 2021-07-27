@@ -3,6 +3,7 @@
 @import "tailwindcss/utilities";
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap');
 
 * {
   font-family: 'Nunito', sans-serif!important;
@@ -12,8 +13,8 @@ body {
   overflow-y: hidden!important;
 }
 
-.scroll-container {
-  height: 89vh;
+.cdk-global-scrollblock {
+  overflow-y: hidden!important;
 }
 
 .home-layout .layout {

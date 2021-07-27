@@ -3,6 +3,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NbMenuItem,NbDialogService, NbWindowService } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
+import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-home-page',
@@ -50,17 +51,22 @@ export class HomePageComponent implements OnInit {
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
   userLogged: any = null;
+  recipes: any;
+  chefRequests: any;
 
   constructor(
     private spinnerService: NgxSpinnerService,
     private dialogService: NbDialogService,
     private _userService: UserService,
     private windowService: NbWindowService,
-    private userService: UserService ) { }
+    private userService: UserService,
+    private recipeService: RecipeService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
     this.userService.userLogged.subscribe( data => this.userLogged = data )
+    this.recipeService.getRecipes().subscribe( data => this.recipes = data )
+    this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
   }
 
   open(dialog: TemplateRef<any>) {
@@ -76,6 +82,38 @@ export class HomePageComponent implements OnInit {
       error=> error
     )
     this.userService.userLogged.subscribe( data => this.userLogged = data )
+  }
+
+  confirmChefRquest(id: String){
+
+    this._userService.confirmChefRquest(id).subscribe(
+
+      data=>{
+        console.log(data);
+        this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+
+    )
+  }
+
+  cancelChefRquest(id: String){
+
+    this._userService.cancelChefRequest(id).subscribe(
+
+      data=>{
+        console.log(data);
+        this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
+      },
+      error=>{
+        console.log(<any>error);
+
+      }
+
+    )
   }
 
   spinnerBehavior () {
