@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/main/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbDialogModule, NbMenuModule, NbThemeModule, NbWindowModule } from '@nebular/theme';
+import { NbDialogModule, NbMenuModule, NbThemeModule, NbToastrModule, NbWindowModule } from '@nebular/theme';
 import { NebularModule } from './nebular.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -65,6 +65,7 @@ export class MyIntl extends TimeagoIntl { }
     CloudinaryModule.forRoot( { Cloudinary: CloudinaryCore }, { cloud_name: 'dykas17bj' } ),
     NbThemeModule.forRoot({ name: 'default' }),
     NbDialogModule.forRoot({ autoFocus: false, closeOnBackdropClick: false }),
+    NbToastrModule.forRoot(),
     NebularModule,
   ],
   providers: [

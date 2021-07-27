@@ -45,4 +45,11 @@ export class UserService {
 
   }
 
+  petitionChefRequest():Observable<any>{
+
+    return this.http.get(`${this.apiUrl}/petitionChefRequest/`);
+
+  }
+
+
 }
