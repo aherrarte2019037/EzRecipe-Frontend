@@ -21,7 +21,9 @@ export class LatestRecipesComponent implements OnInit {
     private recipeService: RecipeService ) { }
 
   ngOnInit(): void {
-    this.recipeService.getLatest().subscribe( data => this.recipes = data );
+    this.recipeService.getLatest().subscribe( data => {
+      console.log(data)
+      this.recipes = data} );
     this.userService.userLogged.subscribe( data => this.userLogged = data )
   }
 
