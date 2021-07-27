@@ -4,8 +4,3 @@
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.40);
     @apply w-full h-full rounded-xl transition transform duration-150 hover:scale-105;
 }
-
-.description-span {
-    font-family: 'Montserrat', sans-serif!important;
-    font-size: 14px!important;
-}

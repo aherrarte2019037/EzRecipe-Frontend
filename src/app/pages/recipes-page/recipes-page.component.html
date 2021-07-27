@@ -1,6 +1,8 @@
 <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }">
-        <div class="flex w-full 2xl:flex-row flex-col 2xl:space-y-0 space-y-4 space-x-0 2xl:space-x-4">        
-            <app-recipe-card></app-recipe-card>
-            <app-recipe-card></app-recipe-card>
-        </div>
+    <app-latest-recipes [recipes]="[] | slice:0:5"></app-latest-recipes>
+
+    <div class="flex w-full 2xl:flex-row flex-col 2xl:space-y-0 space-y-4 space-x-0 2xl:space-x-4">
+        <app-recipe-card></app-recipe-card>
+        <app-recipe-card></app-recipe-card>
+    </div>
 </perfect-scrollbar>

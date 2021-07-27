@@ -64,15 +64,48 @@
                 </span>
             </div>
         </div>
-        <button class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
-            <nb-icon icon="more-horizontal-outline"></nb-icon>
-        </button>
+        <div class="flex space-x-2">
+            <span nbTooltip="Premium" nbTooltipStatus="warning" class="pr-3 px-5 py-1 relative font-semibold bg-yellow-400 rounded-full text-white text-[13px]">
+                <nb-icon class="!text-[15px] mt-[-1px] left-[8px] absolute" icon="star"></nb-icon>
+            </span>
+            <button class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+                <nb-icon icon="more-horizontal-outline"></nb-icon>
+            </button>
+        </div>
     </div>
 
-    <span class="text-gray-800 description-span">El pastel de queso es uno de los más apreciados en la mayoría de regiones del mundo.</span>
+    <span class="text-gray-700 text-[15px] description-span">El pastel de queso es uno de los más apreciados en la mayoría de regiones del mundo.</span>
     <div class="flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 space-x-0 justify-between space-y-4 w-full h-full">
         <div [ngStyle]="{'background-image': 'url(' + 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=653&q=80' + ')'}" class="image-recipe"></div>
         <div [ngStyle]="{'background-image': 'url(' + 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fGZvb2R8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60' + ')'}" class="image-recipe"></div>
+    </div>
+
+    <div class="flex w-full">
+        <nb-accordion>
+            <nb-accordion-item>
+                <nb-accordion-item-header>Product Details</nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    Item Content
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+        </nb-accordion>
+    </div>
+
+    <div class="flex space-x-3 !mt-4 bg-gray-200 px-4 rounded-xl h-[85px] justify-between w-full">
+        <button class="text-gray-500 text-[13px] font-semibold hover:text-red-500 space-x-1 flex items-center">
+            <nb-icon icon="heart"></nb-icon>
+            <span class="mt-0.5">98</span>
+        </button>
+
+        <button class="text-gray-500 text-[13px] hover:text-blue-500 space-x-1 flex items-center">
+            <nb-icon icon="message-circle"></nb-icon>
+            <span class="mt-0.5">25</span>
+        </button>
+
+        <button class="text-gray-500 text-[13px] ml-52 hover:text-green-500 space-x-1 flex items-center">
+            <nb-icon icon="share-outline"></nb-icon>
+            <span class="mt-0.5">25</span>
+        </button>
     </div>
 
 </div>
