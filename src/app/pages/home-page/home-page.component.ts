@@ -1,6 +1,6 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit,TemplateRef,HostBinding  } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NbMenuItem,NbDialogService, NbWindowService } from '@nebular/theme';
+import { NbMenuItem,NbDialogService, NbWindowService,NbToastrService,NbComponentStatus   } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -12,9 +12,10 @@ import { RecipeService } from 'src/app/services/recipe.service';
   providers: [UserService]
 })
 export class HomePageComponent implements OnInit {
+  private index: number = 0;
   showContent: boolean = false;
   videoindex =0;
-  countVideoIndex = 3-this.videoindex;
+  countVideoIndex = 4-this.videoindex;
   disableModal = true;
   items: NbMenuItem[] = [
     {
@@ -61,7 +62,8 @@ export class HomePageComponent implements OnInit {
     private _userService: UserService,
     private windowService: NbWindowService,
     private userService: UserService,
-    private recipeService: RecipeService ) { }
+    private recipeService: RecipeService,
+    private toastrService: NbToastrService ) { }
 
   ngOnInit(): void {
     this.spinnerBehavior();
@@ -69,6 +71,9 @@ export class HomePageComponent implements OnInit {
     this.recipeService.getRecipes().subscribe( data => this.recipes = data )
     this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
   }
+
+  @HostBinding('class')
+  className = 'example-items-rows';
 
   open(dialog: TemplateRef<any>) {
     this.disableModal = true;
@@ -79,7 +84,11 @@ export class HomePageComponent implements OnInit {
 
   addThreeCoins(){
     this._userService.addThreeCoins().subscribe(
-      data=> this.videoindex=this.videoindex + 1,
+      data=>{
+        this.videoindex=this.videoindex + 1,
+        this.showToast(3000, "success")
+      },
+      
       error=> error
     )
     this.userService.userLogged.subscribe( data => this.userLogged = data )
@@ -124,6 +133,13 @@ export class HomePageComponent implements OnInit {
 
   openAddModal() {
     this.windowService.open( AddRecipeComponent, { context: { userLogged: this.userLogged }, closeOnBackdropClick: false, windowClass: 'add-recipe-window' } )
+  }
+
+  showToast(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      `Has visto : ${this.videoindex} de 3 videos`,
+      'Has ganado 3 EzCoins',
+      { duration, status });
   }
 
 }
