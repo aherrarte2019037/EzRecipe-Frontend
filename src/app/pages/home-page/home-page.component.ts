@@ -12,7 +12,6 @@ import { RecipeService } from 'src/app/services/recipe.service';
   providers: [UserService]
 })
 export class HomePageComponent implements OnInit {
-  private index: number = 0;
   showContent: boolean = false;
   videoindex =0;
   countVideoIndex = 4-this.videoindex;
