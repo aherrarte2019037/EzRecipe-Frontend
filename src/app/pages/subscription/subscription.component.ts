@@ -1,6 +1,6 @@
-import { Component, OnInit,TemplateRef,ViewChild } from '@angular/core';
+import { Component, OnInit,TemplateRef,ViewChild,HostBinding } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService,NbComponentStatus,NbToastrService } from '@nebular/theme';
 import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class SubscriptionComponent implements OnInit {
   constructor( 
     private dialogService: NbDialogService, 
     private _subService: SubscriptionService,
-    private spinnerService: NgxSpinnerService,) { 
+    private spinnerService: NgxSpinnerService,
+    private toastrService: NbToastrService) { 
     
   }
 
@@ -47,6 +48,13 @@ export class SubscriptionComponent implements OnInit {
       }
     )
 
+  }
+
+  showToast(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      `Te has suscrito exitosamente`,
+      'Felicidades',
+      { duration, status });
   }
 
 }

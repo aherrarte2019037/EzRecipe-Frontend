@@ -182,7 +182,7 @@
                 </div>
             </nb-card-body>
             <nb-card-footer class="flex justify-end items-center !border-none">
-                <button hero status="success" class="ml-2 !font-semibold !rounded-xl" nbButton (click)="ref.close(); addSubChef()">Adquirir suscripción</button>
+                <button hero status="success" class="ml-2 !font-semibold !rounded-xl" nbButton (click)="ref.close(); addSubChef(); showToast(3000,'success')">Adquirir suscripción</button>
                 <button hero class="ml-2 !font-semibold !rounded-xl" nbButton (click)="ref.close()">Cancelar</button>
               </nb-card-footer>
         </nb-card>

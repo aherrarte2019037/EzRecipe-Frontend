@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NbPosition } from '@nebular/theme';
+import { NbPosition, NbTrigger } from '@nebular/theme';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -10,8 +11,9 @@ export class RecipeCardComponent implements OnInit {
   position: NbPosition = NbPosition.BOTTOM_START;
   @Input() recipe: any = null;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
-
-  constructor( ) { }
+  userLogged$: Object = this.userService.userLogged;
+  
+  constructor( private userService: UserService ) { }
 
   ngOnInit(): void { }
 
