@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,18 +12,18 @@ export class ProfilePageComponent implements OnInit {
   profileForm: FormGroup = this.buildForm()
   formActivated: boolean = false;
   formChanges: any = {};
-  userLogged: any;
-  userProfile: any;
-  username: any
+  userLogged: any = null;
+  imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
 
-  constructor(private renderer: Renderer2, public userService: UserService, private formBuilder: FormBuilder) {}
+  constructor( public userService: UserService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.userService.userLogged.subscribe( data =>{ this.userLogged = data })
+    this.userService.userLogged.subscribe( data => { this.userLogged = data; this.setFormValue() })
   }
 
   setFormValue(){
     this.profileForm.patchValue( this.userLogged );
+    this.profileForm.disable();
     this.profileForm.valueChanges.subscribe( value => {
       if(
         value.username === this.userLogged.username
@@ -40,26 +41,13 @@ export class ProfilePageComponent implements OnInit {
 
   buildForm(){
     const form = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
-      profileImg: [''],
+      username  : ['', Validators.required],
+      email     : ['', [Validators.required, Validators.email]],
+      name      : ['', Validators.required],
+      lastname  : ['', Validators.required],
     });
 
     return form;
-
-  }
-
-  showEdit( edit: HTMLElement, close: HTMLElement, action: boolean ){
-    if(action){
-      this.renderer.setStyle(edit, 'display', 'none')
-      this.renderer.setStyle(edit, 'display', 'block')
-
-    }else {
-      this.renderer.setStyle( edit, 'display', 'block' )
-      this.renderer.setStyle( close, 'display', 'none' )
-    }
 
   }
 
