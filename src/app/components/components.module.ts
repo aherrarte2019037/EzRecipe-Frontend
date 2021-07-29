@@ -14,6 +14,7 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TimeagoModule } from 'ngx-timeago';
 import { DetailVisibilityPipe } from '../pipes/detail-visibility.pipe';
+import { PurchasedRecipesComponent } from './purchased-recipes/purchased-recipes.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -26,7 +27,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RecipeCardComponent,
     LatestRecipesComponent,
     AddRecipeComponent,
-    DetailVisibilityPipe
+    DetailVisibilityPipe,
+    PurchasedRecipesComponent
   ],
   imports: [
     CommonModule,

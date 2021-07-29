@@ -16,12 +16,14 @@ export class RecipeCardComponent implements OnInit {
   userLoggedID: any
   booleanLike: boolean = false
   booleanSave: boolean = false;
+  booleanPurchased: boolean = false;
 
   constructor( private userService: UserService, private recipeService: RecipeService, private nbMenuService: NbMenuService ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
+      if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
     })
 
     /*this.nbMenuService.onItemClick().subscribe((event) => {
@@ -60,6 +62,21 @@ export class RecipeCardComponent implements OnInit {
         }
       }
     )
+  }
+
+  purchasedRecipe(id:any){
+
+    this.userService.purchasedRecipes(id).subscribe(
+      data=>{
+
+        this.booleanPurchased = !this.booleanPurchased;
+
+      },
+      error=>{
+          console.log(<any>error);
+      }
+    )
+
   }
 
 }
