@@ -51,5 +51,10 @@ export class UserService {
 
   }
 
+  editUser( userUpdate: any, userId: string ):Observable<any>{
+
+    return this.http.put<any>(`${this.apiUrl}/editUser/${userId}`, userUpdate);
+
+  }
 
 }

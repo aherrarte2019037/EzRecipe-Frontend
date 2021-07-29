@@ -12,8 +12,11 @@
         <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[245px]">
           <div class="w-full layout-container flex flex-col justify-between">
 
-            <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
-              <nb-user *ngIf="userLogged" class="nb-user" picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" badgeText="Activo" badgeStatus="primary" badgePosition="bottom right" size="giant" [name]="userLogged?.name +' '+ (userLogged?.lastname | slice:0:1)" [title]="'@' + userLogged.rol">
+            <div class="w-full h-24 relative items-center flex justify-around user-card bg-white rounded-xl">
+              <div class="absolute w-16 h-16 -ml-16 rounded-full overflow-hidden">
+                <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#6366F1" [fullScreen]="false" name="profileImage"></ngx-spinner>
+              </div>
+              <nb-user *ngIf="userLogged$ | async as user" class="nb-user" [picture]="user?.image? imageUrl+user?.image:''" [badgeText]="user?.image? 'Activo':''" badgeStatus="primary" badgePosition="bottom right" size="giant" [name]="user?.name +' '+ (user?.lastname | slice:0:1)" [title]="'@' + user?.rol">
               </nb-user>
             </div>
 
@@ -100,14 +103,13 @@
                 </div>
               </div>
 
-              <p *ngIf="chefRequests<=1" class="!font-semibold m-2">¡No tienes peticiones por hoy!<nb-icon icon="checkmark-square-outline" class="ml-1 absolute"></nb-icon></p>
+              <p *ngIf="chefRequests<=1" class="!font-semibold m-2">¡No tienes peticiones por hoy!<nb-icon icon="checkmark-square-outline" class="ml-1 absolute"></nb-icon>
+              </p>
               <nb-card class="w-full !rounded-xl menu-card">
                 <nb-card-body class="!px-4" *ngFor="let req of chefRequests">
                   <div class="flex items-center">
-                    <!--<img *ngIf="req.image" class="w-11 h-10 object-cover rounded-full" [src]="req.image">
-                    <img *ngIf="!req.image" class="w-11 h-10 object-cover rounded-full" src="http://simpleicon.com/wp-content/uploads/user-4.png">-->
                     <div class="ml-3">
-                      <p class="!text-gray-600 !text-sm pb-1"><span class="!text-sm text-gray-700 ezcoin-span !font-semibold">{{req.name}} {{req.lastname}} @{{req.username}}</span> Quiere ser Chef</p>
+                      <p class="!text-gray-600 !text-sm pb-1"><span class="!text-sm text-gray-700 ezcoin-span !font-semibold">{{req?.name}} {{req?.lastname}} @{{req?.username}}</span> Quiere ser Chef</p>
                     </div>
                   </div>
                   <div class="flex mt-3 justify-between space-x-2 mb-1">

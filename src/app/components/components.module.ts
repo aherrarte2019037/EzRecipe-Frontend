@@ -36,7 +36,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FileUploadModule,
     CloudinaryModule,
     NgxSpinnerModule,
-    TimeagoModule
+    TimeagoModule,
+    NgxSpinnerModule
   ],
   exports: [
     NavbarComponent,
