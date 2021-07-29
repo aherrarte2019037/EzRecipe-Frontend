@@ -23,4 +23,14 @@ export class RecipeService {
     return this.http.get( `${this.apiUrl}/latestRecipes` )
   }
 
+  giveLike(id: string){
+
+    return this.http.get<any>( `${this.apiUrl}/giveLikes/${id}`)
+  }
+
+  saveRecipe(id: string){
+
+    return this.http.get<any>( `${this.apiUrl}/saveRecipe/${id}`)
+  }
+
 }

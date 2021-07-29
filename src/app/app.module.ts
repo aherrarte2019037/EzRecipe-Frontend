@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injectable, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +28,9 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TimeagoModule } from 'ngx-timeago';
 import { TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class MyIntl extends TimeagoIntl { }
 
 @NgModule({

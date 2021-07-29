@@ -26,13 +26,13 @@
         <button
         class='flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500'
     >
-        <nb-icon class="" icon = 'list-outline'></nb-icon>    
+        <nb-icon class="" icon = 'list-outline'></nb-icon>
         <span class="text-sm">Pasos</span>
     </button>
         <button
         class='flex items-center gap-1 sm:text-lg border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500'
     >
-        <nb-icon class="" icon = 'copy-outline'></nb-icon>    
+        <nb-icon class="" icon = 'copy-outline'></nb-icon>
         <span class="text-sm">Categoria</span>
         </button>
         <div class="flex gap-4 mt-auto">
@@ -52,25 +52,32 @@
     </div>
 </div> -->
 
-<div *ngIf="recipe" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
+<div *ngIf="recipe && userLogged$ | async as user" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
     <div class="flex justify-between items-center">
         <div class="flex items-center space-x-2">
             <img class="rounded-xl w-11 h-11" src="https://daisyui.com/tailwind-css-component-profile-1@56w.png">
             <div class="flex flex-col justify-between">
                 <span class="font-semibold mb-[-1px] text-[14px] text-gray-800">{{ recipe?.idPublisher?.name }} {{ recipe?.idPublisher?.lastname }}</span>
                 <span class="text-[12px] pl-4 relative mt-[-1px] font-semibold text-gray-400">
-                    <nb-icon class="absolute -ml-4 mt-[2px] !text-[15px]" icon="done-all-outline"></nb-icon>
-                    {{ recipe.dateTime | timeago }}
+                    <nb-icon class="absolute -ml-4 mt-[2px] !text-[15px]" icon="clock-outline"></nb-icon>
+                    <span class="pl-[1px]">{{ recipe.dateTime | timeago }}</span>
                 </span>
             </div>
         </div>
         <div class="flex space-x-2">
-            <span [hidden]="recipe?.type === 'common'" nbTooltip="Premium" nbTooltipStatus="warning" class="pr-3 px-5 py-1 relative font-semibold bg-yellow-400 rounded-full text-white text-[13px]">
-                <nb-icon class="!text-[15px] mt-[-1px] left-[8px] absolute" icon="star"></nb-icon>
-            </span>
-            <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }, { title: 'Guardar' }]" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
-                <nb-icon icon="more-horizontal-outline"></nb-icon>
-            </button>
+            <div *ngIf="[recipe.type, user] | detailVisibility; else buyRecipe">
+                <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }, { title: 'Guardar', data: { id: 'Guardar', recipe: recipe._id } }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+                    <nb-icon icon="more-horizontal-outline"></nb-icon>
+                </button>
+            </div>
+
+            <ng-template #buyRecipe>
+                <button class="flex space-x-0.5 text-sm text-white transform transition duration-150 hover:scale-105 bg-yellow-500 rounded-full items-center justify-between py-1.5 px-4">
+                    <span>Comprar</span>
+                    <nb-icon icon="shopping-cart"></nb-icon>
+                </button>
+            </ng-template>
+
         </div>
     </div>
 
@@ -80,7 +87,7 @@
     </div>
 
     <div class="flex space-x-3 !mt-4 bg-gray-200 px-4 rounded-xl h-[60px] justify-between w-full">
-        <button class="text-gray-500 text-[13px] font-semibold hover:text-red-500 space-x-1 flex items-center">
+        <button [ngClass]="{'!text-red-500':booleanLike == true}" class="text-gray-500 text-[13px] font-semibold hover:text-red-500 space-x-1 flex items-center" (click)="giveLike(recipe._id)">
             <nb-icon icon="heart"></nb-icon>
             <span class="mt-0.5">{{ recipe?.likes?.length }}</span>
         </button>
