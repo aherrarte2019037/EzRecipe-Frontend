@@ -30,7 +30,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Compras',
-      icon: 'credit-card-outline'
+      icon: 'credit-card-outline',
+      link: '/home/purchasedRecipes'
     },
     {
       title: 'Guardado',
@@ -77,9 +78,6 @@ export class HomePageComponent implements OnInit {
     this.userService.getChefRequests().subscribe(data=> this.chefRequests = data);
   }
 
-  @HostBinding('class')
-  className = 'example-items-rows';
-
   open(dialog: TemplateRef<any>) {
     this.disableModal = true;
     this.dialogService.open(dialog);
@@ -92,8 +90,10 @@ export class HomePageComponent implements OnInit {
       data=>{
         this.videoindex=this.videoindex + 1,
         this.showToast(3000, "success")
+        this.userLogged.ezCoins = this.userLogged.ezCoins + 3
+        this.userService.userLogged.next(this.userLogged)
       },
-      
+
       error=> error
     )
     this.userService.userLogged.subscribe( data => this.userLogged = data )

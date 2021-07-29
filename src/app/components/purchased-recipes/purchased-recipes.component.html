@@ -1,0 +1,35 @@
+<perfect-scrollbar style="height: calc( 100%);" class="mt-1" [config]="{ wheelSpeed : 0.4 }">
+  <div *ngFor="let recipe of recipes" class="mb-2">
+    <div *ngIf="recipe && userLogged$ | async as user" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
+      <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+              <img class="rounded-xl w-11 h-11" src="https://daisyui.com/tailwind-css-component-profile-1@56w.png">
+              <div class="flex flex-col justify-between">
+                  <span class="font-semibold mb-[-1px] text-[14px] text-gray-800">{{ recipe.idPublisher.name }} {{ recipe.idPublisher.lastname }}</span>
+                  <span class="text-[12px] pl-4 relative mt-[-1px] font-semibold text-gray-400">
+                      <nb-icon class="absolute -ml-4 mt-[2px] !text-[15px]" icon="clock-outline"></nb-icon>
+                      <span class="pl-[1px]">{{ recipe.dateTime | timeago }}</span>
+                  </span>
+              </div>
+          </div>
+          <div class="flex space-x-2">
+
+            <p class="flex space-x-0.5 text-sm text-white bg-gray-400 rounded-full items-center justify-between py-1.5 px-4">
+              <span>Comprado</span>
+              <nb-icon icon="shopping-cart"></nb-icon>
+            </p>
+            <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] pt-1 flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+              <nb-icon icon="more-horizontal-outline"></nb-icon>
+          </button>
+
+          </div>
+      </div>
+
+      <span class="text-gray-700 text-[15px] description-span">{{ recipe.description | titlecase}}.</span>
+      <div class="flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 space-x-0 justify-between space-y-4 w-full h-full">
+          <div *ngFor="let image of recipe.image" [ngStyle]="{'background-image': 'url(' + imageUrl + image + ')'}" class="image-recipe"></div>
+      </div>
+
+  </div>
+  </div>
+</perfect-scrollbar>
