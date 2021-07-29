@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NbPosition, NbTrigger } from '@nebular/theme';
+import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { filter } from 'rxjs/operators';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,20 +10,26 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./recipe-card.component.css']
 })
 export class RecipeCardComponent implements OnInit {
-  position: NbPosition = NbPosition.BOTTOM_START;
   @Input() recipe: any = null;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   userLogged$: Object = this.userService.userLogged;
   userLoggedID: any
   booleanLike: boolean = false
+  booleanSave: boolean = false;
 
-  constructor( private userService: UserService, private recipeService: RecipeService ) { }
+  constructor( private userService: UserService, private recipeService: RecipeService, private nbMenuService: NbMenuService ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
     })
 
+    /*this.nbMenuService.onItemClick().subscribe((event) => {
+      if (event.item.title === 'Guardar') {
+        console.log(event.item.data.recipe)
+        this.saveRecipe(event.item.data.recipe)
+      }
+    });*/
   }
 
   giveLike(id:any){
@@ -38,6 +45,19 @@ export class RecipeCardComponent implements OnInit {
       },
       error =>{
 
+      }
+    )
+  }
+
+  saveRecipe(id:any){
+    this.recipeService.saveRecipe(id).subscribe(
+      (data:any) => {
+        this.booleanSave = !this.booleanSave
+        if(this.booleanSave == true){
+          console.log('Guardaste la receta')
+        }else {
+          console.log('Ya no esta guardada')
+        }
       }
     )
   }

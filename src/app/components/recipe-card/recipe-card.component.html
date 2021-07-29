@@ -66,7 +66,7 @@
         </div>
         <div class="flex space-x-2">
             <div *ngIf="[recipe.type, user] | detailVisibility; else buyRecipe">
-                <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }, { title: 'Guardar' }]" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+                <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }, { title: 'Guardar', data: { id: 'Guardar', recipe: recipe._id } }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
                     <nb-icon icon="more-horizontal-outline"></nb-icon>
                 </button>
             </div>
