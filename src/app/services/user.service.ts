@@ -53,8 +53,6 @@ export class UserService {
 
 
   purchasedRecipes(id: string){
-  editUser( userUpdate: any, userId: string ):Observable<any>{
-  purchasedRecipes(id: string){
 
     return this.http.get<any>(`${this.apiUrl}/purchasedRecipes/${id}`);
 
@@ -66,6 +64,7 @@ export class UserService {
 
   }
 
+  editUser( userUpdate: any, userId: string ):Observable<any>{
 
     return this.http.put<any>(`${this.apiUrl}/editUser/${userId}`, userUpdate);
 
