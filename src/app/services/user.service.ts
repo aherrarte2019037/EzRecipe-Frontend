@@ -51,5 +51,17 @@ export class UserService {
 
   }
 
+  purchasedRecipes(id: string){
+
+    return this.http.get<any>(`${this.apiUrl}/purchasedRecipes/${id}`);
+
+  }
+
+  showPurchasedRecipes(){
+
+    return this.http.get<any>(`${this.apiUrl}/showPurchasedRecipes`);
+
+  }
+
 
 }

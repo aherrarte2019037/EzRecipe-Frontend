@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PurchasedRecipesComponent } from './components/purchased-recipes/purchased-recipes.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard], children: [
     { path: 'recipes', component: RecipesPageComponent },
     { path: 'profile', component: ProfilePageComponent },
+    {path: 'purchasedRecipes', component: PurchasedRecipesComponent},
     { path: '', pathMatch: 'full', redirectTo: 'recipes' }
   ]},
   { path: '', pathMatch: 'full', redirectTo: 'home' },

@@ -30,7 +30,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Compras',
-      icon: 'credit-card-outline'
+      icon: 'credit-card-outline',
+      link: '/home/purchasedRecipes'
     },
     {
       title: 'Guardado',
