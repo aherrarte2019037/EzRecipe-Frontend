@@ -25,7 +25,7 @@ export class RecipeService {
 
   giveLike(id: string){
 
-    return this.http.put<any>( `${this.apiUrl}/giveLikes/${id}`, {})
+    return this.http.get<any>( `${this.apiUrl}/giveLikes/${id}`, {})
   }
 
   saveRecipe(id: string){
