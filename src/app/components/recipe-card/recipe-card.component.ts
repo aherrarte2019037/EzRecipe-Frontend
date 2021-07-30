@@ -13,11 +13,13 @@ export class RecipeCardComponent implements OnInit {
   @Input() recipe: any = null;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   userLogged$: Object = this.userService.userLogged;
+  userLogged: any;
   userLoggedID: any
   booleanLike: boolean = false
   booleanSave: boolean = false;
   booleanPurchased: boolean = false;
-  userLoggedRecipesSave: any = []
+  userLoggedRecipesSave: any = [];
+  userLoggedBoughtRecipes: any = [];
 
   constructor( private userService: UserService,
     private recipeService: RecipeService,
@@ -28,6 +30,7 @@ export class RecipeCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
+      this.userLogged = data;
       this.userLoggedRecipesSave = data.favoriteRecipes
       if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
@@ -73,6 +76,10 @@ export class RecipeCardComponent implements OnInit {
       data=>{
 
         this.booleanPurchased = !this.booleanPurchased;
+        this.showToastBuy();
+        this.userLogged.purchasedRecipes.push(id)
+        this.userLogged.ezCoins-=45;
+        this.userService.userLogged.next(this.userLogged);
 
       },
       error=>{
@@ -89,6 +96,11 @@ export class RecipeCardComponent implements OnInit {
 
   showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
     this.toastrService.show( '', `Monedas insuficientes`, { status: 'warning', icon: 'alert-circle' });
+  }
+
+  showToastBuy(){
+
+    this.toastrService.show( '', `Receta Comprada`, { status: 'primary', icon: 'shopping-cart-outline' });
   }
 
 }
