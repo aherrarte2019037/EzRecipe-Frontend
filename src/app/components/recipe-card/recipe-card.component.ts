@@ -37,7 +37,7 @@ export class RecipeCardComponent implements OnInit {
 
   giveLike(id:any){
     this.recipeService.giveLike(id).subscribe(
-      (data: any) => {
+      data => {
           this.booleanLike = !this.booleanLike
 
           if(this.booleanLike == true){
