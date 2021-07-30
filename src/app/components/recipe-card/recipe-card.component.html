@@ -70,7 +70,7 @@
                     <nb-icon icon="more-horizontal-outline"></nb-icon>
                 </button>
 
-                <button [ngClass]="{'!text-black':booleanSave == true}" class="text-gray-300 text-[13px] font-semibold hover:text-black space-x-1 flex items-center" (click)="saveRecipe(recipe._id)">
+                <button [ngClass]="{'!text-black':booleanSave == true}" class="text-gray-300 text-[13px] font-semibold hover:text-black space-x-1 flex items-center" (click)="saveRecipe(recipe._id); showToastSaveRecipe(2000, 'success')">
                   <nb-icon icon="bookmark"></nb-icon>
                 </button>
             </div>
