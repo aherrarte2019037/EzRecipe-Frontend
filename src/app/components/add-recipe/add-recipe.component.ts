@@ -73,7 +73,6 @@ export class AddRecipeComponent implements OnInit {
   onAfterAddingFile() {
     this.uploader.onAfterAddingFile = ( item: FileItem ) => {
       const filename = `${this.userLogged._id}${item.file.size}`;
-      console.log(item)
       this.filesName.push( filename );
       const reader = new FileReader();
 

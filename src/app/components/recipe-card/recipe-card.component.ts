@@ -25,13 +25,14 @@ export class RecipeCardComponent implements OnInit {
       if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
     })
-
-    /*this.nbMenuService.onItemClick().subscribe((event) => {
-      if (event.item.title === 'Guardar') {
-        console.log(event.item.data.recipe)
-        this.saveRecipe(event.item.data.recipe)
-      }
-    });*/
+    this.nbMenuService.onItemClick().pipe(
+      filter(({ tag }) => tag === 'my-context-menu'),
+    ).subscribe((event) => {
+    if (event.item.title === 'Guardar') {
+      console.log(event.item.data.recipe)
+      this.saveRecipe(event.item.data.recipe)
+    }
+  });
   }
 
   giveLike(id:any){
@@ -54,7 +55,9 @@ export class RecipeCardComponent implements OnInit {
   saveRecipe(id:any){
     this.recipeService.saveRecipe(id).subscribe(
       (data:any) => {
+
         this.booleanSave = !this.booleanSave
+
         if(this.booleanSave == true){
           console.log('Guardaste la receta')
         }else {
