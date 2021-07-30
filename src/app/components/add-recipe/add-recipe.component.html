@@ -169,7 +169,7 @@
                             </nb-icon>
                     </label>
 
-                    <button (click)="addRecipe()" *ngIf="previewImages.length > 0" hero class="!rounded-xl !pl-4 !pr-7 relative !font-medium" status="primary" nbButton>
+                    <button (click)="addRecipe(); showToastPublicacions(2000,'success')" *ngIf="previewImages.length > 0" hero class="!rounded-xl !pl-4 !pr-7 relative !font-medium" status="primary" nbButton>
                         Publicar&nbsp;&nbsp;&nbsp;
                         <nb-icon class="absolute right-3 bottom-[12px]" icon="save-outline"></nb-icon>
                     </button>

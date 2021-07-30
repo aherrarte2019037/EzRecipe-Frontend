@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { Component, Input, OnInit, TemplateRef, HostBinding } from '@angular/core';
+import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { filter } from 'rxjs/operators';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +19,12 @@ export class RecipeCardComponent implements OnInit {
   booleanPurchased: boolean = false;
   userLoggedRecipesSave: any = []
 
-  constructor( private userService: UserService, private recipeService: RecipeService, private nbMenuService: NbMenuService ) { }
+  constructor( private userService: UserService, 
+    private recipeService: RecipeService, 
+    private nbMenuService: NbMenuService,
+    private toastrService: NbToastrService
+
+    ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
@@ -75,9 +80,22 @@ export class RecipeCardComponent implements OnInit {
       },
       error=>{
           console.log(<any>error);
+          this.showToastInsufficientEzCoins(2000,"success");
       }
     )
 
+  }
+
+  showToast(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      'Se ha guardado la receta',
+      { duration, status });
+  }
+
+  showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      'No tienes los suficientes EzCoins',
+      { duration, status });
   }
 
 }

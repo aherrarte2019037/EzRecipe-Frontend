@@ -147,4 +147,10 @@ export class HomePageComponent implements OnInit {
       { duration, status });
   }
 
+  showToastBuy(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      `Has comprado la receta`,
+      { duration, status });
+  }
+
 }

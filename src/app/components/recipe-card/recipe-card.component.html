@@ -76,7 +76,7 @@
             </div>
 
             <ng-template #buyRecipe>
-                <button *ngIf="booleanPurchased === false" (click)="purchasedRecipe(recipe._id)" class="flex space-x-0.5 text-sm text-white transform transition duration-150 hover:scale-105 bg-yellow-500 rounded-full items-center justify-between py-1.5 px-4">
+                <button *ngIf="booleanPurchased === false" (click)="purchasedRecipe(recipe._id); showToastBuy(3000, 'success')" class="flex space-x-0.5 text-sm text-white transform transition duration-150 hover:scale-105 bg-yellow-500 rounded-full items-center justify-between py-1.5 px-4">
                     <span>Comprar</span>
                     <nb-icon icon="shopping-cart"></nb-icon>
                 </button>
