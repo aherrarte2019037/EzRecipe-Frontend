@@ -15,15 +15,15 @@
 
           <section class="p-6 pl-32 items">
             <div [hidden]="userLogged?.rol !== 'Client'">
-              
-              <button [disabled]="booleanButton===false" (click)="petitionChefRequest()" *ngIf="userLogged?.requestRoleChef === false" [ngClass]="{'hover:bg-blue-300 !bg-blue-200 border-blue-400':petitionBoolean===false}" outline shape="round" status="primary" class=" !border-2  relative float-right !py-2 !font-semibold !pl-4 !pr-9 rounded-full bg-gray-200">
+
+              <button [disabled]="booleanButton===false" (click)="petitionChefRequest()" *ngIf="userLogged?.requestRoleChef === false" outline shape="round" status="primary" class=" relative float-right !py-2 !font-semibold !pl-4 !pr-9" nbButton>
                 {{textButton}}
                 <nb-icon class="absolute right-3.5 !-mt-0.5" icon="award-outline"></nb-icon>
               </button>
 
-              <button *ngIf="userLogged?.requestRoleChef === true" outline shape="round" status="primary" class=" relative float-right !py-2 !font-semibold !pl-4 !pr-9 bg-gray-200 rounded-full">
-                Esperando Confirmación
-                <nb-icon class="absolute right-3.5 !-mt-0.5" icon="award-outline"></nb-icon>
+              <button *ngIf="userLogged?.requestRoleChef === true" outline shape="round" class=" relative float-right !py-2 !font-semibold !pl-4 !pr-9" nbButton>
+                Solocitud Enviada
+                <nb-icon class="absolute right-3.5 !-mt-0.5" icon="done-all-outline"></nb-icon>
               </button>
               
             </div>
