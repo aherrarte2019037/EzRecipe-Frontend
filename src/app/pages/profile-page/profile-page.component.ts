@@ -149,7 +149,6 @@ export class ProfilePageComponent implements OnInit {
 
     this.userService.petitionChefRequest().subscribe(
       data => {
-        console.log(data);
         this.userService.userLogged.subscribe(data => { this.userLogged = data })
 
         this.petitionBoolean = true;
