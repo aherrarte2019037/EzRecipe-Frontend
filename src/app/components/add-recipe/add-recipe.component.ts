@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NbWindowRef, NbToastrService, NbComponentStatus } from '@nebular/theme'; 
 import { fadeInDownOnEnterAnimation, fadeInOnEnterAnimation, fadeInUpOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
@@ -177,11 +177,8 @@ export class AddRecipeComponent implements OnInit {
     return this.thirdForm.get('steps') as FormArray;
   }
 
-  showToastPublicacions(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      'felicidades ',
-      `Se ha publicado tu receta`,
-      { duration, status });
+  showToastPublicacions( duration: any,status: NbComponentStatus ) {
+    this.toastrService.show( 'Felicidades', `Receta publicada`, { status: 'primary', icon: 'checkmark' });
   }
 
 }

@@ -48,7 +48,7 @@ export class HomePageComponent implements OnInit {
     }
   ];
   videos = [
-    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 31000 },
+    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 1000 },
     { link: "https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration: 37000 },
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
@@ -82,7 +82,6 @@ export class HomePageComponent implements OnInit {
     this.disableModal = true;
     this.dialogService.open(dialog);
     setTimeout(() =>{this.disableModal= false},this.videos[this.videoindex].duration)
-
   }
 
   addThreeCoins(){
@@ -100,25 +99,19 @@ export class HomePageComponent implements OnInit {
   }
 
   confirmChefRquest(id: String){
-
     this._userService.confirmChefRquest(id).subscribe(
-
       data=>{
         console.log(data);
         this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
       },
       error=>{
         console.log(<any>error);
-
       }
-
     )
   }
 
   cancelChefRquest(id: String){
-
     this._userService.cancelChefRequest(id).subscribe(
-
       data=>{
         console.log(data);
         this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
@@ -127,7 +120,6 @@ export class HomePageComponent implements OnInit {
         console.log(<any>error);
 
       }
-
     )
   }
 
@@ -142,15 +134,13 @@ export class HomePageComponent implements OnInit {
 
   showToast(duration: any,status: NbComponentStatus) {
     this.toastrService.show(
-      `Has visto : ${this.videoindex} de 3 videos`,
+      `Has visto ${this.videoindex} de 3 videos`,
       'Has ganado 3 EzCoins',
       { duration, status });
   }
 
   showToastBuy(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      `Has comprado la receta`,
-      { duration, status });
+    this.toastrService.show( '', `Receta Comprada`, { status: 'primary', icon: 'shopping-cart-outline' });
   }
 
 }
