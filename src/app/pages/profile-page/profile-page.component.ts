@@ -13,6 +13,9 @@ import { UserService } from 'src/app/services/user.service';
   animations: [slideInRightOnEnterAnimation({ duration: 300 }), slideOutRightOnLeaveAnimation({ duration: 115 })]
 })
 export class ProfilePageComponent implements OnInit {
+  petitionBoolean: boolean = false;
+  booleanButton: boolean = true;
+  textButton: String= "Solicitar ser chef";
   profileForm: FormGroup = this.buildForm()
   formActivated: boolean = false;
   formChanges: any = {};
@@ -32,6 +35,7 @@ export class ProfilePageComponent implements OnInit {
   });
   previewImage: any = null;
   imageDbName: string = '';
+  userStats$: any = this.userService.getUserStats();
 
   constructor (
     public userService: UserService,
@@ -42,6 +46,10 @@ export class ProfilePageComponent implements OnInit {
     this.userService.userLogged.subscribe(data => { this.userLogged = data; this.setFormValue() });
     this.onAfterAddingFile();
     this.onBuildItemForm();
+    if(this.userLogged?.requestRoleChef === true) {
+      this.petitionBoolean = true;
+    }
+    this.userService.getUserStats().subscribe( data => console.log(data) )
   }
 
   //Subir Imágenes
@@ -143,8 +151,17 @@ export class ProfilePageComponent implements OnInit {
 
     this.userService.petitionChefRequest().subscribe(
       data => {
-        console.log(data);
         this.userService.userLogged.subscribe(data => { this.userLogged = data })
+
+        this.petitionBoolean = true;
+        this.userLogged.requestRoleChef = true;
+
+        if(this.petitionBoolean===true){
+
+          this.textButton ="Esperando solicitud"
+          this.booleanButton = false;
+
+        }
 
 
       },

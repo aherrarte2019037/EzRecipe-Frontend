@@ -13,14 +13,16 @@ export class RecipeCardComponent implements OnInit {
   @Input() recipe: any = null;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   userLogged$: Object = this.userService.userLogged;
+  userLogged: any;
   userLoggedID: any
   booleanLike: boolean = false
   booleanSave: boolean = false;
   booleanPurchased: boolean = false;
-  userLoggedRecipesSave: any = []
+  userLoggedRecipesSave: any = [];
+  userLoggedBoughtRecipes: any = [];
 
-  constructor( private userService: UserService, 
-    private recipeService: RecipeService, 
+  constructor( private userService: UserService,
+    private recipeService: RecipeService,
     private nbMenuService: NbMenuService,
     private toastrService: NbToastrService
 
@@ -28,16 +30,17 @@ export class RecipeCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
+      this.userLogged = data;
       this.userLoggedRecipesSave = data.favoriteRecipes
-      if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
-      if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
-      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
+      if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
+      if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
+      if(this.userLoggedRecipesSave?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
   }
 
   giveLike(id:any){
     this.recipeService.giveLike(id).subscribe(
-      (data: any) => {
+      data => {
           this.booleanLike = !this.booleanLike
 
           if(this.booleanLike == true){
@@ -59,13 +62,8 @@ export class RecipeCardComponent implements OnInit {
         this.booleanSave = !this.booleanSave
 
         if(this.booleanSave == true){
-          console.log('Guardaste la receta')
-
           this.userLoggedRecipesSave.push(id)
-          console.log(this.userLoggedRecipesSave)
         }else {
-          console.log('Ya no esta guardada');
-          this.showToastUnsaveRecipe(2000, "danger") 
           this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
         }
       }
@@ -78,6 +76,10 @@ export class RecipeCardComponent implements OnInit {
       data=>{
 
         this.booleanPurchased = !this.booleanPurchased;
+        this.showToastBuy();
+        this.userLogged.purchasedRecipes.push(id)
+        this.userLogged.ezCoins-=45;
+        this.userService.userLogged.next(this.userLogged);
 
       },
       error=>{
@@ -88,30 +90,17 @@ export class RecipeCardComponent implements OnInit {
 
   }
 
-  showToast(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      'Se ha guardado la receta',
-      { duration, status });
+  showToast() {
+    this.toastrService.show( '', `Receta Guardada`, { status: 'primary', icon: 'save-outline' });
   }
 
   showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      'No tienes los suficientes EzCoins',
-      { duration, status });
+    this.toastrService.show( '', `Monedas insuficientes`, { status: 'warning', icon: 'alert-circle' });
   }
 
-  showToastSaveRecipe(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      '',
-      'Se ha añadido a favoritas',
-      { duration, status });
-  }
-  
-  showToastUnsaveRecipe(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      '',
-      'Se ha eliminado de favoritas',
-      { duration, status });
+  showToastBuy(){
+
+    this.toastrService.show( '', `Receta Comprada`, { status: 'primary', icon: 'shopping-cart-outline' });
   }
 
 }
