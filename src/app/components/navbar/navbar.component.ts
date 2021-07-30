@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuService } from '@nebular/theme';
-import { fadeInDownOnEnterAnimation, fadeInExpandOnEnterAnimation, slideInLeftOnEnterAnimation, slideInRightOnEnterAnimation, zoomInOnEnterAnimation } from 'angular-animations';
+import { slideInLeftOnEnterAnimation, slideInRightOnEnterAnimation } from 'angular-animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,11 +20,21 @@ export class NavbarComponent implements OnInit {
     map( ({ item: { title } }) => title ),
   );
   userLogged: BehaviorSubject<any> = this.userService.userLogged;
+  imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
 
-  constructor( private ctxMenuService: NbMenuService, private authService: AuthService, private router: Router, private userService: UserService ) { }
+  constructor(
+    private ctxMenuService: NbMenuService,
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService,
+    private spinnerService: NgxSpinnerService ) { }
 
   ngOnInit(): void {
     this.profileMenuBehavior();
+    this.userService.userLogged.subscribe( data => {
+      if( !data?.image ) this.spinnerService.show('navImage');
+      if( data?.image ) this.spinnerService.hide('navImage');
+    })
   }
 
   profileMenuBehavior() {

@@ -53,8 +53,10 @@ export class HomePageComponent implements OnInit {
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
   userLogged: any = null;
+  userLogged$: any = this.userService.userLogged;
   recipes: any;
   chefRequests: any;
+  imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
 
   constructor(
     private spinnerService: NgxSpinnerService,
@@ -67,9 +69,13 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinnerBehavior();
-    this.userService.userLogged.subscribe( data => this.userLogged = data )
+    this.userService.userLogged.subscribe( data => {
+      this.userLogged = data;
+      if( !this.userLogged?.image ) this.spinnerService.show('profileImage');
+      if( this.userLogged?.image ) this.spinnerService.hide('profileImage');
+    })
     this.recipeService.getRecipes().subscribe( data => this.recipes = data )
-    this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
+    this.userService.getChefRequests().subscribe(data=> this.chefRequests = data);
   }
 
   open(dialog: TemplateRef<any>) {
