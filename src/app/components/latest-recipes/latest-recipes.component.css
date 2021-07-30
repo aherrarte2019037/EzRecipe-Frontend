@@ -16,3 +16,7 @@
 .overlay-container:hover > .overlay-text {
   opacity: 1;
 }
+
+.fix-scroll {
+  width: calc( 100% - 25px );
+}

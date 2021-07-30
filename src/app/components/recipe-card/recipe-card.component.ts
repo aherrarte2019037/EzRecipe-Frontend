@@ -17,22 +17,17 @@ export class RecipeCardComponent implements OnInit {
   booleanLike: boolean = false
   booleanSave: boolean = false;
   booleanPurchased: boolean = false;
+  userLoggedRecipesSave: any = []
 
   constructor( private userService: UserService, private recipeService: RecipeService, private nbMenuService: NbMenuService ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
+      this.userLoggedRecipesSave = data.favoriteRecipes
       if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
+      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
-    this.nbMenuService.onItemClick().pipe(
-      filter(({ tag }) => tag === 'my-context-menu'),
-    ).subscribe((event) => {
-    if (event.item.title === 'Guardar') {
-      console.log(event.item.data.recipe)
-      this.saveRecipe(event.item.data.recipe)
-    }
-  });
   }
 
   giveLike(id:any){
@@ -60,8 +55,11 @@ export class RecipeCardComponent implements OnInit {
 
         if(this.booleanSave == true){
           console.log('Guardaste la receta')
+          this.userLoggedRecipesSave.push(id)
+          console.log(this.userLoggedRecipesSave)
         }else {
           console.log('Ya no esta guardada')
+          this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
         }
       }
     )
