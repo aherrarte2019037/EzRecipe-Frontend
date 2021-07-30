@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
@@ -26,8 +26,7 @@ export class LatestRecipesComponent implements OnInit {
   }
 
   openAddModal() {
-    this.windowService.open( AddRecipeComponent, { context: { userLogged: this.userLogged }, closeOnBackdropClick: false, windowClass: 'add-recipe-window' } )
+    this.windowService.open( AddRecipeComponent, { context: { userLogged: this.userLogged }, closeOnBackdropClick: false, windowClass: 'add-recipe-window'} )
   }
-
 
 }

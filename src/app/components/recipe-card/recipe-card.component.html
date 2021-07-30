@@ -66,12 +66,12 @@
         </div>
         <div class="flex space-x-2">
             <div *ngIf="[recipe.type, user] | detailVisibility; else buyRecipe" class="flex space-x-2">
-                <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
-                    <nb-icon icon="more-horizontal-outline"></nb-icon>
+                <button [ngClass]="{'!text-indigo-500':booleanSave == true}" class="text-gray-400 text-[13px] font-semibold transition duration-300 hover:text-indigo-500 space-x-1 flex items-center" (click)="saveRecipe(recipe._id)">
+                  <nb-icon class="!text-[22px]" icon="bookmark"></nb-icon>
                 </button>
 
-                <button [ngClass]="{'!text-black':booleanSave == true}" class="text-gray-300 text-[13px] font-semibold hover:text-black space-x-1 flex items-center" (click)="saveRecipe(recipe._id)">
-                  <nb-icon icon="bookmark"></nb-icon>
+                <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+                    <nb-icon icon="more-horizontal-outline"></nb-icon>
                 </button>
             </div>
 
@@ -92,7 +92,7 @@
 
     <span class="text-gray-700 text-[15px] description-span">{{ recipe.description | titlecase}}.</span>
     <div class="flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 space-x-0 justify-between space-y-4 w-full h-full">
-        <div *ngFor="let image of recipe.image" [ngStyle]="{'background-image': 'url(' + imageUrl + image + ')'}" class="image-recipe"></div>
+        <div *ngFor="let image of recipe?.image" [ngStyle]="{'background-image': 'url(' + imageUrl + image + ')'}" class="image-recipe"></div>
     </div>
 
     <div class="flex space-x-3 !mt-4 bg-gray-200 px-4 rounded-xl h-[60px] justify-between w-full">

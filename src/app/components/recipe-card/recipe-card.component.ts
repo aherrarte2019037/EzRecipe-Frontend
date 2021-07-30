@@ -29,9 +29,9 @@ export class RecipeCardComponent implements OnInit {
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       this.userLoggedRecipesSave = data.favoriteRecipes
-      if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
-      if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
-      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
+      if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
+      if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
+      if(this.userLoggedRecipesSave?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
   }
 
