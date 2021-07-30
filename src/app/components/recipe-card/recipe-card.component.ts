@@ -60,10 +60,8 @@ export class RecipeCardComponent implements OnInit {
 
         if(this.booleanSave == true){
           this.userLoggedRecipesSave.push(id)
-          this.showToastSaveRecipe(2000, 'success')
         }else {
           this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
-          this.showToastUnsaveRecipe(2000, 'danger')
         }
       }
     )
@@ -85,30 +83,12 @@ export class RecipeCardComponent implements OnInit {
 
   }
 
-  showToast(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      'Se ha guardado la receta',
-      { duration, status });
+  showToast() {
+    this.toastrService.show( '', `Receta Guardada`, { status: 'primary', icon: 'save-outline' });
   }
 
   showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      'No tienes los suficientes EzCoins',
-      { duration, status });
-  }
-
-  showToastSaveRecipe(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      '',
-      'Se ha añadido a favoritas',
-      { duration, status });
-  }
-
-  showToastUnsaveRecipe(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      '',
-      'Se ha eliminado de favoritas',
-      { duration, status });
+    this.toastrService.show( '', `Monedas insuficientes`, { status: 'warning', icon: 'alert-circle' });
   }
 
 }

@@ -177,11 +177,8 @@ export class AddRecipeComponent implements OnInit {
     return this.thirdForm.get('steps') as FormArray;
   }
 
-  showToastPublicacions(duration: any,status: NbComponentStatus) {
-    this.toastrService.show(
-      'felicidades ',
-      `Se ha publicado tu receta`,
-      { duration, status });
+  showToastPublicacions( duration: any,status: NbComponentStatus ) {
+    this.toastrService.show( 'Felicidades', `Receta publicada`, { status: 'primary', icon: 'checkmark' });
   }
 
 }
