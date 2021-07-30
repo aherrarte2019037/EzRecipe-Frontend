@@ -3,7 +3,7 @@
     <div *ngIf="recipe && userLogged$ | async as user" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
       <div class="flex justify-between items-center">
           <div class="flex items-center space-x-2">
-              <img class="rounded-xl w-11 h-11" src="https://daisyui.com/tailwind-css-component-profile-1@56w.png">
+              <img class="rounded-xl w-11 h-11" [src]="imageUrl+recipe.idPublisher.image">
               <div class="flex flex-col justify-between">
                   <span class="font-semibold mb-[-1px] text-[14px] text-gray-800">{{ recipe.idPublisher.name }} {{ recipe.idPublisher.lastname }}</span>
                   <span class="text-[12px] pl-4 relative mt-[-1px] font-semibold text-gray-400">
