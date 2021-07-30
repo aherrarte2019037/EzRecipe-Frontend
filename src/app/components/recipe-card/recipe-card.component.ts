@@ -59,13 +59,8 @@ export class RecipeCardComponent implements OnInit {
         this.booleanSave = !this.booleanSave
 
         if(this.booleanSave == true){
-          console.log('Guardaste la receta')
-
           this.userLoggedRecipesSave.push(id)
-          console.log(this.userLoggedRecipesSave)
         }else {
-          console.log('Ya no esta guardada');
-          this.showToastUnsaveRecipe(2000, "danger") 
           this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
         }
       }
