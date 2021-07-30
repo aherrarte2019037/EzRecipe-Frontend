@@ -1,78 +1,170 @@
-<main role="main">
-  <div class="flex" style="width: 990px;">
-    <section class="w-full ">
-      <!--Content (Center)-->
-      <!-- Nav back-->
-      <div>
-        <div class="flex justify-start">
-          <div class="mx-2">
-            <h2 class="mb-0 text-xl font-bold text-white">{{userLogged.name}} {{userLogged.lastname}}</h2>
+<perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-full h-full">
+  <div class="flex w-full h-full card-shadow bg-white rounded-xl">
+    <div class="w-full justify-center flex">
+      <div class="flex w-full left-container flex-col">
+  
+        <div class="profile-container w-full h-[465px]">
+  
+          <div class="pattern-container"></div>
+          <div class="overlay-container">
+            <div class="profile-div h-[95px] bg-gray-800 w-[95px]">
+              <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#FFF" [fullScreen]="false" name="image"></ngx-spinner>
+              <img *ngIf="userLogged?.image" [src]="imageUrl + userLogged?.image" class="!w-[96px] h-[96px]">
+            </div>
           </div>
-        </div>
-
-        <hr class="border-gray-800">
-      </div>
-
-      <!-- User card-->
-      <div>
-        <div class="w-full bg-cover bg-no-repeat bg-center"
-          style="height: 200px; background-image: url(https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200);">
-          <img class="opacity-0 w-full h-full" src="https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200"
-            alt="">
-        </div>
-        <div class="p-4">
-          <div class="relative flex w-full">
-            <!-- Avatar -->
-            <div class="flex flex-1">
-              <div style="margin-top: -6rem;">
-                <div style="height:9rem; width:9rem;" class="md rounded-full relative avatar">
-                  <img style="height:9rem; width:9rem;" class="md rounded-full relative border-4 border-gray-900"
-                    src="https://pbs.twimg.com/profile_images/1254779846615420930/7I4kP65u_400x400.jpg" alt="">
-                  <div class="absolute"></div>
+  
+          <section class="p-6 pl-32 items">
+            <div [hidden]="userLogged?.rol !== 'Client'">
+              <button outline shape="round" status="primary" class=" relative float-right !py-2 !font-semibold !pl-4 !pr-9" nbButton>
+                Solicitar Ser Chef
+                <nb-icon class="absolute right-3.5 !-mt-0.5" icon="award-outline"></nb-icon>
+              </button>
+            </div>
+            <h1>{{ userLogged?.name | titlecase }} {{ userLogged?.lastname | titlecase }}</h1>
+            <h3>{{ userLogged?.username | titlecase }} • {{ userLogged?.email }}</h3>
+          </section>
+  
+          <div class="w-[90%] mx-auto justify-evenly space-x-4 h-32 flex">
+            <div class="w-1/3 h-full flex-col justify-between space-y-1.5 flex bg-opacity-70 rounded-xl">
+              <span class="w-full !text-[13px] text-gray-800 tracking-wide !font-bold">Últimas publicaciones</span>
+              <div class="flex flex-col space-y-2 items-center">
+                <div class="flex bg-blue-500 rounded-full p-1 pr-2 justify-between w-full space-x-1">
+                  <span class="text-[10px] font-bold text-blue-600 w-5 text-center bg-blue-300 rounded-full">1</span>
+                  <span class="font-semibold tracking-wide !text-[12px] overflow-ellipsis !text-gray-50">Pan Parmesano</span>
+                  <span class="flex text-white items-center space-x-1 justify-center text-xs rounded-full">
+                    <span>25</span>
+                    <nb-icon class="!text-xs" icon="heart"></nb-icon>
+                  </span>
+                </div>
+  
+                <div class="flex bg-blue-500 rounded-full p-1 pr-2 justify-between w-full space-x-1">
+                  <span class="text-[10px] font-bold text-blue-600 w-5 text-center bg-blue-300 rounded-full">1</span>
+                  <span class="font-semibold tracking-wide !text-[12px] overflow-ellipsis !text-gray-50">Pan Parmesano</span>
+                  <span class="flex text-white items-center space-x-1 justify-center text-xs rounded-full">
+                    <span>25</span>
+                    <nb-icon class="!text-xs" icon="heart"></nb-icon>
+                  </span>
+                </div>
+  
+                <div class="flex bg-blue-500 rounded-full p-1 pr-2 justify-between w-full space-x-1">
+                  <span class="text-[10px] font-bold text-blue-600 w-5 text-center bg-blue-300 rounded-full">1</span>
+                  <span class="font-semibold tracking-wide !text-[12px] overflow-ellipsis !text-gray-50">Pan Parmesano</span>
+                  <span class="flex text-white items-center space-x-1 justify-center text-xs rounded-full">
+                    <span>25</span>
+                    <nb-icon class="!text-xs" icon="heart"></nb-icon>
+                  </span>
                 </div>
               </div>
             </div>
-            <!-- Follow Button -->
-            <div class="flex flex-col text-right">
-              <button
-                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  rounded max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 hover:border-blue-800 flex items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                Edit Profile
-              </button>
-            </div>
-          </div>
-
-          <!-- Profile info -->
-          <div class="space-y-1 justify-center w-full mt-3 ml-3">
-            <!-- User basic-->
-            <div>
-              <h2 class="text-xl leading-6 font-bold text-white">{{userLogged.name}} {{userLogged.lastname}}</h2>
-              <p class="text-sm leading-5 font-medium text-gray-600">@{{userLogged.username}}</p>
-            </div>
-            <!-- Description and others -->
-            <div class="mt-3">
-              <p class="text-white leading-tight mb-2">Software Engineer / Designer / Entrepreneur <br>Visit my website
-                to test a working <b>Twitter Clone.</b> </p>
-              <div class="text-gray-600 flex">
-                <span class="flex mr-2">
-                  <p class="text-xl !font-semibold bg-green-500 rounded-full p-1" *ngIf=" userLogged.rol == 'chef'">¡Bienvenido chef!</p>
-                   <button *ngIf="userLogged.requestRoleChef == false && userLogged.rol=='Client' " (click)="petitionChefRequest()"
-                    class="leading-5 ml-1 rounded-lg p-1 text-white bg-blue-500 hover:bg-blue-600">Solicitar ser chef</button>
-                    <button *ngIf="userLogged.requestRoleChef == true"
-                    class="leading-5 ml-1 rounded-lg p-1 text-white bg-gray-500">Petición Chef Solicitada</button></span>
+  
+            <div class="w-1/3 flex flex-col p-4 h-full bg-purple-100 rounded-xl">
+              <div class="flex font-semibold text-[13px] justify-between">
+                <span class="2xl:text-[15px] text-sm tracking-wide font-bold text-purple-500">Publicaciones</span>
+                <span class="flex cursor-pointer !text-xs text-purple-500 font items-center">
+                  <nb-icon icon="chevron-down-outline"></nb-icon>
+                </span>
+              </div>
+  
+              <span class="font-bold mt-1 text-gray-800 text-3xl">54</span>
+              <div class="flex text-gray-700 -mt-1.5 items-center justify-between">
+                <span class="text-xs font-bold">Promedio<br>
+                  <span>26 Me Gusta</span>
+                </span>
+                <nb-icon class="!text-4xl text-purple-500" icon="pie-chart"></nb-icon>
               </div>
             </div>
-            <div class="pt-3 flex justify-start items-start w-full divide-x divide-gray-800 divide-solid">
-              <div class="text-center pr-3"><span
-                  class="font-bold text-black">{{userLogged.following.length}}</span><span class="text-gray-600">
-                  Following</span></div>
-              <div class="text-center px-3"><span
-                  class="font-bold text-black">{{userLogged.followers.length}}</span><span class="text-gray-600">
-                  Followers</span></div>
+  
+            <div class="w-1/3 flex flex-col p-4 h-full bg-indigo-100 rounded-xl">
+              <div class="flex font-semibold text-[13px] justify-between">
+                <span class="2xl:text-[15px] text-sm tracking-wide font-bold text-indigo-500">Guardadas</span>
+                <span class="flex cursor-pointer !text-xs text-indigo-500 font items-center">
+                  <nb-icon icon="chevron-down-outline"></nb-icon>
+                </span>
+              </div>
+  
+              <span class="font-bold mt-1 text-gray-800 text-3xl">22</span>
+              <div class="flex text-gray-700 -mt-1.5 items-center justify-between">
+                <span class="text-xs font-bold">Tienes 10<br>
+                  <span>Recetas Premium</span>
+                </span>
+                <nb-icon class="!text-[40px] text-indigo-500" icon="pricetags"></nb-icon>
+              </div>
             </div>
           </div>
+  
         </div>
-        <hr class="border-gray-800">
+  
+        <div class="bg-white text-sm rounded-xl relative">
+          
+          <form [formGroup]="profileForm" class="flex edit-form justify-center h-full items-center w-full flex-col py-6">
+            <div class="grid grid-cols-1 gap-x-4 gap-y-0 relative sm:grid-cols-2">
+              <div *ngIf="profileForm.disabled && loading" class="absolute w-full z-50 h-full rounded-lg bg-white bg-opacity-60"></div>
+              <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#3084E7" [fullScreen]="false" name="form"></ngx-spinner>
+  
+              <div class="relative h-32 rounded-lg col-span-2 border-dashed border-2 border-gray-300 bg-white flex justify-center items-center">
+                <label [class.cursor-pointer]="profileForm.enabled" *ngIf="!previewImage || loading" for="file" class="flex absolute mt-[51px] flex-col w-full h-full justify-center items-center rounded-xl">
+                  <img class="w-16 absolute -top-4" src="../../../assets/photos.svg">
+                  <div class="absolute flex flex-col mt-1 justify-center items-center">
+                    <span class="text-gray-800 font-semibold">Sube una imágen</span>
+                    <span class="text-gray-600 text-xs font-semibold">JPG, PNG, GIF, JPEG</span>
+                  </div>
+                </label>
+  
+                <input multiple [disabled]="profileForm.disabled" ng2FileSelect [uploader]="uploader" accept="image/*" class="hidden" id="file" type="file">
+  
+                <div *ngIf="previewImage && !loading" class="h-full flex gap-y-1.5 flex-col justify-center items-center w-full bg-white z-50 mx-1 my-1">
+                  <div class="w-16 h-16 rounded-full flex justify-center items-center">
+                    <span *ngIf="previewImage === ''" class="text-white flex justify-center items-center w-16 h-16 bg-gray-800 rounded-full">
+                      <div class="img-spinner"></div>
+                    </span>
+                    <img *ngIf="previewImage && previewImage !== ''" [src]="previewImage?.path" class="w-16 h-16 !m-0 !border-none">
+                  </div>
+                  <span class="bg-gray-800 flex space-x-0.5 items-center px-4 pb-1 pt-0.5 rounded-full">
+                    <span class="text-gray-50 tracking-wide text-[12px]">{{ previewImage?.name }}</span>
+                    <nb-icon (click)="deleteImage()" icon="close-outline" class="cursor-pointer mt-0.5 hover:text-red-500 !text-[16px] text-white"></nb-icon>
+                  </span>
+                </div>
+  
+              </div>
+  
+              <nb-form-field class="mt-5">
+                <nb-icon nbPrefix icon="person-outline"></nb-icon>
+                <input shape="semi-round" formControlName="username" fullWidth type="text" nbInput placeholder="Usuario">
+              </nb-form-field>
+  
+              <nb-form-field class="mt-5">
+                <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
+                <input shape="semi-round" formControlName="email" fullWidth type="email" nbInput placeholder="Correo">
+              </nb-form-field>
+  
+  
+              <nb-form-field class="mt-5">
+                <nb-icon nbPrefix icon="text-outline"></nb-icon>
+                <input shape="semi-round" formControlName="name" fullWidth type="text" nbInput placeholder="Nombre">
+              </nb-form-field>
+  
+              <nb-form-field class="mt-5">
+                <nb-icon nbPrefix icon="text-outline"></nb-icon>
+                <input shape="semi-round" formControlName="lastname" fullWidth type="text" nbInput placeholder="Apellido">
+              </nb-form-field>
+  
+            </div>
+          </form>
+  
+          <button (click)="profileForm.disable(); formActivated = false; deleteImage()" *ngIf="formActivated" class="btn-close-profile flex justify-center items-center">
+            <nb-icon icon="close-outline"></nb-icon>
+          </button>
+  
+          <button [disabled]="(formChanges | json) === '{}'" [@slideInRightOnEnter] [@slideOutRightOnLeave] (click)="editProfile()" *ngIf="formActivated" class="btn-save-profile flex justify-center items-center">
+            <nb-icon icon="save"></nb-icon>
+          </button>
+  
+          <button (click)="profileForm.enable(); formActivated = true" *ngIf="!formActivated" class="btn-edit-profile flex justify-center items-center">
+            <nb-icon icon="edit"></nb-icon>
+          </button>
+        </div>
+  
       </div>
-    </section>
+    </div>
   </div>
-</main>
+</perfect-scrollbar>

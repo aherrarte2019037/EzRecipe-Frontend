@@ -1,10 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Injectable, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/main/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbDialogModule, NbMenuModule, NbThemeModule, NbToastrModule, NbWindowModule } from '@nebular/theme';
+import { NbDialogModule, NbMenuModule, NbSpinnerModule, NbThemeModule, NbToastrModule, NbWindowModule } from '@nebular/theme';
 import { NebularModule } from './nebular.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -27,7 +27,11 @@ import { SubscriptionComponent } from './pages/subscription/subscription.compone
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TimeagoModule } from 'ngx-timeago';
 import { TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
+import { FileUploadModule } from 'ng2-file-upload';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class MyIntl extends TimeagoIntl { }
 
 @NgModule({
@@ -53,6 +57,8 @@ export class MyIntl extends TimeagoIntl { }
     ComponentsModule,
     NgxSpinnerModule,
     NbEvaIconsModule,
+    FileUploadModule,
+    NbSpinnerModule,
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },

@@ -52,4 +52,22 @@ export class UserService {
   }
 
 
+  purchasedRecipes(id: string){
+
+    return this.http.get<any>(`${this.apiUrl}/purchasedRecipes/${id}`);
+
+  }
+
+  showPurchasedRecipes(){
+
+    return this.http.get<any>(`${this.apiUrl}/showPurchasedRecipes`);
+
+  }
+
+  editUser( userUpdate: any, userId: string ):Observable<any>{
+
+    return this.http.put<any>(`${this.apiUrl}/editUser/${userId}`, userUpdate);
+
+  }
+
 }

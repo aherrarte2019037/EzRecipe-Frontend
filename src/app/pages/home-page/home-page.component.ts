@@ -12,7 +12,6 @@ import { RecipeService } from 'src/app/services/recipe.service';
   providers: [UserService]
 })
 export class HomePageComponent implements OnInit {
-  private index: number = 0;
   showContent: boolean = false;
   videoindex =0;
   countVideoIndex = 4-this.videoindex;
@@ -31,7 +30,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Compras',
-      icon: 'credit-card-outline'
+      icon: 'credit-card-outline',
+      link: '/home/purchasedRecipes'
     },
     {
       title: 'Guardado',
@@ -53,8 +53,10 @@ export class HomePageComponent implements OnInit {
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
   userLogged: any = null;
+  userLogged$: any = this.userService.userLogged;
   recipes: any;
   chefRequests: any;
+  imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
 
   constructor(
     private spinnerService: NgxSpinnerService,
@@ -67,13 +69,14 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinnerBehavior();
-    this.userService.userLogged.subscribe( data => this.userLogged = data )
+    this.userService.userLogged.subscribe( data => {
+      this.userLogged = data;
+      if( !this.userLogged?.image ) this.spinnerService.show('profileImage');
+      if( this.userLogged?.image ) this.spinnerService.hide('profileImage');
+    })
     this.recipeService.getRecipes().subscribe( data => this.recipes = data )
-    this.userService.getChefRequests().subscribe(data=> this.chefRequests = data)
+    this.userService.getChefRequests().subscribe(data=> this.chefRequests = data);
   }
-
-  @HostBinding('class')
-  className = 'example-items-rows';
 
   open(dialog: TemplateRef<any>) {
     this.disableModal = true;
@@ -87,8 +90,10 @@ export class HomePageComponent implements OnInit {
       data=>{
         this.videoindex=this.videoindex + 1,
         this.showToast(3000, "success")
+        this.userLogged.ezCoins = this.userLogged.ezCoins + 3
+        this.userService.userLogged.next(this.userLogged)
       },
-      
+
       error=> error
     )
     this.userService.userLogged.subscribe( data => this.userLogged = data )

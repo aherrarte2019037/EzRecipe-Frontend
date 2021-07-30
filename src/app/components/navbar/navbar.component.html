@@ -1,13 +1,12 @@
 <div class="h-[78px] flex w-full justify-between items-center px-5">
 
-    
     <div [@slideInLeftOnEnter] class="flex items-center cursor-pointer justify-center space-x-2 text-gray-800">
         <div class="bg-blue-100 p-1 rounded-lg flex items-center justify-center">
             <img class="w-7 h-7" src="../../../assets/logo.svg">
         </div>
         <span class="font-bold text-gray-800">EzRecipe</span>
     </div>
-    
+
     <div class="flex items-center space-x-5">
         <div [@slideInRightOnEnter] class="relative text-gray-600">
             <input class="bg-gray-200/40 w-80 placeholder-gray-500 h-10 px-5 pl-[46px] rounded-xl text-sm focus:outline-none" type="search" placeholder="Buscar">
@@ -18,10 +17,14 @@
             </button>
         </div>
 
-        <div [@slideInRightOnEnter] class="flex relative items-center justify-center">
-            <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full absolute top-0 right-1"></span>
-            <button *ngIf="userLogged | async as user" nbContextMenuTag="profile-menu" [nbContextMenu]="[{ title: 'Cerrar Sesión' }]" class="text-gray-50 bg-indigo-500 hover:bg-indigo-600 font-semibold rounded-full pl-5 pr-[33px] shadow-sm py-[8px] text-[14px]">{{ user.name }} {{ user.lastname | slice:0:1 }} <nb-icon class="absolute ml-0.5" icon="chevron-down-outline"></nb-icon></button>
-            <img class="rounded-full ml-2.5 w-[42px]" src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+        <div *ngIf="userLogged | async as user" [@slideInRightOnEnter] class="flex relative items-center justify-center">
+            <button nbContextMenuTag="profile-menu" [nbContextMenu]="[{ title: 'Cerrar Sesión' }]" class="text-gray-50 bg-indigo-500 hover:bg-indigo-600 font-semibold rounded-full pl-5 pr-[33px] shadow-sm py-[8px] text-[14px]">{{ user.name }} {{ user.lastname | slice:0:1 }} <nb-icon class="absolute ml-0.5" icon="chevron-down-outline"></nb-icon></button>
+            <div class="relative">
+                <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#6366F1" [fullScreen]="false" name="navImage"></ngx-spinner>                
+                <nb-user class="nb-user !ml-2" [picture]="user?.image? imageUrl+user?.image:''" [name]="user?.name +' '+ (user?.lastname | slice:0:1)" onlyPicture></nb-user>
+            </div>
+            <nb-icon class="text-indigo-500" icon="bell"></nb-icon>
+            <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full absolute top-0 right-8"></span>
         </div>
     </div>
 
