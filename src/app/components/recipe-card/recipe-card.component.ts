@@ -19,8 +19,8 @@ export class RecipeCardComponent implements OnInit {
   booleanPurchased: boolean = false;
   userLoggedRecipesSave: any = []
 
-  constructor( private userService: UserService, 
-    private recipeService: RecipeService, 
+  constructor( private userService: UserService,
+    private recipeService: RecipeService,
     private nbMenuService: NbMenuService,
     private toastrService: NbToastrService
 
@@ -60,8 +60,10 @@ export class RecipeCardComponent implements OnInit {
 
         if(this.booleanSave == true){
           this.userLoggedRecipesSave.push(id)
+          this.showToastSaveRecipe(2000, 'success')
         }else {
           this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
+          this.showToastUnsaveRecipe(2000, 'danger')
         }
       }
     )
@@ -101,7 +103,7 @@ export class RecipeCardComponent implements OnInit {
       'Se ha añadido a favoritas',
       { duration, status });
   }
-  
+
   showToastUnsaveRecipe(duration: any,status: NbComponentStatus) {
     this.toastrService.show(
       '',
