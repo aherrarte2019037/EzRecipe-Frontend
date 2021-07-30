@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { Component, Input, OnInit, TemplateRef, HostBinding } from '@angular/core';
+import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { filter } from 'rxjs/operators';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,22 +17,22 @@ export class RecipeCardComponent implements OnInit {
   booleanLike: boolean = false
   booleanSave: boolean = false;
   booleanPurchased: boolean = false;
+  userLoggedRecipesSave: any = []
 
-  constructor( private userService: UserService, private recipeService: RecipeService, private nbMenuService: NbMenuService ) { }
+  constructor( private userService: UserService,
+    private recipeService: RecipeService,
+    private nbMenuService: NbMenuService,
+    private toastrService: NbToastrService
+
+    ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
+      this.userLoggedRecipesSave = data.favoriteRecipes
       if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
+      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
-    this.nbMenuService.onItemClick().pipe(
-      filter(({ tag }) => tag === 'my-context-menu'),
-    ).subscribe((event) => {
-    if (event.item.title === 'Guardar') {
-      console.log(event.item.data.recipe)
-      this.saveRecipe(event.item.data.recipe)
-    }
-  });
   }
 
   giveLike(id:any){
@@ -59,9 +59,11 @@ export class RecipeCardComponent implements OnInit {
         this.booleanSave = !this.booleanSave
 
         if(this.booleanSave == true){
-          console.log('Guardaste la receta')
+          this.userLoggedRecipesSave.push(id)
+          this.showToastSaveRecipe(2000, 'success')
         }else {
-          console.log('Ya no esta guardada')
+          this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
+          this.showToastUnsaveRecipe(2000, 'danger')
         }
       }
     )
@@ -77,9 +79,36 @@ export class RecipeCardComponent implements OnInit {
       },
       error=>{
           console.log(<any>error);
+          this.showToastInsufficientEzCoins(2000,"success");
       }
     )
 
+  }
+
+  showToast(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      'Se ha guardado la receta',
+      { duration, status });
+  }
+
+  showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      'No tienes los suficientes EzCoins',
+      { duration, status });
+  }
+
+  showToastSaveRecipe(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      '',
+      'Se ha añadido a favoritas',
+      { duration, status });
+  }
+
+  showToastUnsaveRecipe(duration: any,status: NbComponentStatus) {
+    this.toastrService.show(
+      '',
+      'Se ha eliminado de favoritas',
+      { duration, status });
   }
 
 }
