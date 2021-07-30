@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NbWindowRef } from '@nebular/theme';
+import { NbWindowRef, NbToastrService, NbComponentStatus } from '@nebular/theme'; 
 import { fadeInDownOnEnterAnimation, fadeInOnEnterAnimation, fadeInUpOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 import { FileItem, FileUploader } from 'ng2-file-upload';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -51,7 +51,8 @@ export class AddRecipeComponent implements OnInit {
     public windowRef: NbWindowRef,
     private formBuilder: FormBuilder,
     private spinnerService: NgxSpinnerService,
-    private recipeService: RecipeService ) { }
+    private recipeService: RecipeService,
+    private toastrService: NbToastrService ) { }
 
   ngOnInit(): void {
     this.onAfterAddingFile();
@@ -174,6 +175,10 @@ export class AddRecipeComponent implements OnInit {
 
   getSteps() {
     return this.thirdForm.get('steps') as FormArray;
+  }
+
+  showToastPublicacions( duration: any,status: NbComponentStatus ) {
+    this.toastrService.show( 'Felicidades', `Receta publicada`, { status: 'primary', icon: 'checkmark' });
   }
 
 }

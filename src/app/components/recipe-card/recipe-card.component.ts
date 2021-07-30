@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NbMenuItem, NbMenuService } from '@nebular/theme';
+import { Component, Input, OnInit, TemplateRef, HostBinding } from '@angular/core';
+import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { filter } from 'rxjs/operators';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,20 +19,25 @@ export class RecipeCardComponent implements OnInit {
   booleanPurchased: boolean = false;
   userLoggedRecipesSave: any = []
 
-  constructor( private userService: UserService, private recipeService: RecipeService, private nbMenuService: NbMenuService ) { }
+  constructor( private userService: UserService,
+    private recipeService: RecipeService,
+    private nbMenuService: NbMenuService,
+    private toastrService: NbToastrService
+
+    ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       this.userLoggedRecipesSave = data.favoriteRecipes
-      if(this.recipe.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
-      if(data.purchasedRecipes.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
-      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
+      if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
+      if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
+      if(this.userLoggedRecipesSave?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
   }
 
   giveLike(id:any){
     this.recipeService.giveLike(id).subscribe(
-      (data: any) => {
+      data => {
           this.booleanLike = !this.booleanLike
 
           if(this.booleanLike == true){
@@ -72,9 +77,18 @@ export class RecipeCardComponent implements OnInit {
       },
       error=>{
           console.log(<any>error);
+          this.showToastInsufficientEzCoins(2000,"success");
       }
     )
 
+  }
+
+  showToast() {
+    this.toastrService.show( '', `Receta Guardada`, { status: 'primary', icon: 'save-outline' });
+  }
+
+  showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
+    this.toastrService.show( '', `Monedas insuficientes`, { status: 'warning', icon: 'alert-circle' });
   }
 
 }

@@ -23,13 +23,13 @@
 
                         <div class="relative text-area">
                             <nb-icon [status]="getFormStatus('description', firstForm)" class="absolute top-3 left-3" icon="file-text-outline"></nb-icon>
-                            <textarea fullWidth shape="semi-round" id="textarea" [status]="getFormStatus('description', firstForm)" formControlName="description" placeholder="Descripción" class="h-24 !pt-2 !pl-[38px]" nbInput></textarea>
+                            <textarea fullWidth shape="semi-round" [status]="getFormStatus('description', firstForm)" formControlName="description" placeholder="Descripción" class="h-24 !pt-2 !pl-[38px]" nbInput></textarea>
                         </div>
 
                     </div>
 
                     <div class="w-full flex space-x-3 mt-6 justify-end">
-                        <button (click)="firstForm.invalid? firstForm.markAllAsTouched(): ''" type="submit" hero class="!pl-4 !rounded-xl relative !font-medium" status="primary" nbButton nbStepperNext>
+                        <button (click)="firstForm.invalid? firstForm.markAllAsTouched(): ''" type="button" hero class="!pl-4 !rounded-xl relative !font-medium" status="primary" nbButton nbStepperNext>
                             Siguiente&nbsp;&nbsp;&nbsp;
                             <nb-icon class="absolute right-2 bottom-[11px]" icon="chevron-right"></nb-icon>
                         </button>
@@ -169,7 +169,7 @@
                             </nb-icon>
                     </label>
 
-                    <button (click)="addRecipe()" *ngIf="previewImages.length > 0" hero class="!rounded-xl !pl-4 !pr-7 relative !font-medium" status="primary" nbButton>
+                    <button (click)="addRecipe(); showToastPublicacions(2000,'success')" *ngIf="previewImages.length > 0" hero class="!rounded-xl !pl-4 !pr-7 relative !font-medium" status="primary" nbButton>
                         Publicar&nbsp;&nbsp;&nbsp;
                         <nb-icon class="absolute right-3 bottom-[12px]" icon="save-outline"></nb-icon>
                     </button>
