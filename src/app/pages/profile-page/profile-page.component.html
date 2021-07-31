@@ -47,6 +47,10 @@
                   </span>
                 </div>
 
+                <div *ngIf="stats?.myRecipes.length === 0" class="flex bg-gray-700 rounded-full p-1 pr-2 justify-center w-full">
+                  <span class="font-semibold tracking-wide text-center !text-[12px] overflow-ellipsis !text-gray-50">No tienes recetas...</span>
+                </div>
+
               </div>
             </div>
 
