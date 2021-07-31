@@ -71,4 +71,8 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/userStats`);
   }
 
+  getSavedRecipes(){
+    return this.http.get<any>(`${this.apiUrl}/savedRecipes`);
+  }
+
 }

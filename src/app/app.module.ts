@@ -28,6 +28,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { TimeagoModule } from 'ngx-timeago';
 import { TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
 import { FileUploadModule } from 'ng2-file-upload';
+import { SavedRecipesComponent } from './pages/saved-recipes/saved-recipes.component';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,8 @@ export class MyIntl extends TimeagoIntl { }
     RecipesPageComponent,
     ProfilePageComponent,
     SafePipe,
-    SubscriptionComponent
+    SubscriptionComponent,
+    SavedRecipesComponent
   ],
   imports: [
     BrowserModule,

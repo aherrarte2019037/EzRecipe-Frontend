@@ -1,4 +1,9 @@
-<div *ngIf="recipe && userLogged$ | async as user" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
+<div *ngIf="recipes<=1" class="flex flex-wrap content-center justify-center bg-gray-200 h-full rounded-md text-gray-500">
+  <p class="!text-2xl">¡No tienes ninguna receta guardada como favoritas!</p>
+  <nb-icon icon="inbox-outline" class="!text-5xl mx-40"></nb-icon>
+</div>
+<perfect-scrollbar style="height: calc( 100% - 10px);" class="mt-1" [config]="{ wheelSpeed : 0.4 }">
+  <div *ngFor="let recipe of recipes" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5 mb-2">
     <div class="flex justify-between items-center">
         <div class="flex items-center space-x-2">
           <img class="rounded-xl w-11 h-11" [src]="imageUrl+recipe.idPublisher.image" >
@@ -11,37 +16,24 @@
             </div>
         </div>
         <div class="flex space-x-2">
-            <div *ngIf="[recipe.type, user] | detailVisibility; else buyRecipe" class="flex space-x-2">
-                <button [ngClass]="{'!text-indigo-500':booleanSave == true}" class="text-gray-400 text-[13px] font-semibold transition duration-300 hover:text-indigo-500 space-x-1 flex items-center" (click)="saveRecipe(recipe._id)">
+            <div class="flex space-x-2">
+                <!-- <button [ngClass]="{'!text-indigo-500':booleanSave == true}" class="text-gray-400 text-[13px] font-semibold transition duration-300 hover:text-indigo-500 space-x-1 flex items-center" (click)="saveRecipe(recipe._id)">
                   <nb-icon class="!text-[22px]" [icon]="booleanSave? 'bookmark':'bookmark-outline'"></nb-icon>
-                </button>
+                </button> -->
 
                 <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
                     <nb-icon icon="more-horizontal-outline"></nb-icon>
                 </button>
             </div>
-
-            <ng-template #buyRecipe>
-                <button nbTooltip="45 EzCoins" *ngIf="booleanPurchased === false" (click)="purchasedRecipe(recipe._id)" class="flex space-x-0.5 text-sm text-white transform transition duration-150 hover:scale-105 bg-yellow-500 rounded-full items-center justify-between py-1.5 px-4">
-                    <span>Comprar</span>
-                    <nb-icon icon="shopping-cart"></nb-icon>
-                </button>
-
-                <p *ngIf="booleanPurchased === true" class="flex space-x-0.5 text-sm text-white bg-gray-400 rounded-full items-center justify-between py-1.5 px-4">
-                  <span>Comprado</span>
-                  <nb-icon icon="shopping-cart"></nb-icon>
-                </p>
-            </ng-template>
-
         </div>
     </div>
 
     <span class="text-gray-700 text-[15px] description-span">{{ recipe.description | titlecase}}.</span>
     <div class="flex flex-col lg:flex-row lg:space-y-0 lg:space-x-4 space-x-0 justify-between space-y-4 w-full h-full">
-        <div *ngFor="let image of recipe?.image" [ngStyle]="{'background-image': 'url(' + imageUrl + image + ')'}" class="image-recipe"></div>
+        <div *ngFor="let image of recipe.image" [ngStyle]="{'background-image': 'url(' + imageUrl + image + ')'}" class="image-recipe"></div>
     </div>
 
-    <div class="flex space-x-3 !mt-4 bg-gray-200 px-4 rounded-xl h-[60px] justify-between w-full">
+    <!-- <div class="flex space-x-3 !mt-4 bg-gray-200 px-4 rounded-xl h-[60px] justify-between w-full">
         <button [ngClass]="{'!text-red-500':booleanLike == true}" class="text-gray-500 text-[13px] font-semibold hover:text-red-500 space-x-1 flex items-center" (click)="giveLike(recipe._id)">
             <nb-icon icon="heart"></nb-icon>
             <span class="mt-0.5">{{ recipe?.likes?.length }}</span>
@@ -56,6 +48,7 @@
             <nb-icon icon="share-outline"></nb-icon>
             <span class="mt-0.5">25</span>
         </button>
-    </div>
+    </div> -->
 
-</div>
+  </div>
+  </perfect-scrollbar>
