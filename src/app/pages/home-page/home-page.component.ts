@@ -36,6 +36,7 @@ export class HomePageComponent implements OnInit {
     {
       title: 'Guardado',
       icon: 'archive-outline',
+      link: '/home/savedRecipes'
     },
     {
       title: 'Suscripciones',

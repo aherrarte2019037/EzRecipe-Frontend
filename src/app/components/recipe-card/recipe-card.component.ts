@@ -32,9 +32,10 @@ export class RecipeCardComponent implements OnInit {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       this.userLogged = data;
       this.userLoggedRecipesSave = data.favoriteRecipes
+      console.log(this.userLoggedRecipesSave)
       if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
-      if(this.userLoggedRecipesSave?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
+      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
   }
 
@@ -58,15 +59,14 @@ export class RecipeCardComponent implements OnInit {
   saveRecipe(id:any){
     this.recipeService.saveRecipe(id).subscribe(
       (data:any) => {
-
         this.booleanSave = !this.booleanSave
-        
+
         if(this.booleanSave == true){
-          this.showToastSaveRecipe(2000, 'success');
           this.userLoggedRecipesSave.push(id)
+          this.showToastSaveRecipe(2000, 'success');
         }else {
-          this.showToastUnsaveRecipe(2000, 'danger')
           this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
+          this.showToastUnsaveRecipe(2000, 'danger')
         }
       }
     )
@@ -98,7 +98,7 @@ export class RecipeCardComponent implements OnInit {
       'Se ha añadido a favoritas',
       { duration, status });
   }
-  
+
   showToastUnsaveRecipe(duration: any,status: NbComponentStatus) {
       this.toastrService.show(
         '',
