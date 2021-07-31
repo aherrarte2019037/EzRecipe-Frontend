@@ -1,8 +1,8 @@
-<!-- <ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
- -->
+<ngx-spinner template="<img class='w-32 h-32' src='../../../assets/spinner2.gif'/>" bdColor="rgba(255, 255, 255, 1)" [disableAnimation]="false" name="main"></ngx-spinner>
+
 <app-navbar></app-navbar>
 
-<ng-container *ngIf="true">
+<ng-container *ngIf="showContent">
   <nb-layout>
 
     <nb-layout-column>
@@ -132,7 +132,7 @@
                 </div>
 
                 <nb-card class="w-full !h-full !rounded-xl menu-card">
-                  <nb-card-body class="!px-5 !py-5 !flex !flex-col space-y-7">
+                  <nb-card-body class="!px-5 !py-5 !flex !flex-col space-y-[30px]">
 
                     <div *ngFor="let recipe of (popularRecipes | slice:0:8)" class="flex justify-between items-center">
                       <div class="flex space-x-2 items-center">
