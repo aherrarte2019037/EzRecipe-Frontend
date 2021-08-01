@@ -49,7 +49,6 @@ export class ProfilePageComponent implements OnInit {
     if(this.userLogged?.requestRoleChef === true) {
       this.petitionBoolean = true;
     }
-    this.userService.getUserStats().subscribe( data => console.log(data) )
   }
 
   //Subir Imágenes
