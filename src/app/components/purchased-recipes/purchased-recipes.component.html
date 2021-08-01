@@ -1,3 +1,8 @@
+<div *ngIf="recipes<=1" class="flex flex-wrap content-center justify-center bg-gray-200 h-full rounded-md text-gray-500">
+  <p class="!text-2xl">¡No tienes ninguna receta comprada!</p>
+  <nb-icon icon="inbox-outline" class="!text-5xl mx-40"></nb-icon>
+</div>
+
 <perfect-scrollbar style="height: calc( 100%);" class="mt-1" [config]="{ wheelSpeed : 0.4 }">
   <div *ngFor="let recipe of recipes" class="mb-2">
     <div *ngIf="recipe && userLogged$ | async as user" class="rounded-xl space-y-3.5 flex flex-col shadow-md bg-white w-full sm:h-[450px] lg:h-[400px] p-5">
