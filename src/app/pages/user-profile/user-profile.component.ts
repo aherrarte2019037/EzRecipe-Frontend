@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NbComponentStatus, NbToastrService } from '@nebular/theme';
+import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,8 +15,9 @@ export class UserProfileComponent implements OnInit {
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   userLoggedID: any
   booleanFollowing: boolean = false
+  recipes: any = []
 
-  constructor(private userService: UserService, public _activetedRoute: ActivatedRoute, private toastrService: NbToastrService) { }
+  constructor(private userService: UserService, public _activetedRoute: ActivatedRoute, private toastrService: NbToastrService, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
@@ -24,6 +26,7 @@ export class UserProfileComponent implements OnInit {
         this.userService.getUsername(this.Username).subscribe( data => {
           this.user = data.userFound
           if(data?.userFound?.followers.some( (followers:any) => followers === this.userLoggedID )) this.booleanFollowing = true
+          this.recipeService.getRecipeIdPublisher(data.userFound._id).subscribe( data => this.recipes = data)
         })
     } )
     });
