@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { filter } from 'rxjs/operators';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -24,7 +25,8 @@ export class RecipeCardComponent implements OnInit {
   constructor( private userService: UserService,
     private recipeService: RecipeService,
     private nbMenuService: NbMenuService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router
 
     ) { }
 
@@ -34,7 +36,7 @@ export class RecipeCardComponent implements OnInit {
       this.userLoggedRecipesSave = data.favoriteRecipes
       if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
-      if(this.userLoggedRecipesSave?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
+      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
   }
 
@@ -58,15 +60,14 @@ export class RecipeCardComponent implements OnInit {
   saveRecipe(id:any){
     this.recipeService.saveRecipe(id).subscribe(
       (data:any) => {
-
         this.booleanSave = !this.booleanSave
-        
+
         if(this.booleanSave == true){
-          this.showToastSaveRecipe(2000, 'success');
           this.userLoggedRecipesSave.push(id)
+          this.showToastSaveRecipe(2000, 'success');
         }else {
-          this.showToastUnsaveRecipe(2000, 'danger')
           this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
+          this.showToastUnsaveRecipe(2000, 'danger')
         }
       }
     )
@@ -98,13 +99,13 @@ export class RecipeCardComponent implements OnInit {
       'Se ha añadido a favoritas',
       { duration, status });
   }
-  
+
   showToastUnsaveRecipe(duration: any,status: NbComponentStatus) {
       this.toastrService.show(
         '',
         'Se ha eliminado de favoritas',
         { duration, status });
-    }
+  }
 
   showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
     this.toastrService.show( '', `Monedas insuficientes`, { status: 'warning', icon: 'alert-circle' });
@@ -115,6 +116,8 @@ export class RecipeCardComponent implements OnInit {
     this.toastrService.show( '', `Receta Comprada`, { status: 'primary', icon: 'shopping-cart-outline' });
   }
 
-
+  navigate(username:any){
+    this.router.navigate(['/home/user-profile', username])
+  }
 
 }

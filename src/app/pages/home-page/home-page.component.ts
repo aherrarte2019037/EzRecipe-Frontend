@@ -36,6 +36,7 @@ export class HomePageComponent implements OnInit {
     {
       title: 'Guardado',
       icon: 'archive-outline',
+      link: '/home/savedRecipes'
     },
     {
       title: 'Suscripciones',
@@ -56,6 +57,7 @@ export class HomePageComponent implements OnInit {
   userLogged$: any = this.userService.userLogged;
   recipes: any;
   chefRequests: any;
+  popularRecipes: any = [];
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
 
   constructor(
@@ -74,8 +76,17 @@ export class HomePageComponent implements OnInit {
       if( !this.userLogged?.image ) this.spinnerService.show('profileImage');
       if( this.userLogged?.image ) this.spinnerService.hide('profileImage');
     })
-    this.recipeService.getRecipes().subscribe( data => this.recipes = data )
+    this.recipeService.getRecipes().subscribe( data => { this.recipes = data; this.sortArrayByLikes() })
     this.userService.getChefRequests().subscribe(data=> this.chefRequests = data);
+  }
+
+  sortArrayByLikes() {
+    const recipes = this.recipes;
+    this.popularRecipes = recipes.sort( ( a: any, b: any ) => {
+      if( a.likes.length > b.likes.length ) return 1;
+      if( a.likes.length < b.likes.length ) return -1;
+      return 0;
+    });
   }
 
   open(dialog: TemplateRef<any>) {
