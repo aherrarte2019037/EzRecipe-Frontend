@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { filter } from 'rxjs/operators';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -24,7 +25,8 @@ export class RecipeCardComponent implements OnInit {
   constructor( private userService: UserService,
     private recipeService: RecipeService,
     private nbMenuService: NbMenuService,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private router: Router
 
     ) { }
 
@@ -32,7 +34,6 @@ export class RecipeCardComponent implements OnInit {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       this.userLogged = data;
       this.userLoggedRecipesSave = data.favoriteRecipes
-      console.log(this.userLoggedRecipesSave)
       if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
       if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
@@ -104,7 +105,7 @@ export class RecipeCardComponent implements OnInit {
         '',
         'Se ha eliminado de favoritas',
         { duration, status });
-    }
+  }
 
   showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
     this.toastrService.show( '', `Monedas insuficientes`, { status: 'warning', icon: 'alert-circle' });
@@ -115,6 +116,8 @@ export class RecipeCardComponent implements OnInit {
     this.toastrService.show( '', `Receta Comprada`, { status: 'primary', icon: 'shopping-cart-outline' });
   }
 
-
+  navigate(username:any){
+    this.router.navigate(['/home/user-profile', username])
+  }
 
 }

@@ -11,6 +11,7 @@ import { RecipesPageComponent } from './pages/recipes-page/recipes-page.componen
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { SavedRecipesComponent } from './pages/saved-recipes/saved-recipes.component';
 import { SubscriptionComponent } from './pages/subscription/subscription.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginPageComponent, canActivate: [NoAuthGuard] },
@@ -20,7 +21,8 @@ const routes: Routes = [
     { path: 'recipes', component: RecipesPageComponent },
     { path: 'profile', component: ProfilePageComponent },
     { path: 'purchasedRecipes', component: PurchasedRecipesComponent },
-    { path: 'savedRecipes', component: SavedRecipesComponent},
+    { path: 'savedRecipes', component: SavedRecipesComponent },
+    { path: 'user-profile/:username', component: UserProfileComponent },
     { path: '', pathMatch: 'full', redirectTo: 'recipes' }
   ]},
   { path: '', pathMatch: 'full', redirectTo: 'home' },
