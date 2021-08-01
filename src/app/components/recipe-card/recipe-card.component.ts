@@ -1,41 +1,63 @@
-import { Component, Input, OnInit, TemplateRef, HostBinding } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService } from '@nebular/theme';
-import { filter } from 'rxjs/operators';
+import { NbMenuItem, NbMenuService, NbComponentStatus, NbToastrService,NbDialogService,NbWindowService } from '@nebular/theme';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-recipe-card',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './recipe-card.component.html',
-  styleUrls: ['./recipe-card.component.css']
+  styleUrls: ['./recipe-card.component.css'],
+  styles: [`
+  :host nb-tab {
+    padding: 1.25rem;
+  }
+`],
 })
 export class RecipeCardComponent implements OnInit {
   @Input() recipe: any = null;
+  disableModal = true;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   userLogged$: Object = this.userService.userLogged;
   userLogged: any;
-  userLoggedID: any
-  booleanLike: boolean = false
+  userLoggedID: any;
+  booleanLike: boolean = false;
   booleanSave: boolean = false;
   booleanPurchased: boolean = false;
   userLoggedBoughtRecipes: any = [];
+  recipes: any;
 
   constructor( private userService: UserService,
+    private windowService: NbWindowService,
+    private dialogService: NbDialogService,
     private recipeService: RecipeService,
     private nbMenuService: NbMenuService,
     private toastrService: NbToastrService,
     private router: Router
-
     ) { }
 
   ngOnInit(): void {
-    this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
+      this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       this.userLogged = data;
       if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
       if(this.userLogged.favoriteRecipes?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
+  }
+
+  open(dialog: TemplateRef<any>) {
+    this.disableModal = true;
+    this.dialogService.open(dialog);
+  }
+
+  getIdRecipe(id: any){
+    this.recipeService.getIdRecipe(id).subscribe(
+      data => {
+        this.recipes = data.foundRecipes;
+        console.log(data.foundRecipes);
+      }
+    )
   }
 
   giveLike(id:any){

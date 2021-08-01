@@ -37,4 +37,8 @@ export class RecipeService {
     return this.http.get<any>( `${this.apiUrl}/getRecipesIdPublisher/${id}`)
   }
 
+  getIdRecipe(id: string){
+    return this.http.get<any>( `${this.apiUrl}/getIdRecipe/${id}` )
+  }
+
 }
