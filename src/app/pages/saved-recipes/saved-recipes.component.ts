@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +15,7 @@ export class SavedRecipesComponent implements OnInit {
   booleanSave: boolean = true;
   userLoggedRecipesSave: any = []
 
-  constructor(private userService: UserService, private recipeService: RecipeService, private toastrService: NbToastrService) { }
+  constructor(private userService: UserService, private recipeService: RecipeService, private toastrService: NbToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getSavedRecipes().subscribe( data => { this.recipes = data
@@ -46,6 +47,10 @@ export class SavedRecipesComponent implements OnInit {
       '',
       'Se ha eliminado de favoritas',
       { duration, status });
+  }
+
+  navigate(username:any){
+    this.router.navigate(['/home/user-profile', username])
   }
 
 }
