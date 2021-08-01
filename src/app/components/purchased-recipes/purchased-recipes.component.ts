@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,7 +15,7 @@ export class PurchasedRecipesComponent implements OnInit {
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   booleanLike: boolean = false
 
-  constructor(private userService: UserService, private recipeService: RecipeService) {
+  constructor(private userService: UserService, private recipeService: RecipeService, private router: Router) {
 
   }
 
@@ -22,5 +23,7 @@ export class PurchasedRecipesComponent implements OnInit {
     this.userService.showPurchasedRecipes().subscribe(data=> this.recipes = data)
   }
 
-
+  navigate(username:any){
+    this.router.navigate(['/home/user-profile', username])
+  }
 }
