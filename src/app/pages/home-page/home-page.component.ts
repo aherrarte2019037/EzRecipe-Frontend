@@ -87,6 +87,7 @@ export class HomePageComponent implements OnInit {
       if( a.likes.length < b.likes.length ) return -1;
       return 0;
     });
+    this.popularRecipes.reverse();
   }
 
   open(dialog: TemplateRef<any>) {

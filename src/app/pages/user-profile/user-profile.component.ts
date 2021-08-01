@@ -39,7 +39,10 @@ export class UserProfileComponent implements OnInit {
 
         if(this.booleanFollowing === true){
 
+          this.user.followers.push(this.userLoggedID);
+
         }else {
+          this.user.followers = this.user.followers.filter( (followers: any)=>followers!==this.userLoggedID );
           this.showToastUnsaveRecipe(2000, 'danger')
         }
       }
@@ -50,7 +53,7 @@ export class UserProfileComponent implements OnInit {
     this.toastrService.show(
       '',
       'Dejaste de seguir al usuario',
-      { duration, status });
+      { duration, status, icon:"person-remove-outline" });
   }
 
 }

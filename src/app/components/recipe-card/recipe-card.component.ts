@@ -19,7 +19,6 @@ export class RecipeCardComponent implements OnInit {
   booleanLike: boolean = false
   booleanSave: boolean = false;
   booleanPurchased: boolean = false;
-  userLoggedRecipesSave: any = [];
   userLoggedBoughtRecipes: any = [];
 
   constructor( private userService: UserService,
@@ -33,10 +32,9 @@ export class RecipeCardComponent implements OnInit {
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data =>{ this.userLoggedID = data._id
       this.userLogged = data;
-      this.userLoggedRecipesSave = data.favoriteRecipes
       if(this.recipe?.likes.some((userLike: any) => userLike === this.userLoggedID)) this.booleanLike = true
       if(data?.purchasedRecipes?.some((purchased:any)=>purchased === this.recipe._id)) this.booleanPurchased= true
-      if(this.userLoggedRecipesSave.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
+      if(this.userLogged.favoriteRecipes?.some( (saved:any) => saved === this.recipe._id )) this.booleanSave = true
     })
   }
 
@@ -63,12 +61,14 @@ export class RecipeCardComponent implements OnInit {
         this.booleanSave = !this.booleanSave
 
         if(this.booleanSave == true){
-          this.userLoggedRecipesSave.push(id)
           this.showToastSaveRecipe(2000, 'success');
+          this.userLogged.favoriteRecipes.push(id)
         }else {
-          this.userLoggedRecipesSave = this.userLoggedRecipesSave.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
+          this.userLogged.favoriteRecipes = this.userLogged.favoriteRecipes.filter( (recipesSaved: any) => recipesSaved.toString() !== id )
           this.showToastUnsaveRecipe(2000, 'danger')
+
         }
+        this.userService.userLogged.next(this.userLogged)
       }
     )
   }
@@ -104,7 +104,7 @@ export class RecipeCardComponent implements OnInit {
       this.toastrService.show(
         '',
         'Se ha eliminado de favoritas',
-        { duration, status });
+        { duration, status, icon:"minus-circle-outline" });
   }
 
   showToastInsufficientEzCoins(duration: any,status: NbComponentStatus) {
