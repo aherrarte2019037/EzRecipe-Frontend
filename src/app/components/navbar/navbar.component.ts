@@ -50,4 +50,9 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  search( value: string ) {
+    const searchTerm = value.trim();
+    this.router.navigate([ 'home/search', searchTerm ]);
+  }
+
 }

@@ -30,6 +30,7 @@ import { TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timea
 import { FileUploadModule } from 'ng2-file-upload';
 import { SavedRecipesComponent } from './pages/saved-recipes/saved-recipes.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,8 @@ export class MyIntl extends TimeagoIntl { }
     SafePipe,
     SubscriptionComponent,
     SavedRecipesComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,

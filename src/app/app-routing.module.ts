@@ -10,6 +10,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { SavedRecipesComponent } from './pages/saved-recipes/saved-recipes.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SubscriptionComponent } from './pages/subscription/subscription.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard], children: [
     { path: 'recipes', component: RecipesPageComponent },
     { path: 'profile', component: ProfilePageComponent },
+    { path: 'search/:term', component: SearchPageComponent },
     { path: 'purchasedRecipes', component: PurchasedRecipesComponent },
     { path: 'savedRecipes', component: SavedRecipesComponent },
     { path: 'user-profile/:username', component: UserProfileComponent },

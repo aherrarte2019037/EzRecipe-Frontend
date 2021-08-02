@@ -4,6 +4,7 @@ import { NbMenuItem,NbDialogService, NbWindowService,NbToastrService,NbComponent
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
@@ -49,7 +50,7 @@ export class HomePageComponent implements OnInit {
     }
   ];
   videos = [
-    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 1000 },
+    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 31000 },
     { link: "https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration: 37000 },
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
@@ -67,9 +68,11 @@ export class HomePageComponent implements OnInit {
     private windowService: NbWindowService,
     private userService: UserService,
     private recipeService: RecipeService,
-    private toastrService: NbToastrService ) { }
+    private toastrService: NbToastrService,
+    private title: Title ) { }
 
   ngOnInit(): void {
+    this.title.setTitle( 'Inicio' )
     this.spinnerBehavior();
     this.userService.userLogged.subscribe( data => {
       this.userLogged = data;
