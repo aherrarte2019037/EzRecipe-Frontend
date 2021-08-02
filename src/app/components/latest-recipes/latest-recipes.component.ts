@@ -3,6 +3,7 @@ import { NbWindowService } from '@nebular/theme';
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-latest-recipes',
@@ -18,7 +19,9 @@ export class LatestRecipesComponent implements OnInit {
   constructor(
     private windowService: NbWindowService,
     private userService: UserService,
-    private recipeService: RecipeService ) { }
+    private recipeService: RecipeService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.recipeService.getLatest().subscribe( data => this.recipes = data );
@@ -27,6 +30,10 @@ export class LatestRecipesComponent implements OnInit {
 
   openAddModal() {
     this.windowService.open( AddRecipeComponent, { context: { userLogged: this.userLogged }, closeOnBackdropClick: false, windowClass: 'add-recipe-window'} )
+  }
+
+  navigate(username:any){
+    this.router.navigate(['/home/user-profile', username])
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="h-[78px] flex w-full justify-between items-center px-5">
+<div *ngIf="loading" class="h-[78px] flex w-full justify-between items-center px-5">
 
     <div [@slideInLeftOnEnter] class="flex items-center cursor-pointer justify-center space-x-2 text-gray-800">
         <div class="bg-blue-100 p-1 rounded-lg flex items-center justify-center">
@@ -20,7 +20,7 @@
         <div *ngIf="userLogged | async as user" [@slideInRightOnEnter] class="flex relative items-center justify-center">
             <button nbContextMenuTag="profile-menu" [nbContextMenu]="[{ title: 'Cerrar Sesión' }]" class="text-gray-50 bg-indigo-500 hover:bg-indigo-600 font-semibold rounded-full pl-5 pr-[33px] shadow-sm py-[8px] text-[14px]">{{ user.name }} {{ user.lastname | slice:0:1 }} <nb-icon class="absolute ml-0.5" icon="chevron-down-outline"></nb-icon></button>
             <div class="relative">
-                <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#6366F1" [fullScreen]="false" name="navImage"></ngx-spinner>                
+                <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#6366F1" [fullScreen]="false" name="navImage"></ngx-spinner>
                 <nb-user class="nb-user !ml-2" [picture]="user?.image? imageUrl+user?.image:''" [name]="user?.name +' '+ (user?.lastname | slice:0:1)" onlyPicture></nb-user>
             </div>
             <nb-icon class="text-indigo-500" icon="bell"></nb-icon>

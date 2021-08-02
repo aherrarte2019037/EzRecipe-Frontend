@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   );
   userLogged: BehaviorSubject<any> = this.userService.userLogged;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
+  loading: boolean =false;
 
   constructor(
     private ctxMenuService: NbMenuService,
@@ -31,6 +32,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileMenuBehavior();
+    setTimeout(() => {
+      this.loading = true;
+    }, 500);
     this.userService.userLogged.subscribe( data => {
       if( !data?.image ) this.spinnerService.show('navImage');
       if( data?.image ) this.spinnerService.hide('navImage');

@@ -49,7 +49,7 @@ export class HomePageComponent implements OnInit {
     }
   ];
   videos = [
-    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 1000 },
+    { link: "https://www.youtube.com/embed/oIdj9igF6jg?autoplay=1", duration: 31000 },
     { link: "https://www.youtube.com/embed/dtnNU83ZyG0?autoplay=1", duration: 37000 },
     { link: "https://www.youtube.com/embed/ADefP_GKMJk?autoplay=1", duration: 21000 },
   ]
@@ -87,6 +87,7 @@ export class HomePageComponent implements OnInit {
       if( a.likes.length < b.likes.length ) return -1;
       return 0;
     });
+    this.popularRecipes.reverse();
   }
 
   open(dialog: TemplateRef<any>) {
