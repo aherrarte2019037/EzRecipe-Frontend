@@ -4,6 +4,7 @@ import { NbMenuItem,NbDialogService, NbWindowService,NbToastrService,NbComponent
 import { UserService } from 'src/app/services/user.service';
 import { AddRecipeComponent } from 'src/app/components/add-recipe/add-recipe.component';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
@@ -67,9 +68,11 @@ export class HomePageComponent implements OnInit {
     private windowService: NbWindowService,
     private userService: UserService,
     private recipeService: RecipeService,
-    private toastrService: NbToastrService ) { }
+    private toastrService: NbToastrService,
+    private title: Title ) { }
 
   ngOnInit(): void {
+    this.title.setTitle( 'Inicio' )
     this.spinnerBehavior();
     this.userService.userLogged.subscribe( data => {
       this.userLogged = data;

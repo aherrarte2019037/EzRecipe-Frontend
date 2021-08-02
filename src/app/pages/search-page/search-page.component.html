@@ -1,0 +1,139 @@
+<perfect-scrollbar class="bg-white rounded-xl" [config]="{ wheelSpeed : 0.4 }">
+
+    <div class="h-full w-full p-8 mb-10">
+
+        <div class="flex flex-col space-y-5 rounded-xl">
+            <div class="w-full flex justify-center items-start flex-col">
+                <h3 class="!font-semibold">Resultados de búsqueda</h3>
+                <h3 class="-mt-2">{{ searchTerm }}</h3>
+            </div>
+
+            <div class="flex relative w-full mx-auto 2xl:w-3/4 mt-8 h-11 space-x-4">
+                <input class="w-full search bg-gray-100 h-11 px-5 pl-[45px] rounded-xl text-sm relative outline-none" type="search" placeholder="Buscar">
+                <button type="submit" class="absolute left-1 top-[13px]">
+                    <svg class="text-gray-400 h-[17px] w-[17px] fill-current" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                    </svg>
+                </button>
+                <span class="absolute top-[50px] -left-3 text-[13px] text-gray-600">
+                    <span class="font-bold text-gray-700">4 Resultados</span>
+                    <span class="font-semibold"> encontrados</span>
+                </span>
+
+                <button class="flex btn-filter px-4 rounded-xl space-x-2 border border-gray-200 items-center justify-center">
+                    <span class="text-gray-600 font-semibold">Filtrar</span>
+                    <nb-icon class="!text-indigo-500" icon="options-2-outline"></nb-icon>
+                </button>
+
+                <button class="flex btn-filter px-3.5 rounded-xl space-x-2 border border-gray-200 items-center justify-center">
+                    <nb-icon class="!text-indigo-500" icon="trash-2-outline"></nb-icon>
+                </button>
+            </div>
+
+            <div class="grid gap-4 grid-cols-1 2xl:grid-cols-2 !mt-11">
+
+                <div class="relative border border-gray-600 p-2 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                            <span tabindex="0" class="focus:outline-none text-purple-400 text-xs italic font-normal pl-1">11:30 AM</span>
+                        </div>
+                        <button aria-label="dropdown" class="cursor-pointer py-2  focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full focus:ring-gray-500" onclick="dropdownHandler(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="4" viewBox="0 0 16 4" fill="none">
+                                <path d="M2.11191 2.83331C2.56925 2.83331 2.94 2.46021 2.94 1.99997C2.94 1.53973 2.56925 1.16663 2.11191 1.16663C1.65456 1.16663 1.28381 1.53973 1.28381 1.99997C1.28381 2.46021 1.65456 2.83331 2.11191 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M7.90854 2.83331C8.36588 2.83331 8.73663 2.46021 8.73663 1.99997C8.73663 1.53973 8.36588 1.16663 7.90854 1.16663C7.45119 1.16663 7.08044 1.53973 7.08044 1.99997C7.08044 2.46021 7.45119 2.83331 7.90854 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M13.705 2.83331C14.1623 2.83331 14.5331 2.46021 14.5331 1.99997C14.5331 1.53973 14.1623 1.16663 13.705 1.16663C13.2477 1.16663 12.877 1.53973 12.877 1.99997C12.877 2.46021 13.2477 2.83331 13.705 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="absolute z-40 right-0">
+                                <div class="rounded bg-white shadow-xl">
+                                    <ul class="hidden mt-1">
+                                        <a href="javascript:void(0)" class="focus:outline-none focus:underline">
+                                            <li class="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Delete</li>
+                                        </a>
+                                        <a href="javascript:void(0)" class="focus:outline-none focus:underline">
+                                            <li class="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Edit</li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <p tabindex="0" class="focus:outline-none text-gray-600 dark:text-gray-100 text-sm leading-none pt-2 ">Meeting with stake holders</p>
+                    <p tabindex="0" class="focus:outline-none text-xs italic pt-1 leading-3 text-gray-400">Discussion on the template design</p>
+                    <div class="flex items-center justify-left">
+                        <div tabindex="0" class="focus:outline-none text-green-700 bg-green-100 py-1 px-2 rounded text-xs leading-3 mt-2">Completed</div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                            <span tabindex="0" class="focus:outline-none text-blue-400 text-xs italic font-normal pl-1">1:00 AM</span>
+                        </div>
+                        <button aria-label="dropdown" class="cursor-pointer py-2  focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full focus:ring-gray-500" onclick="dropdownHandler(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="4" viewBox="0 0 16 4" fill="none">
+                                <path d="M2.11191 2.83331C2.56925 2.83331 2.94 2.46021 2.94 1.99997C2.94 1.53973 2.56925 1.16663 2.11191 1.16663C1.65456 1.16663 1.28381 1.53973 1.28381 1.99997C1.28381 2.46021 1.65456 2.83331 2.11191 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M7.90854 2.83331C8.36588 2.83331 8.73663 2.46021 8.73663 1.99997C8.73663 1.53973 8.36588 1.16663 7.90854 1.16663C7.45119 1.16663 7.08044 1.53973 7.08044 1.99997C7.08044 2.46021 7.45119 2.83331 7.90854 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M13.705 2.83331C14.1623 2.83331 14.5331 2.46021 14.5331 1.99997C14.5331 1.53973 14.1623 1.16663 13.705 1.16663C13.2477 1.16663 12.877 1.53973 12.877 1.99997C12.877 2.46021 13.2477 2.83331 13.705 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="absolute z-40 right-0">
+                                <div class="rounded bg-white shadow-xl">
+                                    <ul class="hidden mt-1">
+                                        <a href="javascript:void(0)" class="focus:outline-none focus:underline">
+                                            <li class="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Delete</li>
+                                        </a>
+                                        <a href="javascript:void(0)" class="focus:outline-none focus:underline">
+                                            <li class="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Edit</li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <p tabindex="0" class="focus:outline-none text-gray-600 dark:text-gray-100 text-sm leading-none pt-2 ">Design spring discussion</p>
+                    <p tabindex="0" class="focus:outline-none text-xs italic pt-1 leading-3 text-gray-400">Plan next weeks design sprint</p>
+                    <div class="flex items-center justify-left">
+                        <div tabindex="0" class="focus:outline-none text-red-700 bg-red-100 py-1 px-2 rounded text-xs leading-3 mt-2">Pending</div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 rounded-full bg-pink-400"></div>
+                            <span tabindex="0" class="focus:outline-none text-pink-400 text-xs italic font-normal pl-1">2:30 PM</span>
+                        </div>
+                        <button aria-label="dropdown" class="cursor-pointer py-2  focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full focus:ring-gray-500" onclick="dropdownHandler(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="4" viewBox="0 0 16 4" fill="none">
+                                <path d="M2.11191 2.83331C2.56925 2.83331 2.94 2.46021 2.94 1.99997C2.94 1.53973 2.56925 1.16663 2.11191 1.16663C1.65456 1.16663 1.28381 1.53973 1.28381 1.99997C1.28381 2.46021 1.65456 2.83331 2.11191 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M7.90854 2.83331C8.36588 2.83331 8.73663 2.46021 8.73663 1.99997C8.73663 1.53973 8.36588 1.16663 7.90854 1.16663C7.45119 1.16663 7.08044 1.53973 7.08044 1.99997C7.08044 2.46021 7.45119 2.83331 7.90854 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M13.705 2.83331C14.1623 2.83331 14.5331 2.46021 14.5331 1.99997C14.5331 1.53973 14.1623 1.16663 13.705 1.16663C13.2477 1.16663 12.877 1.53973 12.877 1.99997C12.877 2.46021 13.2477 2.83331 13.705 2.83331Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="absolute z-40 right-0">
+                                <div class="rounded bg-white shadow-xl">
+                                    <ul class="hidden mt-1 ">
+                                        <a href="javascript:void(0)" class="focus:outline-none focus:underline">
+                                            <li class="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Delete</li>
+                                        </a>
+                                        <a href="javascript:void(0)" class="focus:outline-none focus:underline">
+                                            <li class="hover:text-white cursor-pointer hover:bg-indigo-700 p-2">Edit</li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <p tabindex="0" class="focus:outline-none text-gray-600 dark:text-gray-100 text-sm leading-none pt-2 ">Finalise marketing plan</p>
+                    <p tabindex="0" class="focus:outline-none text-xs italic pt-1 leading-3 text-gray-400">Define channels for content</p>
+                    <div class="flex items-center justify-left">
+                        <div tabindex="0" class="focus:outline-none text-red-700 bg-red-100 py-1 px-2 rounded text-xs leading-3 mt-2">Pending</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</perfect-scrollbar>
