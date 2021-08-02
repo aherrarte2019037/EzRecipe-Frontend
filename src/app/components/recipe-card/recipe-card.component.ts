@@ -55,7 +55,6 @@ export class RecipeCardComponent implements OnInit {
     this.recipeService.getIdRecipe(id).subscribe(
       data => {
         this.recipes = data.foundRecipes;
-        console.log(data.foundRecipes);
       }
     )
   }
