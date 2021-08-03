@@ -41,7 +41,7 @@
             <ng-container *ngIf="results?.users?.length !== 0 || results?.recipes?.length !== 0">
                 <div class="flex !mt-12 space-y-2 flex-col">
                     <div class="grid gap-4 grid-cols-1 2xl:grid-cols-2">
-                        
+
                         <div [@fadeInUpOnEnter]="{ value: '', params: { delay: i*50 } }" *ngFor="let user of results.users; let i = index" class="relative border border-gray-200 rounded-xl p-3">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
@@ -56,7 +56,7 @@
                                     </svg>
                                 </button>
                             </div>
-    
+
                             <div class="flex space-x-2 mt-1 justify-between items-center">
                                 <div class="flex space-x-2">
                                     <img class="w-10 h-10 rounded-full" [src]="imgUrl + user?.image">
@@ -68,40 +68,40 @@
                                 <div class="text-green-700 bg-green-100 py-1 px-2 rounded text-xs leading-3 mt-2">{{ user.rol === 'Client'? '@Client':'@Chef' }}</div>
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
-    
+
                 <div class="flex !mt-6 space-y-2 flex-col">
-    
+
                     <div class="grid gap-4 grid-cols-2 2xl:grid-cols-3">
-                        
-                        <div *ngFor="let recipe of results.recipes" class="border relative flex flex-col items-center justify-center border-gray-200 rounded-xl p-4 h-56 w-full">
+
+                        <div [@fadeInUpOnEnter]="{ value: '', params: { delay: i*50 } }" *ngFor="let recipe of results.recipes; let i = index" class="border relative flex flex-col items-center justify-center border-gray-200 rounded-xl p-4 h-56 w-full">
                             <span class="absolute right-2.5 top-2.5">
                                 <nb-icon [class.!text-yellow-400]="recipe?.type === 'premium'" class="!text-[18px] text-green-400" [icon]="recipe?.type === 'premium'? 'star':'checkmark-circle-2-outline'"></nb-icon>
                             </span>
-    
+
                             <span class="absolute flex items-center !text-red-500 rounded-full px-[9px] text-[13px] font-bold left-2.5 top-2.5">
                                 <span class="mt-0.5">{{ recipe?.likes.length }}</span>
                                 <nb-icon class="!text-[16px]" icon="heart"></nb-icon>
                             </span>
-    
+
                             <img class="w-20 h-20 rounded-full mt-3 mx-auto" [src]="imgUrl + recipe?.image[0]">
                             <div class="flex mt-2 flex-col items-center">
                                 <span class="font-bold text-gray-800">{{ recipe?.name }}</span>
                                 <span class="text-[13px] font-semibold text-center -mt-0.5 text-gray-700">{{ recipe?.description | slice:0:40 }}...</span>
                             </div>
-    
+
                             <button nbButton shape="round" size="small" status="primary" ghost outline class="!font-semibold w-full xl:w-1/2 !tracking-wide text-xs mt-2">
                                 Detalles
                                 <nb-icon icon="book-outline"></nb-icon>
                             </button>
                         </div>
-    
+
                     </div>
                 </div>
             </ng-container>
-            
+
         </div>
 
     </div>
