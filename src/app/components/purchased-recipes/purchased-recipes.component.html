@@ -23,7 +23,7 @@
               <span>Comprado</span>
               <nb-icon icon="shopping-cart"></nb-icon>
             </p>
-            <button [nbContextMenuPlacement]="position" [nbContextMenu]="[{ title: 'Detalles' }]" nbContextMenuTag="my-context-menu" class="text-[#76819f] pt-1 flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md">
+            <button nbTooltip="Detalles" [nbContextMenuPlacement]="position" nbContextMenuTag="my-context-menu" class="text-[#76819f] pt-1 flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md" (click)="open(describeRecipe); getIdRecipe(recipe._id)">
               <nb-icon icon="more-horizontal-outline"></nb-icon>
           </button>
 
@@ -38,3 +38,80 @@
   </div>
   </div>
 </perfect-scrollbar>
+
+<ng-template #describeRecipe let-data let-ref="dialogRef">
+  <nb-card>
+      <nb-card-body>
+
+          <nb-tabset>
+              <nb-tab tabTitle="Detalles" tabIcon="info-outline" responsive>
+                  <div class="flex space-x-4 mt-2 max-w-prose max-h-44">
+                      <div class="flex flex-col space-y-4 absolute">
+
+                          <div class="flex space-x-2  ">
+                              <nb-icon class="!float-left text-lg !font-medium" nbPrefix icon="book-outline">
+                              </nb-icon>
+                              <p>{{recipe?.name}}</p>
+                          </div>
+                          <div class="flex space-x-2  text-lg">
+                              <nb-icon class=" !float-left " nbPrefix icon="grid-outline"></nb-icon>
+                              <p>{{recipe?.category}}</p>
+                          </div>
+                      </div>
+                      <div class=" space-x-2 text-lg !mx-40 !text-justify">
+                          <nb-icon class="float-left" icon="file-text-outline"></nb-icon>
+                          <p class="! overflow-clip">{{recipe?.description}}</p>
+                      </div>
+                  </div>
+              </nb-tab>
+              <nb-tab tabTitle="Ingredientes" tabIcon="shopping-bag-outline" responsive>
+                  <ul class="flex flex-col p-4 max-h-44">
+                  <li *ngFor="let ingr of recipe?.ingredients" class="border-gray-400 flex flex-row p-2">
+                      <div
+                          class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-4  hover:shadow-2xl border-blue-400"
+                      >
+                          <div class="flex-1 pl-1 mr-16">
+                              <div class="font-medium">
+                                  {{ingr.name}}
+                              </div>
+                          </div>
+                          <div
+                              class="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-blue-500 justify-center items-center mr-10 p-2"
+                          >
+                          {{ingr.quantity}}
+                          </div>
+                      </div>
+                  </li>
+                  </ul>
+
+              </nb-tab>
+              <nb-tab tabTitle="Procedimiento" tabIcon="layers-outline" responsive class="!text-center">
+                <div class="max-w-prose max-h-48 !items-center">
+                  <nb-stepper orientation="horizontal" class="!bg-red-100">
+                    <nb-step *ngFor="let step of recipe?.steps; let i = index" [label]="'Paso '+ (i+1)" class="!items-center">
+                        <p class="!overflow-clip">{{step}}</p>
+
+                        <div class="w-full flex space-x-3 mt-6 justify-end ">
+                          <button *ngIf=" i !== 0  " hero class="!rounded-xl !pr-4 !font-medium relative" status="info" nbButton nbStepperPrevious>
+                            <nb-icon class="absolute left-2 bottom-[11px]" icon="chevron-left"></nb-icon>
+                            &nbsp;&nbsp;&nbsp;Anterior
+                        </button>
+
+                          <button *ngIf="i !== (recipe?.steps.length-1) " type="button" hero class="!pl-4 !rounded-xl relative !font-medium" status="primary" nbButton nbStepperNext>
+                              Siguiente&nbsp;&nbsp;&nbsp;
+                              <nb-icon class="absolute right-2 bottom-[11px]" icon="chevron-right"></nb-icon>
+                          </button>
+                      </div>
+                    </nb-step>
+
+                  </nb-stepper>
+
+                </div>
+
+              </nb-tab>
+          </nb-tabset>
+      </nb-card-body>
+      <button nbButton (click)="ref.close()">Cerrar</button>
+
+  </nb-card>
+</ng-template>

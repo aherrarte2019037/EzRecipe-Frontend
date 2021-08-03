@@ -41,4 +41,8 @@ export class RecipeService {
     return this.http.get<any>( `${this.apiUrl}/getIdRecipe/${id}` )
   }
 
+  searchByTerm( term: string ) {
+    return this.http.get<any>( `${this.apiUrl}/search/${term}` )
+  }
+
 }

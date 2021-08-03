@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NbComponentStatus, NbToastrService } from '@nebular/theme';
 import { slideInRightOnEnterAnimation, slideOutRightOnLeaveAnimation } from 'angular-animations';
 import { FileItem, FileUploader } from 'ng2-file-upload';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -40,7 +41,8 @@ export class ProfilePageComponent implements OnInit {
   constructor (
     public userService: UserService,
     private formBuilder: FormBuilder,
-    private spinnerService: NgxSpinnerService ) { }
+    private spinnerService: NgxSpinnerService,
+    private toastrService: NbToastrService ) { }
 
   ngOnInit(): void {
     this.userService.userLogged.subscribe(data => { this.userLogged = data; this.setFormValue() });
@@ -142,6 +144,7 @@ export class ProfilePageComponent implements OnInit {
         this.profileForm.disable();
         this.formChanges = {};
         this.formActivated = false;
+        this.showToastEditProfile(2000, 'success')
       }
     );
   }
@@ -176,6 +179,10 @@ export class ProfilePageComponent implements OnInit {
     this.uploader.clearQueue();
     this.previewImage = null;
     this.uploader.destroy();
+  }
+
+  showToastEditProfile( duration: any,status: NbComponentStatus ) {
+    this.toastrService.show( 'Se editó tu perfil', 'Perfil editado con exito', { status: 'primary', icon: 'person-done-outline' });
   }
 
 }

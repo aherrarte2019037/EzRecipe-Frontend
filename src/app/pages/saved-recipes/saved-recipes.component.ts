@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbComponentStatus, NbToastrService } from '@nebular/theme';
+import { NbComponentStatus, NbDialogService, NbToastrService } from '@nebular/theme';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,11 +11,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SavedRecipesComponent implements OnInit {
   recipes: any
+  disableModal = true;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   booleanSave: boolean = true;
   userLoggedRecipesSave: any = []
+  recipe: any;
 
-  constructor(private userService: UserService, private recipeService: RecipeService, private toastrService: NbToastrService, private router: Router) { }
+  constructor(private userService: UserService, private recipeService: RecipeService, private toastrService: NbToastrService, private dialogService: NbDialogService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getSavedRecipes().subscribe( data => { this.recipes = data
@@ -53,4 +55,16 @@ export class SavedRecipesComponent implements OnInit {
     this.router.navigate(['/home/user-profile', username])
   }
 
+  open(dialog: TemplateRef<any>) {
+    this.disableModal = true;
+    this.dialogService.open(dialog);
+  }
+
+  getIdRecipe(id: any){
+    this.recipeService.getIdRecipe(id).subscribe(
+      data => {
+        this.recipe = data.foundRecipes;
+      }
+    )
+  }
 }

@@ -5,7 +5,7 @@
             <img class="rounded-xl w-11 h-11 cursor-pointer" (click)="navigate(recipe.idPublisher.username)"
                 [src]="imageUrl+recipe.idPublisher.image">
             <div class="flex flex-col justify-between">
-                <span class="font-semibold mb-[-1px] text-[14px] text-gray-800 cursor-pointer"
+                <span class="font-semibold mb-[-1px] text-[14px] text-gray-800 cursor-pointer hover:underline"
                     (click)="navigate(recipe.idPublisher.username)">{{ recipe?.idPublisher?.name }} {{
                     recipe?.idPublisher?.lastname }}</span>
                 <span class="text-[12px] pl-4 relative mt-[-1px] font-semibold text-gray-400">
@@ -22,7 +22,7 @@
                     <nb-icon class="!text-[22px]" [icon]="booleanSave? 'bookmark':'bookmark-outline'"></nb-icon>
                 </button>
 
-                <button [nbContextMenuPlacement]="position" nbContextMenuTag="my-context-menu"
+                <button nbTooltip="Detalles" [nbContextMenuPlacement]="position" nbContextMenuTag="my-context-menu"
                     class="text-[#76819f] flex flex-col hover:bg-gray-100 border border-gray-300 px-1.5 rounded-md"
                     (click)="open(describeRecipe); getIdRecipe(recipe._id)">
                     <nb-icon icon="more-horizontal-outline"></nb-icon>
