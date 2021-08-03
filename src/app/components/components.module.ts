@@ -45,7 +45,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NavbarComponent,
     RecipeCardComponent,
     LatestRecipesComponent,
-    NebularModule
+    NebularModule,
+    DetailVisibilityPipe
   ],
   providers: [
     {

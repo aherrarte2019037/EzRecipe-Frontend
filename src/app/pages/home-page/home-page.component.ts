@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   videoindex =0;
   countVideoIndex = 4-this.videoindex;
   disableModal = true;
+  recipe: any;
   items: NbMenuItem[] = [
     {
       title: 'Recetas',
@@ -46,7 +47,8 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Ajustes',
-      icon: 'settings-2-outline'
+      icon: 'settings-2-outline',
+      link: '/404'
     }
   ];
   videos = [
@@ -81,6 +83,18 @@ export class HomePageComponent implements OnInit {
     })
     this.recipeService.getRecipes().subscribe( data => { this.recipes = data; this.sortArrayByLikes() })
     this.userService.getChefRequests().subscribe(data=> this.chefRequests = data);
+  }
+
+  openPopular(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog);
+  }
+
+  getIdRecipe(id: any){
+    this.recipeService.getIdRecipe(id).subscribe(
+      data => {
+        this.recipe = data.foundRecipes;
+      }
+    )
   }
 
   sortArrayByLikes() {

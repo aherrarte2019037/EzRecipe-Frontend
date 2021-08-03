@@ -107,7 +107,6 @@ export class RecipeCardComponent implements OnInit {
 
       },
       error=>{
-          console.log(<any>error);
           this.showToastInsufficientEzCoins(2000,"success");
       }
     )
