@@ -5,7 +5,7 @@ import {  FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } 
   providedIn: 'root'
 })
 export class GlobalService {
-  private apiUrl: string = 'http://localhost:3000/api';
+  private apiUrl: string = 'https://ez-recipe--backend.herokuapp.com/api';
 
   constructor() { }
 
