@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fadeInOnEnterAnimation, fadeInUpOnEnterAnimation, slideInDownOnEnterAnimation, slideInLeftOnEnterAnimation, slideInUpOnEnterAnimation } from 'angular-animations';
 import { RecipeService } from 'src/app/services/recipe.service';
 
@@ -15,13 +15,13 @@ export class SearchPageComponent implements OnInit {
   imgUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
   @ViewChild('searchInput') searchInput!: ElementRef;
 
-  constructor( private activatedRoute: ActivatedRoute, private recipeService: RecipeService ) { }
+  constructor( private activatedRoute: ActivatedRoute, private recipeService: RecipeService, private router: Router ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
       this.searchTerm = params['term'];
       this.search( this.searchTerm );
-      if( this.searchInput ) this.searchInput.nativeElement.value = this.searchTerm; 
+      if( this.searchInput ) this.searchInput.nativeElement.value = this.searchTerm;
     })
   }
 
@@ -46,6 +46,10 @@ export class SearchPageComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.searchInput.nativeElement.value = this.searchTerm;
+  }
+
+  navigate(username:any){
+    this.router.navigate(['/home/user-profile', username])
   }
 
 }
