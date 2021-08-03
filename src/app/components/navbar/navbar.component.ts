@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuService } from '@nebular/theme';
 import { slideInLeftOnEnterAnimation, slideInRightOnEnterAnimation } from 'angular-animations';
@@ -21,7 +21,8 @@ export class NavbarComponent implements OnInit {
   );
   userLogged: BehaviorSubject<any> = this.userService.userLogged;
   imageUrl: string = 'https://res.cloudinary.com/dykas17bj/image/upload/';
-  loading: boolean =false;
+  loading: boolean = false;
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(
     private ctxMenuService: NbMenuService,
@@ -52,7 +53,8 @@ export class NavbarComponent implements OnInit {
 
   search( value: string ) {
     const searchTerm = value.trim();
-    this.router.navigate([ 'home/search', searchTerm ]);
+    if( searchTerm.length > 2 ) this.router.navigate([ 'home/search', searchTerm ]);
+    this.searchInput.nativeElement.value = '';
   }
 
 }
