@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalService } from './global.service';
 import { tap } from "rxjs/operators";
+import { SocialAuthService } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { tap } from "rxjs/operators";
 export class AuthService {
   private apiUrl = this.globalService.getApiUrl();
 
-  constructor( private globalService: GlobalService, private http: HttpClient ) { }
+  constructor( private globalService: GlobalService, private http: HttpClient, private socialService: SocialAuthService ) { }
 
   login( email: string, password: string, remember: boolean, token: boolean = true ) {
     return this.http.post<any>( `${this.apiUrl}/login`, { email, password, getToken: token } ).pipe(
@@ -36,6 +37,7 @@ export class AuthService {
   logOut() {
     localStorage.removeItem( 'token' )
     sessionStorage.removeItem( 'token' )
+    this.socialService.signOut( true ).catch()
   }
 
   isAuthenticated() {

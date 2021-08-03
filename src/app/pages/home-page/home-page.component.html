@@ -3,46 +3,255 @@
 <app-navbar></app-navbar>
 
 <ng-container *ngIf="showContent">
-    <nb-layout class="home-layout">
-        <nb-layout-column>
+  <nb-layout>
 
-            <div class="flex space-x-9 justify-center w-full h-full mb-8">
-                <div class="w-[25%] xl:w-[15%]">
+    <nb-layout-column>
 
-                    <div class="w-full h-24 items-center flex justify-around user-card bg-white rounded-xl">
-                        <nb-user class="nb-user" picture="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" badgeText="Activo" badgeStatus="primary" badgePosition="bottom right" size="giant" name="Marta G" title="@Engineer">
-                        </nb-user>
-                    </div>
+      <div class="flex main-container space-x-4 xl:space-x-9 justify-between w-full">
 
-                    <nb-card class="w-full !rounded-xl menu-card mt-5 px-5 py-3">
-                        <nb-menu class="navigation-menu" [items]="items"></nb-menu>
-                        
-                    </nb-card>
+        <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[245px]">
+          <div class="w-full flex flex-col justify-between">
 
-                </div>
-
-                <div class="w-[50%] xl:w-[70%]  bg-red-200">
-                    <app-latest-recipes></app-latest-recipes>
-
-                    <div class="w-full flex justify-center">
-                        <div class="bg-gray-300 w-10/12 flex items-center justify-between">
-                            <div>imagen</div>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="What are you thinking?">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                                Publish
-                            </button>
-                        </div>
-                    </div>               
-
-
-                    <router-outlet></router-outlet>
-                </div>
-
-                <div class="w-[25%] xl:w-[15%] bg-green-200">
-                    <p>right</p>
-                </div>
+            <div class="w-full h-24 relative items-center flex justify-around user-card bg-white rounded-xl">
+              <div class="absolute w-16 h-16 -ml-16 rounded-full overflow-hidden">
+                <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#6366F1" [fullScreen]="false" name="profileImage"></ngx-spinner>
+              </div>
+              <nb-user *ngIf="userLogged$ | async as user" class="nb-user" [picture]="user?.image? imageUrl+user?.image:''" [badgeText]="user?.image? 'Activo':''" badgeStatus="primary" badgePosition="bottom right" size="giant" [name]="user?.name +' '+ (user?.lastname | slice:0:1)" [title]="'@' + user?.rol">
+              </nb-user>
             </div>
 
-        </nb-layout-column>
-    </nb-layout>
+            <nb-card class="w-full !rounded-xl menu-card mt-4 px-5 py-3">
+              <nb-menu class="navigation-menu" [items]="items"></nb-menu>
+            </nb-card>
+
+            <div class="flex flex-col space-y-2">
+              <div class="flex w-full px-0.5 items-center justify-between">
+                <span class="font-bold text-gray-500 text-[12px]">ANUNCIOS</span>
+                <div class="relative mt-[-22px]">
+                  <nb-badge [text]="countVideoIndex.toString()" position="top right" status="danger"></nb-badge>
+                </div>
+              </div>
+
+              <nb-card class="w-full !rounded-xl menu-card !mb-0">
+                <nb-card-body class="!p-3.5">
+                  <img src="../../../assets/adds.svg" class="!rounded-lg">
+                  <img class="absolute w-9 h-9 top-6 right-6" src="../../../assets/promotion.svg">
+                  <div class="flex justify-start items-center space-x-2">
+                    <button *ngIf="videoindex<3" (click)="open(dialog)" class="bg-pink-500 text-sm hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-3">
+                      Ver vídeo
+                    </button>
+                    <button *ngIf="videoindex>2"  class="bg-gradient-to-r from-gray-400 to-gray-400 text-sm text-white py-2 px-4 rounded-lg mt-3" disabled>
+                      Ver video
+                    </button>
+                    <button class="h-[38px] rounded-lg relative w-[38px] mt-3 bg-gray-200">
+                      <nb-icon class="!absolute !w-5 !h-5 !top-[9px] !left-[9px]" icon="close-outline"></nb-icon>
+                    </button>
+                  </div>
+                </nb-card-body>
+              </nb-card>
+            </div>
+
+          </div>
+        </perfect-scrollbar>
+
+        <div class="w-[50%] xl:w-[50%]">
+          <div class="w-full layout-container flex flex-col justify-between">
+
+            <div class="h-[84vh]">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+
+        <perfect-scrollbar [config]="{ wheelSpeed : 0.1 }" class="w-[28%] max-w-[230px] xl:max-w-[280px]">
+          <div class="w-full flex flex-col justify-between">
+            <div *ngIf="userLogged?.rol != 'AdminApp'" class="w-full mt-0.5 card-shadow flex flex-col justify-between">
+              <div class="flex flex-col space-y-2">
+                <div class="flex mb-0.1 w-full px-0.5 items-center justify-between">
+                  <span class="font-bold text-gray-500 text-[12px]">MONEDAS</span>
+                  <div class="relative mt-[-23px]">
+                    <nb-badge class="!bg-[#1f80ff]" [text]="userLogged?.ezCoins" position="top right" status="info"></nb-badge>
+                  </div>
+                </div>
+
+                <nb-card class="w-full !rounded-xl menu-card">
+                  <nb-card-body class="!px-4">
+                    <div class="flex items-center">
+                      <img class="w-11 ml-3 h-10 object-cover rounded-full" src="../../../assets/ezCoins.png">
+                      <div class="text-left ml-3">
+                        <p class="!text-gray-600 !text-[15px] pb-1"><span class="!text-sm text-gray-700 ezcoin-span !font-semibold">{{userLogged?.ezCoins}} EzCoins</span> en tu cuenta</p>
+                      </div>
+                    </div>
+                    <div class="flex mt-3 justify-between space-x-2 mb-1">
+                      <button routerLink="/subscription" class="rounded-xl bg-[#1878f3] hover:bg-blue-600 w-full text-sm tracking-wide py-2 text-white">Detalles</button>
+                      <button routerLink="/subscription" class="rounded-xl hover:bg-gray-300 bg-gray-200 text-sm tracking-wide text-gray-700 font-semibold px-6 py-2">Más</button>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+
+            <div *ngIf="userLogged?.rol == 'AdminApp'" class="w-full mt-0.5 card-shadow flex flex-col justify-between">
+              <div class="flex flex-col space-y-2">
+                <div class="flex mb-0.1 w-full px-0.5 items-center justify-between">
+                  <span class="font-bold text-gray-500 text-[12px]">PETICIONES</span>
+                  <div class="relative mt-[-22px]">
+                    <nb-badge *ngIf="chefRequests.length>0" [text]="chefRequests.length" position="top right" status="danger"></nb-badge>
+                    <nb-badge *ngIf="chefRequests.length<1" text="0" position="top right" status="danger"></nb-badge>
+                  </div>
+                </div>
+
+                <p *ngIf="chefRequests<=1" class="!font-semibold m-2">¡No tienes peticiones por hoy!<nb-icon icon="checkmark-square-outline" class="ml-1 absolute"></nb-icon>
+                </p>
+                <nb-card class="w-full !rounded-xl menu-card">
+                  <nb-card-body class="!px-4" *ngFor="let req of chefRequests">
+                    <div class="flex items-center">
+                      <div class="ml-3">
+                        <p class="!text-gray-600 !text-sm pb-1"><span class="!text-sm text-gray-700 ezcoin-span !font-semibold">{{req?.name}} {{req?.lastname}} @{{req?.username}}</span> Quiere ser Chef</p>
+                      </div>
+                    </div>
+                    <div class="flex mt-3 justify-between space-x-2 mb-1">
+                      <button (click)="confirmChefRquest(req._id)" class="rounded-xl bg-[#1878f3] hover:bg-blue-600 w-full text-sm tracking-wide py-2 text-white">Confirmar</button>
+                      <button (click)="cancelChefRquest(req._id)" class="rounded-xl hover:bg-gray-300 bg-gray-200 text-sm tracking-wide text-gray-700 font-semibold px-6 py-2">Cancelar</button>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+
+            <div class="w-full h-full mt-6 card-shadow flex flex-col justify-between">
+              <div class="flex flex-col space-y-2">
+                <div class="flex mb-0.1 w-full px-0.5 items-center justify-between">
+                  <span class="font-bold text-gray-500 text-[12px]">RECETAS POPULARES</span>
+                  <div class="relative mt-[-23px]">
+                    <nb-badge class="!bg-indigo-500" text="9" position="top right" status="info"></nb-badge>
+                  </div>
+                </div>
+
+                <nb-card class="w-full !h-full !rounded-xl menu-card">
+                  <nb-card-body class="!px-5 !py-5 !flex !flex-col space-y-[30px]">
+
+                    <div *ngFor="let recipe of (popularRecipes | slice:0:8)" class="flex justify-between items-center">
+                      <div class="flex space-x-2 items-center">
+                        <img class="w-11 h-10 object-cover rounded-lg" [src]="imageUrl + recipe?.image[0]">
+                        <div class="flex flex-col">
+                          <p [nbTooltip]="recipe?.name" class="!text-gray-700 !font-semibold !text-[15px]">{{ recipe?.name | slice:0:12 }}...</p>
+                          <span class="text-xs">{{ recipe?.dateTime | date:'shortDate' }}</span>
+                        </div>
+                      </div>
+                      <div class="text-left flex space-x-2 justify-between">
+                        <button shape="round" size="tiny" nbButton class="!bg-red-500 !transform !transition !duration-100 hover:scale-110 !text-white">
+                          {{ recipe?.likes?.length }}
+                          <nb-icon icon="heart"></nb-icon>
+                        </button>
+
+                        <button (click)="openPopular(describeRecipe); getIdRecipe(recipe?._id)" shape="round" size="tiny" nbButton class="!bg-indigo-500 !transform !transition !duration-150 hover:scale-125 !text-white">
+                          <nb-icon icon="more-horizontal-outline"></nb-icon>
+                        </button>
+                      </div>
+                    </div>
+
+                  </nb-card-body>
+                </nb-card>
+
+              </div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+
+      </div>
+
+    </nb-layout-column>
+  </nb-layout>
 </ng-container>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <nb-card class="!p-2 !pt-4 !rounded-2xl">
+    <nb-card-body>
+
+      <iframe class="rounded-[15px]" width="560" height="315" [src]="videos[videoindex].link | safe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    </nb-card-body>
+    <nb-card-footer class="flex justify-end items-center !border-none">
+      <button class="!rounded-xl" hero status="primary" [disabled]="disableModal" nbButton (click)="ref.close(); addThreeCoins();">EzCoins</button>
+      <button class="ml-2 !rounded-xl" nbButton (click)="ref.close()">Cerrar</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<ng-template #describeRecipe let-data let-ref="dialogRef">
+  <nb-card>
+      <nb-card-body>
+
+          <nb-tabset>
+              <nb-tab tabTitle="Detalles" tabIcon="info-outline" responsive>
+                  <div class="flex space-x-4 mt-2 max-w-prose max-h-44">
+                      <div class="flex flex-col space-y-4 absolute">
+
+                          <div class="flex space-x-2  ">
+                              <nb-icon class="!float-left text-lg !font-medium" nbPrefix icon="book-outline">
+                              </nb-icon>
+                              <p>{{recipe?.name}}</p>
+                          </div>
+                          <div class="flex space-x-2  text-lg">
+                              <nb-icon class=" !float-left " nbPrefix icon="grid-outline"></nb-icon>
+                              <p>{{recipe?.category}}</p>
+                          </div>
+                      </div>
+                      <div class=" space-x-2 text-lg !mx-40">
+                          <nb-icon class="float-left" icon="file-text-outline"></nb-icon>
+                          <p class="! overflow-clip">{{recipe?.description}}</p>
+                      </div>
+                  </div>
+              </nb-tab>
+              <nb-tab tabTitle="Ingredientes" tabIcon="shopping-bag-outline" responsive>
+                  <ul class="flex flex-col p-4 max-h-44">
+                  <li *ngFor="let ingr of recipe?.ingredients" class="border-gray-400 flex flex-row p-2">
+                      <div
+                          class="select-none flex flex-1 items-center p-4 transition duration-500 ease-in-out transform hover:-translate-y-2 rounded-2xl border-2 p-4  hover:shadow-2xl border-blue-400"
+                      >
+                          <div class="flex-1 pl-1 mr-16">
+                              <div class="font-medium">
+                                  {{ingr.name}}
+                              </div>
+                          </div>
+                          <div
+                              class="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-blue-500 justify-center items-center mr-10 p-2"
+                          >
+                          {{ingr.quantity}}
+                          </div>
+                      </div>
+                  </li>
+                  </ul>
+
+              </nb-tab>
+              <nb-tab tabTitle="Procedimiento" tabIcon="layers-outline" responsive class="!text-center">
+                <div class="max-w-prose max-h-48 !items-center">
+                  <nb-stepper orientation="horizontal" class="!bg-red-100">
+                    <nb-step *ngFor="let step of recipe?.steps; let i = index" [label]="'Paso '+ (i+1)" class="!items-center">
+                        <p class="!overflow-clip">{{step}}</p>
+
+                        <div class="w-full flex space-x-3 mt-6 justify-end ">
+                          <button *ngIf=" i !== 0  " hero class="!rounded-xl !pr-4 !font-medium relative" status="info" nbButton nbStepperPrevious>
+                            <nb-icon class="absolute left-2 bottom-[11px]" icon="chevron-left"></nb-icon>
+                            &nbsp;&nbsp;&nbsp;Anterior
+                        </button>
+
+                          <button *ngIf="i !== (recipe?.steps.length-1) " type="button" hero class="!pl-4 !rounded-xl relative !font-medium" status="primary" nbButton nbStepperNext>
+                              Siguiente&nbsp;&nbsp;&nbsp;
+                              <nb-icon class="absolute right-2 bottom-[11px]" icon="chevron-right"></nb-icon>
+                          </button>
+                      </div>
+                    </nb-step>
+
+                  </nb-stepper>
+
+                </div>
+
+              </nb-tab>
+          </nb-tabset>
+      </nb-card-body>
+      <button nbButton (click)="ref.close()">Cerrar</button>
+
+  </nb-card>
+</ng-template>

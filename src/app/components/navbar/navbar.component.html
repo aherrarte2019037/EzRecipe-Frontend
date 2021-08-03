@@ -1,27 +1,30 @@
-<div class="h-[78px] flex w-full justify-between items-center px-5">
+<div *ngIf="loading" class="h-[78px] flex w-full justify-between items-center px-5">
 
-    
     <div [@slideInLeftOnEnter] class="flex items-center cursor-pointer justify-center space-x-2 text-gray-800">
         <div class="bg-blue-100 p-1 rounded-lg flex items-center justify-center">
             <img class="w-7 h-7" src="../../../assets/logo.svg">
         </div>
         <span class="font-bold text-gray-800">EzRecipe</span>
     </div>
-    
+
     <div class="flex items-center space-x-5">
         <div [@slideInRightOnEnter] class="relative text-gray-600">
-            <input class="bg-gray-200/40 w-80 placeholder-gray-500 h-10 px-5 pl-[46px] rounded-xl text-sm focus:outline-none" type="search" placeholder="Buscar">
-            <button type="submit" class="absolute left-0 top-0 mt-3 ml-5">
+            <input (keydown.enter)="search( searchInput.value )" #searchInput class="bg-gray-200/40 w-80 placeholder-gray-500 h-10 px-5 pl-[46px] rounded-xl text-sm focus:outline-none" type="search" placeholder="Buscar">
+            <button (click)="search( searchInput.value )" type="button" class="absolute left-0 top-0 mt-3 ml-5">
                 <svg class="text-gray-500 h-4 w-4 fill-current" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
                     <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
                 </svg>
             </button>
         </div>
 
-        <div [@slideInRightOnEnter] class="flex relative items-center justify-center">
-            <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full absolute top-0 right-1"></span>
-            <button nbContextMenuTag="profile-menu" [nbContextMenu]="[{ title: 'Perfil' }, { title: 'Cerrar Sesión' }]" class="text-gray-50 bg-indigo-500 hover:bg-indigo-600 font-semibold rounded-full pl-5 pr-[33px] shadow-sm py-[8px] text-[14px]">Marta G <nb-icon class="absolute ml-0.5" icon="chevron-down-outline"></nb-icon></button>
-            <img class="rounded-full ml-2.5 w-[42px]" src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+        <div *ngIf="userLogged | async as user" [@slideInRightOnEnter] class="flex relative items-center justify-center">
+            <button nbContextMenuTag="profile-menu" [nbContextMenu]="[{ title: 'Cerrar Sesión' }]" class="text-gray-50 bg-indigo-500 hover:bg-indigo-600 font-semibold rounded-full pl-5 pr-[33px] shadow-sm py-[8px] text-[14px]">{{ user.name }} {{ user.lastname | slice:0:1 }} <nb-icon class="absolute ml-0.5" icon="chevron-down-outline"></nb-icon></button>
+            <div class="relative">
+                <ngx-spinner bdColor="rgba(0)" type="ball-clip-rotate" size="default" color="#6366F1" [fullScreen]="false" name="navImage"></ngx-spinner>
+                <nb-user class="nb-user !ml-2" [picture]="user?.image? imageUrl+user?.image:''" [name]="user?.name +' '+ (user?.lastname | slice:0:1)" onlyPicture></nb-user>
+            </div>
+            <nb-icon class="text-indigo-500" icon="bell"></nb-icon>
+            <span class="w-2.5 h-2.5 bg-indigo-500 rounded-full absolute top-0 right-8"></span>
         </div>
     </div>
 

@@ -1,1 +1,11 @@
-<p>recipes works!</p>
+<app-latest-recipes [recipes]="[] | slice:0:5"></app-latest-recipes>
+
+<perfect-scrollbar style="height: calc( 100% - 228px);" class="mt-4" [config]="{ wheelSpeed : 0.4 }">
+        
+    <div class="grid grid-cols-1 mt-2 2xl:grid-cols-2 !px-3.5 gap-5">
+        <ng-container *ngFor="let recipe of recipes">
+            <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        </ng-container>
+    </div>
+
+</perfect-scrollbar>
