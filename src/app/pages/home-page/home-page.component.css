@@ -1,0 +1,33 @@
+nb-layout-column {
+    @apply flex flex-col !justify-between items-center
+}
+
+.user-card, .menu-card {
+    box-shadow: rgba(160, 160, 160, 0.1) 0px 4px 12px;
+}
+
+.add-recipe-span {
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+.card-shadow {
+    box-shadow: rgba(160, 160, 160, 0.1) 0px 4px 12px!important;
+}
+
+.main-container {
+    height: calc( 100vh - 126px );
+}
+
+.layout-container {
+    height: calc( 100vh - 150px );
+}
+
+@media (max-width: 1000px) {
+    .layout-container {
+        height: calc( 100vh - 130px );
+    }
+  }
+  
+.ezcoin-span {
+    font-family: 'Open Sans', sans-serif!important;
+}
